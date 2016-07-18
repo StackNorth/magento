@@ -1,0 +1,200 @@
+<?php
+$credit_qty = 10;
+?>
+<div style="margin-top:150px;background-color:#fff;padding:50px;height:550px;overflow:auto;">
+
+
+<div style="border:1px solid #ccc;padding:5px;margin:10px;">
+<h3>for html developer</h3>
+购买的链接地址生成方式：
+<?php
+$product = Mage::getModel('catalog/product')->setStoreId(Mage::app()->getStore()->getId())->load(1);
+$addUrl  = Mage::helper('checkout/cart')->getAddUrl($product);
+?>
+<a href="<?php echo $addUrl;?>"><?php echo $addUrl;?></a>
+
+</div>
+
+<br/>
+<div style="color:red;">
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+</div>
+<br/>
+
+<?php
+	$cartQty = $this->getSummaryCount();
+	if($cartQty):?>
+	
+	<h1><?php echo $this->__('SHOPPING BAG');?></h1>
+	
+	
+	<div class="steps" style="margin:10px;">
+		<ul>
+			<li><?php echo $this->__('CHECK OUT');?></li>
+			<li><?php echo $this->__('FILL IN YOUR INFO.');?></li>
+			<li><?php echo $this->__('SUBMIT PURCHASE');?></li>
+		</ul>
+	</div>
+	
+	<br/>
+	<br/>
+	
+	<div>
+	<p><?php echo $this->__(' %s COURSE',  $this->getSummaryCount());?>: </p>
+	<?php 
+		$i = 1;
+		foreach($this->getItems() as $_item): ?>
+        <?php echo $i;?>. <?php echo $_item->getProduct()->getName(); ?> x <?php echo $_item->getQty();?>
+    <?php 
+    	$i++;
+    endforeach ?>
+    
+    <br/>
+    <?php echo $this->__('PRICE');?><br/>
+    <?php echo $this->helper('checkout')->formatPrice($this->getGrandtotal());?>
+    
+	
+	</div>
+	
+	<br/>
+    <br/>
+    
+    <div>
+    
+    <form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
+	    <script>
+		function discountFormsubmit(isRemove) {
+			
+			if (isRemove) {
+		        $('#coupon_code').removeClass('required-entry');
+		        $('#remove-coupone').val("1");
+		    } else {
+		        $('#coupon_code').addClass('required-entry');
+		        $('#remove-coupone').val("0");
+		    }
+			$('#discount-coupon-form').submit();
+		}
+		
+		</script>
+	    
+	    <div class="discount">
+	        <div class="discount-form">
+	            <label for="coupon_code"><?php echo $this->__('Enter your code') ?></label>
+	            <input type="hidden" name="remove" id="remove-coupone" value="0" />
+	            <div class="field-wrapper">
+	                <input class="input-text" type="text" id="coupon_code" name="coupon_code" value="<?php echo $this->escapeHtml($this->getCouponCode()) ?>" />
+	                <div class="button-wrapper">
+	                    <button type="button" title="<?php echo $this->__('Apply') ?>" class="button2"  onclick="discountFormsubmit(false);" value="<?php echo $this->__('Apply') ?>"><span><span><?php echo $this->__('Apply') ?></span></span></button>
+	                    <?php if(strlen($this->getCouponCode())): ?>
+	                        <button type="button" title="<?php echo $this->__('Cancel') ?>" class="button2 cancel-coupon"  onclick="discountFormsubmit(true)" value="<?php echo $this->__('Cancel') ?>"><span><span><?php echo $this->__('Cancel') ?></span></span>
+	                        </button>
+	                    <?php endif;?>
+	                </div>
+	            </div>
+	            <p><?php echo $this->__('it will update the price');?></p>
+	        </div>
+	    </div>
+	    
+	    
+	    
+	</form>
+    
+    
+    </div>
+    
+    
+    <?php if($this->getCustomer()->getId()):?>
+    
+    <br/>
+    <br/>
+	
+	<div>
+	<form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/creditsPost') ?>" method="post">
+		<?php echo $this->__('USE');?>
+		<input class="input-text" type="text" id="use_credit_amount" name="use_credit_amount" value="<?php echo $this->getUsedCreditsAmount() ?>" />
+		<div class="button-wrapper">
+	                    <button type="submit" title="<?php echo $this->__('Apply') ?>" class="button2" value="<?php echo $this->__('Apply') ?>"><span><span><?php echo $this->__('Apply') ?></span></span></button>
+	    </div>
+	    <p><?php echo $this->__('YOUR HAVE %s CREDITS', $this->getCreditsByCustomer());?></p>
+	</form>
+	
+	<p><?php echo $this->__('WHY USE CREDITS?');?></p>
+	<p><a href="<?php echo $this->getUrl('credits/checkout/view');?>"><?php echo $this->__('BUY CREDTIS');?></a></p>
+	
+	</div>
+	
+	
+	<br/>
+    <br/>
+	
+	<div>
+	<form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/pointsPost') ?>" method="post">
+		<?php echo $this->__('USE');?>
+		<input class="input-text" type="text" id="use_points_amount" name="use_points_amount" value="<?php echo $this->getUsedRewardpointsAmount() ?>" />
+		<div class="button-wrapper">
+	                    <button type="submit" title="<?php echo $this->__('Apply') ?>" class="button2" value="<?php echo $this->__('Apply') ?>"><span><span><?php echo $this->__('Apply') ?></span></span></button>
+	    </div>
+	</form>
+	
+	<p><?php echo $this->__('YOUR HAVE %s POINTS', $this->getUserRewardpointAmount());?></p>
+	
+	</div>
+	<?php else:?>
+	<br/>
+	<div>
+		<p><?php echo $this->__('Please log in to use the credit or points to payment!');?></p>
+		<p><a href="<?php echo $this->getUrl('customer/account/login');?>"><?php echo $this->__('LOG IN');?></a></p>
+	</div>
+	<br/>
+	<?php endif;?>
+	
+	
+	<br/>
+	
+	<div>
+	<p><?php echo $this->__('Please select a purchase method');?>
+	<ul>
+	    <li><input type="radio" name="payment_method" value="alipay_payment" checked><?php echo __('Alipay Method');?></li>
+	</ul>
+	</div>
+	
+	<br/>
+	<input type="button" id="checkout_cart" value="<?php echo __('proceed');?>"/>
+	<script>
+	
+	$(function() {
+		$('#checkout_cart').click(function(){
+			location.href="<?php echo $this->getUrl('checkout/onepage/billing');?>";
+		})
+		
+	})
+	
+	</script>
+	<br/>
+	<br/>
+	<?php echo $this->getChildHtml('totals'); ?>
+	
+	
+	
+<?php
+	else:?>
+	
+	<div>
+		<div class="page-title">
+		    <h1><?php echo $this->__('Shopping Cart is Empty') ?></h1>
+		</div>
+		<div class="cart-empty">
+		    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+		    <?php echo $this->getChildHtml('checkout_cart_empty_widget'); ?>
+		    <p><?php echo $this->__('You have no items in your shopping cart.') ?></p>
+		    <p><?php echo $this->__('Click <a href="%s">here</a> to continue shopping.', $this->getContinueShoppingUrl()) ?></p>
+		    <?php echo $this->getChildHtml('shopping.cart.table.after'); ?>
+		</div>
+	</div>
+	
+<?php
+	endif;?>
+
+
+
+</div>

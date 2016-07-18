@@ -1,0 +1,198 @@
+<div id="explore_home">
+<div id="slider_images">
+    <?php
+    	$i = 1;
+	 	foreach ($_banners as $_banner): 
+	 	?>
+	 	
+	 	<?php 
+	 		$bannerHelper = Mage::helper('easybanner/banner')->load($_banner);
+			$onclick = '';
+			$options = '\'\'';
+			if ($bannerHelper->getTarget() == 'popup') {
+			    $options = '\'width='.$bannerHelper->getPopupWidth().',height='.$bannerHelper->getPopupHeight().'\'';
+			}
+			if ($bannerHelper->getTarget() != 'self') {
+			    $onclick = 'onclick="return !window.open(this.href, \'easybanners'.$bannerHelper->getBannerId().'\', '.$options.')"';
+			}
+			
+			$defaultStyle = ($i == 1) ? ' style="display:block;"' : ' style="display:none;"';
+			
+			$sperate =  ( substr($bannerHelper->getUrl(), strlen($bannerHelper->getUrl())-1  ) != '/' ) ? '/' : '' ;
+		?>
+	 	<a rel="nofollow" href="<?php echo $bannerHelper->getUrl() . $sperate . $bannerHelper->getBannerUrl() ?>" title="<?php echo $bannerHelper->getTitle() ?>" <?php echo $onclick ?>>
+	 	<img  class="slide"<?php echo $defaultStyle;?>  id="slide_img_<?php echo $i ?>"  src="<?php echo Mage::getBaseUrl('media') . trim(Mage::getStoreConfig('easybanner/general/image_folder'), ' /\\') . '/' . $bannerHelper->getImage() ?>"  alt="<?php echo $bannerHelper->getTitle() ?>" />
+	 	</a>
+	 <?php $i++; endforeach;?>
+</div>
+
+<?php
+$_total = count($_banners);
+ if($_total > 1 ):?>
+<div id="slider_home" style="width:<?php echo ( $_total + 2) * 25 ?>px">
+	<p><a href="#" class="arrow-slider-home arrow_slider_left"><img src="<?php echo $this->getSkinUrl('images/Slider_buttons/left-arrow.png') ?>" alt="<?php echo $this->__('left') ?>" /></a></p>
+    	<div id="slider_numbers">
+           <?php
+	    	$t = 1;
+		 	foreach ($_banners as $_banner):
+		 	
+		 	$defaultClass = ($t == 1) ? ' active' :  '';
+		 	
+		 	 ?>
+			<a class="square_slider square_slider_<?php echo $t ?><?php echo $defaultClass ?>" id="slider_<?php echo $t ?>" href=""><?php echo $t ?></a>
+		   <?php $t++; endforeach;?>
+    	</div>
+    <p><a href="#" class="arrow-slider-home arrow_slider_right"><img src="<?php echo $this->getSkinUrl('images/Slider_buttons/right-arrow.png') ?>" alt="<?php echo $this->__('Right') ?>" /></a></p>
+</div>
+<?php endif;?>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+jQuery(document).ready(function(){
+
+	var indexImage = 0;
+	var lesImages = jQuery('#slider_images .slide');
+	var nbImages = lesImages.length;
+	lesImages.eq(indexImage).css('z-index', 10).siblings().hide();
+	
+		jQuery('a.square_slider').click(function(e) {
+			if(nbImages == 1){
+				e.preventDefault();
+			}else {
+				  id = jQuery(this)[0]["id"].split('_')[1];
+				  image = lesImages[ id - 1 ];
+				  jQuery('.square_slider').removeClass('active');
+				  jQuery(this).addClass('active');
+				  jQuery('.slide').hide();
+				  jQuery('#slide_img_'+ id ).css('opacity', 1).show().animate({
+						opacity: 1
+					},{
+						duration: 10000,
+						easing: 'easeOutExpo'
+					});
+				  
+				  	indexImage = id - 1;
+	
+				  clearInterval(test);
+			}
+			e.preventDefault();
+		});
+		
+		jQuery('a.arrow_slider_left').click(function(e) {
+			if(nbImages == 1){
+				e.preventDefault();
+			}else {
+				  
+				  clearInterval(test);
+				  
+				  //alert( ' indexImage : ' + indexImage);
+				  
+				  if ( indexImage > 0 )
+				  	id = indexImage ;
+				  else
+				  	id = nbImages;
+				  	
+				 //alert('id:' + id);
+				 
+				  jQuery('.square_slider').removeClass('active');
+				  jQuery('#slider_' + id ).addClass('active');
+				  jQuery('.slide').hide();
+				  jQuery('#slide_img_'+ id ).css('opacity', 1).show().animate({
+						opacity: 1
+					},{
+						duration: 10000,
+						easing: 'easeOutExpo'
+					});
+				  
+				  	indexImage = id - 1;
+				  
+			}
+			e.preventDefault();
+		});
+		
+		jQuery('a.arrow_slider_right').click(function(e) {
+			if(nbImages == 1){
+				e.preventDefault();
+			}else {
+				  
+				  clearInterval(test);
+				  
+				 // alert( ' indexImage : ' + indexImage);
+				  
+				  if ( indexImage  == nbImages - 1 )
+				  	id = 1;
+				  else
+				  	id = indexImage + 2;
+				  
+				  //alert('id:' + id);
+				  
+				  jQuery('.square_slider').removeClass('active');
+				  jQuery('#slider_' + id ).addClass('active');
+				  jQuery('.slide').hide();
+				  jQuery('#slide_img_'+ id ).css('opacity', 1).show().animate({
+						opacity: 1
+					},{
+						duration: 10000,
+						easing: 'easeOutExpo'
+					});
+				  
+				  	indexImage = id - 1;
+				  
+			}
+			e.preventDefault();
+		});
+	
+	
+	// Slideshow automatique
+	test = setInterval(
+		function () {
+			var indexImage2 = lesImages.eq(indexImage);
+
+			jQuery('.controles_number .first_ctrl_button input').attr('src', '<?php echo $this->getSkinUrl('images/slider-buttons/btn_car_1.png') ?>');
+			jQuery('.controles_number .more_button input').attr('src', '<?php echo $this->getSkinUrl('images/slider-buttons/btn_car_2.png') ?>');
+			jQuery('.controles_number .third_ctrl_button input').attr('src', '<?php echo $this->getSkinUrl('images/slider-buttons/btn_car_3.png') ?>');
+
+			if(indexImage == nbImages-1){
+				nouvelleImage = lesImages.filter(':first');
+				indexImage = 0;
+				jQuery('.controles_number .first_ctrl_button input').attr('src', '<?php echo $this->getSkinUrl('images/slider-buttons/btn_car_1_on.png') ?>');
+			}else {
+				nouvelleImage = indexImage2.next();
+				indexImage++;
+				
+				if(indexImage==0)
+				{
+					jQuery('.controles_number .first_ctrl_button input').attr('src', '<?php echo $this->getSkinUrl('images/slider-buttons/btn_car_1_on.png') ?>');
+				}
+				if(indexImage==1)
+				{
+					jQuery('.controles_number .more_button input').attr('src', '<?php echo $this->getSkinUrl('images/slider-buttons/btn_car_2_on.png') ?>');
+				}
+				if(indexImage==2)
+				{
+					jQuery('.controles_number .third_ctrl_button input').attr('src', '<?php echo $this->getSkinUrl('images/slider-buttons/btn_car_3_on.png') ?>');
+				}
+				
+			}
+			
+			indexImage2.hide();
+			lesImages.stop();
+			jQuery('.slide').hide();
+			lesImages.eq(indexImage).css('opacity', 1).show().animate({
+				opacity: 1
+			},{
+				duration: 10000,
+				easing: 'easeOutExpo'
+			});
+			var id = indexImage + 1;
+			jQuery('.square_slider').removeClass('active');
+			jQuery('#slider_' + id ).addClass('active');
+			
+		}
+	, 10000 );
+	
+});
+
+//]]>
+</script>

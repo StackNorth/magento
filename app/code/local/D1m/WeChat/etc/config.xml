@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_WeChat>
+            <version>0.1.3</version>
+        </D1m_WeChat>
+    </modules>
+
+    <global>
+        <models>
+            <weChat>
+                <class>D1m_WeChat_Model</class>
+                <resourceModel>weChat_mysql4</resourceModel>
+            </weChat>
+            <weChat_mysql4>
+                <class>D1m_WeChat_Model_Mysql4</class>
+                <entities>
+                    <api_debug>
+                        <table>wechat_payment_api_debug</table>
+                    </api_debug>
+                    <payment_notify_debug>
+                        <table>wechat_payment_notify_debug</table>
+                    </payment_notify_debug>
+                    <payment_query_debug>
+                        <table>wechat_payment_query_debug</table>
+                    </payment_query_debug>
+                    <access_token>
+                        <table>wechat_access_token</table>
+                    </access_token>
+                </entities>
+            </weChat_mysql4>
+        </models>
+
+        <blocks>
+            <weChat>
+                <class>D1m_WeChat_Block</class>
+            </weChat>
+        </blocks>
+
+        <helpers>
+            <weChat>
+                <class>D1m_WeChat_Helper</class>
+            </weChat>
+        </helpers>
+
+        <resources>
+            <weChat_setup>
+                <setup>
+                    <module>D1m_WeChat</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+            </weChat_setup>
+        </resources>
+    </global>
+
+    <frontend>
+        <routers>
+            <weChat>
+                <use>standard</use>
+                <args>
+                    <module>D1m_WeChat</module>
+                    <frontName>weChat</frontName>
+                </args>
+            </weChat>
+        </routers>
+
+        <layout>
+            <updates>
+                <weChat>
+                    <file>wechat.xml</file>
+                </weChat>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <D1m_WeChat>
+                    <files>
+                        <default>D1m_WeChat.csv</default>
+                    </files>
+                </D1m_WeChat>
+            </modules>
+        </translate>
+    </frontend>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <D1m_WeChat>
+                    <files>
+                        <default>D1m_WeChat.csv</default>
+                    </files>
+                </D1m_WeChat>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <default>
+        <payment>
+            <weChat_payment>
+                <model>weChat/payment</model>
+                <active>1</active>
+                <title>微信支付</title>
+                <subject>微信支付</subject>
+                <allowspecific>0</allowspecific>
+                <transaction_type>O</transaction_type>
+                <order_status>pending</order_status>
+                <order_status_payment_accepted>processing</order_status_payment_accepted>
+                <order_status_payment_refused>pending</order_status_payment_refused>
+            </weChat_payment>
+        </payment>
+
+       <!-- 统一设置微信的全局值-->
+        <weChat>
+            <common>
+              <!--  <appId></appId>
+                <appsecret></appsecret>-->
+            </common>
+        </weChat>
+    </default>
+
+
+    <crontab>
+        <jobs>
+            <check_weChat_Pay>
+                <schedule>
+                    <cron_expr>4 0 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>weChat/cron_payment::checkWeChatPay</model>
+                </run>
+            </check_weChat_Pay>
+        </jobs>
+    </crontab>
+
+</config>

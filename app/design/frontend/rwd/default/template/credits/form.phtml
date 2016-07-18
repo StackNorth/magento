@@ -1,0 +1,65 @@
+<?php
+// $credit_qty = 10;
+/* @@var $this D1m_Credits_Block_Form  */
+$credit_qty=$this->getRequest()->getParam('qty',10);
+settype($credit_qty,'integer');
+$paymentmethod=$this->getRequest()->getParam('method','chinapay_payment');
+
+?>
+<div class="buy-credits step1">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <h2 class="pc"><span><?php echo $this->__('My Account') ?></span></h2>
+    <div class="myaccount_link">
+        <a href="<?php  echo mage::getUrl('customer/account/home');?>">会员中心</a><a href="<?php  echo mage::getUrl('customer/account/coupons');?>">优惠劵中心</a><a href="<?php  echo mage::getUrl('credits/checkout/view');?>">我的课点</a></div>
+    <form action="<?php echo Mage::getUrl('credits/checkout/savecredits');;?>" method="POST" name="billingaddressForm" id="billingaddressForm" >
+        <div class="form">
+            <p class="title"><?php echo $this->__('BUY CREDITS') ?></p>
+            <!--div class="block-item process">
+            <div class="step1"><?php echo $this->__('check out') ?></div>
+          </div-->
+            <div class="block-item current-credits">
+                <p><?php echo $this->__('当前课点') ?></p>
+                <p><strong><?php echo $this->getCreditsByCustomer();?></strong></p>
+            </div>
+            <div class="block-item point-select">
+                <p><?php echo Mage::getStoreConfig('d1m_credits/general/creditmemo') ?></p>
+                <div class="points">
+                    <ol data-price="<?php echo $this->getFeeByCredit();?>">
+                        <li class="<?php // echo ($credit_qty == 10) ? 'current' : '';?>">1000</li>
+                        <li class="<?php //echo ($credit_qty == 20) ? 'current' : '';?>">2000</li>
+                        <li class="<?php // echo ($credit_qty == 30) ? 'current' : '';?>">3000</li>
+                        <li class="text">或</li>
+                        <li class="current">
+                            <input placeholder="<?php echo $this->__('输入购买数量') ?>" class="other-qty" name="other_qty" type="text"  value=""/>
+                        </li>
+                    </ol>
+
+
+                    <input name="credit_qty" class="current-selected" type="hidden" value="<?php echo $credit_qty; ?>" />
+                </div>
+                <p><strong class="price"></strong></p>
+            </div>
+            <div class="block-item select-payment">
+                <p><?php echo $this->__('Please select a purchase method') ?></p>
+                <div class="payment-method">
+                    <label  for="c1"  data-payment="chinapay_payment" class="zfb <?php if (($paymentmethod=='chinapay_payment') or ($paymentmethod=='')) echo 'current'; ?>">
+                        <?php echo $this->__('银联支付') ?>
+                    </label>
+                    <label  for="c2" data-payment="alipay_payment" class="zfb <?php if ($paymentmethod=='alipay_payment') echo 'current'; ?>">
+                        <?php echo $this->__('支付宝支付') ?>
+                    </label>
+                    <?php if (Mage::getStoreConfig('payment/sandpay_payment/active')): ?>
+                    <label  for="c3" data-payment="sandpay_payment" class="zfb <?php if ($paymentmethod=='sandpay_payment') echo 'current'; ?>">
+                        <?php echo $this->__('杉德支付') ?>
+                    </label>
+                    <?php endif;?>
+                </div>
+                <input type=hidden name="payment_method" id="payment_method" value="<?php  if ($paymentmethod=='alipay_payment') echo 'alipay_payment'; else echo 'chinapay_payment';?>">
+
+            </div>
+            <div class="block-item to-next">
+                <button><?php echo $this->__('继续') ?></button>
+            </div>
+        </div>
+    </form>
+</div>

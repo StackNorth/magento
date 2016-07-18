@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TM_Easyslide>
+            <active>false</active>
+            <codePool>local</codePool>
+            <depends />
+        </TM_Easyslide>
+        <TM_EasyBanner>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends />
+        </TM_EasyBanner>
+    </modules>
+</config>

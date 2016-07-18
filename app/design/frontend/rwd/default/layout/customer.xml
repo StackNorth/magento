@@ -1,0 +1,373 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+Supported layout update handles (action):
+- customer_account_index
+- customer_address_index
+- customer_address_view
+- customer_account_login
+- customer_account_logoutsuccess
+- customer_account_create
+- customer_account_forgotpassword
+- customer_account_confirmation
+- customer_account_edit
+
+Supported layout update handles (special):
+- default
+
+-->
+<layout version="0.1.0">
+
+<!--
+Default layout, loads most of the pages
+-->
+
+    <default>
+        <!-- Mage_Customer -->
+        <!--reference name="top.links">
+            <action method="addLink" translate="label title" module="customer"><label>My Account</label><url helper="customer/getAccountUrl"/><title>My Account</title><prepare/><urlParams/><position>10</position></action>
+            <action method="addLink" translate="label title before_text" module="customer"><label>Register</label><url helper="customer/getRegisterUrl" /><title>Register</title><prepare/><urlParams/><position>100</position><li/><a/></action>
+        </reference>
+        <reference name="footer_links2">
+            <action method="addLink" translate="label title" module="catalog"><label>My Account</label><url helper="customer/getAccountUrl" /><title>My Account</title></action>
+        </reference-->
+    </default>
+
+<!--
+Load this update on every page when customer is logged in
+-->
+
+    <!--customer_logged_in>
+        <reference name="top.links">
+            <action method="removeLinkByUrl"><url helper="customer/getRegisterUrl" /></action>
+            <action method="addLink" translate="label title" module="customer"><label>Log Out</label><url helper="customer/getLogoutUrl"/><title>Log Out</title><prepare/><urlParams/><position>100</position></action>
+        </reference>
+    </customer_logged_in-->
+
+<!--
+Load this update on every page when customer is logged out
+-->
+
+    <!--customer_logged_out-->
+        <!---<reference name="right">
+            <block type="customer/form_login" name="customer_form_mini_login" before="-" template="customer/form/mini.login.phtml"/>
+        </reference>-->
+        <!--reference name="top.links">
+            <action method="addLink" translate="label title" module="customer"><label>Log In</label><url helper="customer/getLoginUrl"/><title>Log In</title><prepare/><urlParams/><position>100</position></action>
+        </reference>
+        <remove name="reorder"></remove>
+    </customer_logged_out-->
+
+<!--
+Layout for customer login page
+-->
+
+    <customer_account_login translate="label">
+        <label>Customer Account Login Form</label>
+        <!-- Mage_Customer -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="customer/form_login" name="customer_form_login" template="customer/form/login.phtml" />
+        </reference>
+    </customer_account_login>
+
+<!--
+Layout for customer log out page
+-->
+
+    <customer_account_logoutsuccess translate="label">
+        <label>Customer Account Logout Success</label>
+        <!-- Mage_Customer -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="customer_logout" template="customer/logout.phtml"/>
+        </reference>
+    </customer_account_logoutsuccess>
+
+<!--
+New customer registration
+-->
+
+    <customer_account_create translate="label">
+        <label>Customer Account Registration Form</label>
+        <!-- Mage_Customer -->
+        <remove name="right"/>
+        <remove name="left"/>
+		
+		<reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/create.js</name></action>
+        </reference>
+		
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="customer/form_register" name="customer_form_register" template="customer/form/register.phtml">
+                <block type="page/html_wrapper" name="customer.form.register.fields.before" as="form_fields_before" translate="label">
+                    <label>Form Fields Before</label>
+                </block>
+            </block>
+        </reference>
+    </customer_account_create>
+
+    <customer_account_forgotpassword translate="label">
+        <label>Customer Forgot Password Form</label>
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="head">
+            <action method="setTitle" translate="title" module="customer"><title>Forgot Your Password</title></action>
+            <action method="addItem"><type>skin_css</type><name>css/forget-password.css</name></action>
+            <action method="addJs"><script>rwd/forget-password.js</script></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <action method="setHeaderTitle" translate="title" module="customer"><title>Password forgotten</title></action>
+        </reference>
+        <reference name="content">
+            <!--<block type="core/template" name="forgotPassword" template="customer/form/forgotpassword.phtml"/>-->
+            <block type="customer/account_forgotpassword" name="forgotPassword" template="customer/form/forgotpassword.phtml" />
+        </reference>
+    </customer_account_forgotpassword>
+
+    <customer_account_resetpassword translate="label">
+        <label>Reset a Password</label>
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="head">
+            <action method="setTitle" translate="title" module="customer">
+                <title>Reset a Password</title>
+            </action>
+            <action method="addItem"><type>skin_css</type><name>css/reset-password.css</name></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+            <action method="setHeaderTitle" translate="title" module="customer">
+                <title>Reset a Password</title>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="customer/account_resetpassword" name="resetPassword" template="customer/form/resetforgottenpassword.phtml"/>
+        </reference>
+    </customer_account_resetpassword>
+
+    <customer_account_confirmation>
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <action method="setHeaderTitle" translate="title" module="customer"><title>Send confirmation link</title></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="accountConfirmation" template="customer/form/confirmation.phtml"/>
+        </reference>
+    </customer_account_confirmation>
+
+    <customer_account_edit translate="label">
+        <label>Customer Account Edit Form</label>
+        <update handle="customer_account"/>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/edit.css</name></action>
+            <!--<action method="addJs"><script>rwd/edit.js</script></action>-->
+        </reference>
+        <reference name="root">
+            <action method="setHeaderTitle" translate="title" module="customer"><title>Edit Account Info</title></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="customer/form_edit" name="customer_edit" template="customer/form/edit.phtml"/>
+        </reference>
+
+        <reference name="left">
+          <action method="unsetChild"><name>left.permanent.callout</name></action>
+        </reference>
+    </customer_account_edit>
+
+<!--
+Customer account pages, rendered for all tabs in dashboard
+-->
+
+    <customer_account translate="label">
+        <label>Customer My Account (All Pages)</label>
+        <!--remove name="catalog.compare.sidebar"/>
+        <remove name="sale.reorder.sidebar"/-->
+        <!-- Mage_Customer -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <action method="addBodyClass"><class>customer-account</class></action>
+        </reference>
+		
+        <remove name="right"/>
+        <remove name="left"/>
+		
+        <reference name="content">
+            <block type="page/html_wrapper" name="my.account.wrapper" translate="label">
+                <label>My Account Wrapper</label>
+                <action method="setElementClass"><value>my-account</value></action>
+            </block>
+        </reference>
+
+        
+    </customer_account>
+
+<!--
+Customer account home dashboard layout
+-->
+
+    <customer_account_index translate="label">
+        <label>Customer My Account Dashboard</label>
+        <remove name="right"/>
+        <remove name="left"/>
+        <update handle="customer_account"/>
+        <!-- Mage_Customer -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/account.css</name></action>
+            <action method="addJs"><script>rwd/account.js</script></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="customer/account_dashboard" name="customer_account_dashboard" template="customer/account/dashboard.phtml">
+                <block type="customer/account_dashboard_address" name="customer_account_dashboard_address" as="address" template="customer/account/dashboard/address.phtml"/>
+                
+                <block type="robi_checkout/orderedclasses" name="orderedclasses" as="orderedclasses" template="customer/account/orderedclasses.phtml"/>
+                <block type="robi_checkout/pastedorderedclasses" name="pastedorderedclasses" as="pastedorderedclasses" template="customer/account/pastedorderedclasses.phtml"/>
+                <block type="robi_checkout/available" name="available" as="available" template="customer/account/available.phtml"/>
+                
+                <block type="d1m_invitation/form" name="invitation_form" as="invitaionform" template="invitation/form.phtml"/>
+            </block>
+        </reference>
+
+    </customer_account_index>
+    <customer_account_home translate="label">
+        <label>Customer My Account Dashboard</label>
+        <remove name="right"/>
+        <remove name="left"/>
+        <update handle="customer_account"/>
+        <!-- Mage_Customer -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/account.css</name></action>
+            <action method="addJs"><script>rwd/account.js</script></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="customer/account_dashboard" name="customer_account_dashboard" template="customer/account/home.phtml">
+
+            </block>
+        </reference>
+
+    </customer_account_home>
+    <customer_account_coupons>
+        <label>Customer My Account Dashboard</label>
+        <remove name="right"/>
+        <remove name="left"/>
+        <update handle="customer_account"/>
+        <!-- Mage_Customer -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/account.css</name></action>
+            <action method="addJs"><script>rwd/account.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="couponRule/customer_coupon" name="coupon.customer.coupon"  template="customer/account/coupons.phtml"/>
+
+
+
+        </reference>
+    </customer_account_coupons>
+    <mycustomer_account_index translate="label">
+        <label>Customer My Account Dashboard</label>
+        <remove name="right"/>
+        <remove name="left"/>
+        <update handle="customer_account"/>
+        <!-- Mage_Customer -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/account.css</name></action>
+            <action method="addJs"><script>rwd/account.js</script></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="customer/account_dashboard" name="customer_account_dashboard" template="customer/account/dashboard.phtml">
+                <block type="customer/account_dashboard_address" name="customer_account_dashboard_address" as="address" template="customer/account/dashboard/address.phtml"/>
+                
+                <block type="robi_checkout/orderedclasses" name="orderedclasses" as="orderedclasses" template="customer/account/orderedclasses.phtml"/>
+                <block type="robi_checkout/pastedorderedclasses" name="pastedorderedclasses" as="pastedorderedclasses" template="customer/account/pastedorderedclasses.phtml"/>
+                <block type="robi_checkout/available" name="available" as="available" template="customer/account/available.phtml"/>
+                
+                <block type="d1m_invitation/form" name="invitation_form" as="invitaionform" template="invitation/form.phtml"/>
+            </block>
+        </reference>
+
+    </mycustomer_account_index>
+
+<!--
+Customer account address book
+-->
+
+    <customer_address_index translate="label">
+        <label>Customer My Account Address Book</label>
+        <!-- Mage_Customer -->
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="customer/address_book" name="address_book" template="customer/address/book.phtml"/>
+        </reference>
+    </customer_address_index>
+
+<!--
+Customer account address edit page
+-->
+
+    <customer_address_form translate="label">
+        <label>Customer My Account Address Edit Form</label>
+        <!-- Mage_Customer -->
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="customer/address_edit" name="customer_address_edit" template="customer/address/edit.phtml"/>
+        </reference>
+    </customer_address_form>
+
+</layout>

@@ -1,0 +1,16 @@
+<?php
+/* @var $this   Mage_Core_Block_Template  */
+$url=urldecode($this->getRequest()->getparam('url',''));
+$homepage=Mage::getBaseUrl();
+?>
+
+<div class="buy-credits step11">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <h2><span><?php echo $this->__('购买课点') ?></span></h2>
+        <p style="color:#94712b;margin-top: 20px" align="center">确认支付,  <a style="color:gold" target=_blank href="<?php echo $url;?>">点击完成支付</a> </p>
+        <p style="color:#94712b;margin-top: 20px" align="center">放弃支付,  <a style="color:gold" target=_blank href="<?php echo $homepage;?>">点击返回首页</a> </p>
+     <!-- p style="color:gold;margin-top: 20px" align="center">如支付未完成或失败，可重新 <a href="<?php echo Mage::getUrl('credits/checkout/view');?>">购买课点</a>   </p>
+     <p style="color:gold;margin-top: 20px" align="center"><a href="<?php echo Mage::getUrl('customer/account/index');?>">返回到我的帐户</a>   </p -->
+
+</div>
+

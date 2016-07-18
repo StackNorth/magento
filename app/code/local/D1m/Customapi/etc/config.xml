@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_Customapi>
+            <version>0.1.0</version>
+        </D1m_Customapi>
+    </modules>
+	<global>
+		<models>
+			<customapi>
+				<class>D1m_Customapi_Model</class>
+			</customapi>
+		</models> 
+		<helpers>
+			<customapi>
+				<class>D1m_Customapi_Helper</class>
+			</customapi>
+		</helpers>   	
+		<blocks>     
+			  <customapi>
+			  	 <class>D1m_Customapi_Block</class>
+			  </customapi>	
+		</blocks>
+    </global>
+     
+    <frontend>
+        <routers>
+            <customapi>
+                <use>standard</use>
+                <args>
+                    <module>D1m_Customapi</module>
+                    <frontName>customapi</frontName>
+                </args>
+            </customapi>
+        </routers>
+    </frontend>
+</config>

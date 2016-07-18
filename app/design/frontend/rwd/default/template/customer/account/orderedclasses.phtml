@@ -1,0 +1,44 @@
+<?php
+/*  @var $this Robi_Checkout_Block_Orderedclasses  */
+?>
+<div class="block-item coming-activities">
+    <p class="t"><?php echo $this->__('即将开始的课程');?></p>
+    <table class="table" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+            <th class="th1"><?php echo $this->__('DATE');?></th>
+            <th class="th2"><?php echo $this->__('TITLE');?></th>
+            <th class="th3 pc"><?php echo $this->__('LOCATION');?></th>
+            <th class="th4">操作</th>
+        </tr>
+        <?php
+        $orderedClses = $this->_getOrderClassesCollection();
+        foreach($orderedClses as $orderedCls):
+            ?>
+            <tr>
+                <td valign="top"><?php echo $this->formatDate($orderedCls->classdate);?></td>
+                <td valign="top"><?php echo $this->escapeHtml($orderedCls->name);?><?php //echo Mage::getSingleton('sales/order_config')->getStatusLabel($orderedCls->getOrderStatus());?></td>
+                <td valign="top" class="pc"><?php echo $orderedCls->product_province_label?> <?php echo $this->escapeHtml($orderedCls->product_lassaddress); ?></td>
+                <td valign="top">
+                    <a onclick="return confirm('确认取消吗？')" class="btn" href="<?php echo $this->getUrl('course/index/cancelorder').'id/'.$orderedCls->getOrderId(); ?>"><?php echo $this->__('取消订单');?></a>
+<?php
+//正式环境下不可以换课
+$url=Mage::getBaseUrl();
+
+?>
+                    <a class="btn" href="<?php echo $this->getUrl('course/index/reorder').'id/'.$orderedCls->getOrderId();?>"><?php echo $this->__('换课');?></a>
+
+                    <?php
+                    //根据课程日期，2个月内可以下载菜谱
+                    $d1=new DateTime($orderedCls->classdate);
+                    $d1->add(new DateInterval('P2M'));
+                    $s1= $d1->format('Y-m-d');
+                    //echo $s1;
+                    if (date("Y-m-d")<= $s1):?>
+                        <a class="btn" href="<?php echo $this->getUrl('course/index/download').'id/'.$orderedCls->getOrderId().'/pname/'.urlencode($orderedCls->name);?>"><?php echo $this->__('下载菜谱');?></a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php
+        endforeach;?>
+    </table>
+</div>

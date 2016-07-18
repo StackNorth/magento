@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <D1m_Core>
+            <active>true</active>
+            <codePool>local</codePool>
+        </D1m_Core>
+    </modules>
+</config>

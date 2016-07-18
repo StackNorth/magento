@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <geetest translate="title" module="d1m_geeTest">
+                                        <title>GeeTest Setting</title>
+                                        <sort_order>150</sort_order>
+                                    </geetest>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

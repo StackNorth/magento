@@ -1,0 +1,100 @@
+<style>
+	div.main-col-inner>.entry-edit {position: relative;}
+	.block-mask {position: absolute; width: 100%; height: 100%; background: #fff; opacity: 0.6; filter: alpha(opacity=60); left: 0; top: 0; z-index: 9999;}
+</style>
+<script type="text/javascript">
+//<![CDATA[
+
+
+<?php
+//init
+$rule         =     Mage::registry('current_promo_quote_rule');
+$page_disable =     false;
+?>
+
+
+/*发送相关的业务逻辑*/
+<?php
+// 1) 如果为立即发送，则马上发送。 同时整个发送页面为DISABLE状态,则发送的状态标识为已发送
+// 2) 如果是选择CRONTAB，则将senddate记录， 问题： 用户是否还可以修改发送时间。    发送时间会不断修改。 如何解决这种问题。
+
+//如果记录的时间已过，则自动将
+// 3) 如果是事件类型的优惠券，也允许修改
+
+
+// 如果发送时间已经超过当前时间，或者发送的类型为立即发送 message_sent_flag
+if ($rule->getMessageSentFlag() == D1m_CouponRule_Helper_Data::MESSAGE_SENT_FLAG_YES){
+    $page_disable = true;
+}
+?>
+	var isPageDisable = '<?php echo $page_disable; ?>';
+	function addMask () {
+		var mask = document.createElement('div');
+		mask.setAttribute('class', 'block-mask');
+		$$('#promo_catalog_edit_tabs_coupons_section_sent_content .entry-edit')[0].appendChild(mask);
+	}
+if (isPageDisable) {
+	addMask();
+}
+	
+	
+	
+function sendMessageOrSave(generateUrl) {
+
+    //choose templates  validate
+    $('coupons_sent_coupon_templates_information_fieldset').removeClassName('ignore-validate');
+    var validationResult = $('coupons_sent_coupon_templates_information_fieldset').select('input',
+            'select', 'textarea').collect( function(elm) {
+            return Validation.validate(elm, {
+                useTitle :false,
+                onElementValidate : function() {
+                }
+            });
+        }).all();
+    $('coupons_sent_coupon_templates_information_fieldset').addClassName('ignore-validate');
+
+    if (!validationResult) {
+        return;
+    }
+
+    var elements = $('coupons_sent_coupon_templates_information_fieldset').select('input', 'select', 'textarea');
+
+    //只针对非事件类优惠券
+    if ($('coupons_sent_coupon_methods_information_fieldset')){
+        elements = elements.concat(
+            $('coupons_sent_coupon_methods_information_fieldset').select('input', 'select', 'textarea')
+        );
+    }
+
+    var params = Form.serializeElements(elements, true);
+    params.form_key = FORM_KEY;
+//如果发送方式为立即发送，则发送之后，即变成disable
+ //在些做if的判断   params.sent_method_type == <?php D1m_CouponRule_Helper_Data::COUPON_SENT_METHOD_RIGHT_NOW ?>
+	
+    $('messages').update();
+    new Ajax.Request(generateUrl, {
+        parameters :params,
+        method :'post',
+        onComplete : function (transport, param){
+            var response = false;
+            if (transport && transport.responseText) {
+                response = eval('(' + transport.responseText + ')');
+            }
+
+            if (response && response.messages) {
+                $('messages').update(response.messages);
+				if (params.sent_method_type == <?php echo D1m_CouponRule_Helper_Data::COUPON_SENT_METHOD_RIGHT_NOW ?>) {
+					addMask();
+				}
+            }
+
+            //如果响应没有报错，则将页面disable
+            if (response && response.error) {
+                alert(response.error);
+            }
+        }
+    });
+}
+
+//]]>
+</script>

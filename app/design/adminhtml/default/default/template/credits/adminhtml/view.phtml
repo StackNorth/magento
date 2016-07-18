@@ -1,0 +1,218 @@
+<?php
+/* @@var $this D1m_Credits_Block_Adminhtml_Credits_Edit */
+    $_order = $this->getOrder()
+?>
+<?php
+$orderAdminDate = $this->formatDate($_order->getCreatedAt(), 'medium', true);
+$orderStoreDate = $this->formatDate($_order->getCreatedAt(), 'medium', true);
+$paymentAtDate = $this->formatDate($_order->getPaymentAt(), 'medium', true);
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3><?php echo $this->getHeaderText() ?></h3></td>
+            <td class="form-buttons">
+                <?php echo $this->getButtonsHtml() ?>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="box-left">
+    <!--Order Information-->
+    <div class="entry-edit">
+        <?php if ($_order->getEmailSent()):
+            $_email = Mage::helper('sales')->__('the order confirmation email was sent');
+        else:
+            $_email = Mage::helper('sales')->__('the order confirmation email is not sent');
+        endif; ?>
+        <div class="entry-edit-head">
+            <?php echo Mage::helper('sales')->__('Order # %s', $_order->getRealOrderId()) ?>
+            <strong>(<?php echo $_email ?>)</strong>
+        </div>
+        <div class="fieldset">
+            <table cellspacing="0" class="form-list">
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Order Date') ?></label></td>
+                <td class="value"><strong><?php echo $orderAdminDate ?></strong></td>
+            </tr>
+            
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Payment Method') ?></label></td>
+                <td class="value"><strong><?php echo $this->escapeHtml($_order->getPaymentMethod()) ?></strong></td>
+            </tr>
+            
+            <?php if($_order->getPaymentAt() != '0000-00-00 00:00:00'):?>
+            
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('支付时间') ?></label></td>
+                <td class="value"><strong><?php echo $paymentAtDate; ?></strong></td>
+            </tr>
+            
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('总课点数') ?></label></td>
+                <td class="value"><strong><?php echo $this->escapeHtml($_order->getTotalPaid()) ?></strong></td>
+            </tr>
+            <?php endif;?>
+            
+            <?php if ($orderAdminDate != $orderStoreDate):?>
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Order Date (%s)', $_order->getCreatedAt()->getTimezone()) ?></label></td>
+                <td class="value"><strong><?php echo $orderStoreDate ?></strong></td>
+            </tr>
+            <?php endif;?>
+
+
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Order Status') ?></label></td>
+                <td class="value"><strong><span id="order_status"><?php echo $_order->getStatusLabel() ?></span></strong></td>
+            </tr>
+            
+            <?php if($_order->getRemoteIp()): ?>
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Placed from IP') ?></label></td>
+                <td class="value"><strong><?php echo $_order->getRemoteIp(); ?></strong></td>
+            </tr>
+            <?php endif; ?>
+            
+
+            </table>
+        </div>
+    </div>
+</div>
+<div class="box-right">
+    <!--Account Information-->
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-account"><?php echo Mage::helper('sales')->__('Account Information') ?></h4>
+            <div class="tools"></div>
+        </div>
+        <div class="fieldset">
+        	<?php $customer = $this->getCustomer();?>
+            <div class="hor-scroll">
+                <table cellspacing="0" class="form-list">
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Customer Name') ?></label></td>
+                    <td class="value"> <strong><?php echo $this->escapeHtml($customer->getUsername()) ?></strong> </td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Email') ?></label></td>
+                    <td class="value"><a href="mailto:<?php echo $customer->getEmail() ?>"><strong><?php echo $customer->getEmail() ?></strong></a></td>
+                </tr>
+                    <tr>
+                        <td class="label"><label><?php echo Mage::helper('sales')->__('手机') ?></label></td>
+                        <td class="value"> <strong><?php echo $this->escapeHtml($customer->getPhone()) ?></strong> </td>
+                    </tr>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+
+<div class="box-left">
+    <!--Order Information-->
+    <div class="entry-edit">
+		<div class="entry-edit-head">
+            <h4 class="icon-head head-account"><?php echo Mage::helper('sales')->__('Order Information') ?></h4>
+            <div class="tools"></div>
+        </div>
+        <div class="fieldset">
+            <table cellspacing="0" class="form-list">
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('购买数量') ?></label></td>
+                <td class="value"><strong><?php echo $_order->getQty() ?></strong></td>
+            </tr>
+
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Unit Price') ?></label></td>
+                <td class="value"><strong><span id="order_status"><?php echo $_order->getUnitPrice() ?></span></strong></td>
+            </tr>
+            
+            <!-- tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('金额') ?></label></td>
+                <td class="value"><strong><span id="order_status"><?php echo $_order->getQty() * $_order->getUnitPrice() ?></span></strong></td>
+            </tr -->
+            
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('优惠公式') ?></label></td>
+                <td class="value"><strong><?php echo $_order->getCreditsparam() ?></strong></td>
+            </tr>
+            
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('赠送课点') ?></label></td>
+                <td class="value"><strong><?php echo $_order->getGiftCredits() ?></strong></td>
+            </tr>
+            
+            <!-- tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('赠送金额') ?></label></td>
+                <td class="value"><strong><?php echo $_order->getGiftTotal() ?></strong></td>
+            </tr -->
+            
+            <tr>
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Grand Total') ?></label></td>
+                <td class="value"><strong><span id="order_status"><?php echo $_order->getGrandTotal() ?></span></strong></td>
+            </tr>
+            
+
+            
+
+            </table>
+        </div>
+    </div>
+</div>
+<div class="box-right">
+    <!--Account Information-->
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-account"><?php echo Mage::helper('sales')->__('Billing Information') ?></h4>
+            <div class="tools"></div>
+        </div>
+        <div class="fieldset">
+            <div class="hor-scroll">
+                <table cellspacing="0" class="form-list">
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Firstname') ?></label></td>
+                    <td class="value">
+                   
+                        <strong><?php echo $this->escapeHtml($_order->getFirstname()) ?></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Lastname') ?></label></td>
+                    <td class="value"><strong><?php echo $_order->getLastname() ?></strong></td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Email') ?></label></td>
+                    <td class="value"><strong><?php echo $_order->getEmail() ?></strong></td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('city') ?></label></td>
+                    <td class="value"><strong><?php echo $_order->getCity() ?></strong></td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('company') ?></label></td>
+                    <td class="value"><strong><?php echo $_order->getCompany() ?></strong></td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('zipcode') ?></label></td>
+                    <td class="value"><strong><?php echo $_order->getZipcode() ?></strong></td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('telephone') ?></label></td>
+                    <td class="value"><strong><?php echo $_order->getTelephone() ?></strong></td>
+                </tr>
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Street Address') ?></label></td>
+                    <td class="value"><strong><?php echo $_order->getStreetAddress() ?></strong></td>
+                </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>

@@ -1,0 +1,21 @@
+<?php
+// mage::log(get_class($this));
+/* @var $this Mage_Adminhtml_Block_Sales_Order_Totals_Item */
+?>
+<?php $this->setPriceDataObject($this->getSource()); ?>
+<?php if ((float) $this->getSource()->getCreditAmount()): ?>
+    <tr>
+        <td class="label">使用课点<?php echo $this->getSource()->getCreditQty();?></td>
+        <td>
+            <?php echo $this->displayPrices($this->getSource()->getBaseCreditAmount(), $this->getSource()->getCreditAmount()); ?>
+        </td>
+    </tr>
+<?php endif; ?>
+<?php if ((float) $this->getSource()->getRewardpointsAmount()): ?>
+    <tr>
+        <td class="label">使用积分<?php echo $this->getSource()->getRewardCreditQty();?></td>
+        <td>
+            <?php echo $this->displayPrices($this->getSource()->getBaseRewardpointsAmount(), $this->getSource()->getRewardpointsAmount()); ?>
+        </td>
+    </tr>
+<?php endif; ?>

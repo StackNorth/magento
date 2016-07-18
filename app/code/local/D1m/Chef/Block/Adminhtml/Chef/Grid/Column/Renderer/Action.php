@@ -1,0 +1,5 @@
+<?php
+class D1m_Chef_Block_Adminhtml_Chef_Grid_Column_Renderer_Action extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Text
+{
+
+}

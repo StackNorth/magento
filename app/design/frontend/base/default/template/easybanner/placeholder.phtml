@@ -1,0 +1,31 @@
+<?php
+/**
+ * DO NOT REMOVE OR MODIFY THIS NOTICE
+ * 
+ * EasyBanner module for Magento - flexible banner management
+ * 
+ * @author Templates-Master Team <www.templates-master.com>
+ */
+?>
+
+<?php
+ if( ($_banners = $this->getBanner()) && count($_banners) ):
+	 $placeholder = Mage::getModel('easybanner/placeholder')->load($this->getPlaceholderId());
+	 if($placeholder->getParentBlock() == 'category_banner'):?>
+<div id="img-header-listbycat"><?php
+	foreach ($_banners as $_banner):
+	echo Mage::helper('easybanner/banner')->load($_banner)->toHtml();
+endforeach;?></div><?php
+elseif( $placeholder->getParentBlock() ==  'home_top_left_banner'):
+		require dirname(__FILE__) .DS.'home_left_banner.phtml';
+else:
+foreach ($_banners as $_banner): 
+echo Mage::helper('easybanner/banner')->load($_banner)->toHtml();
+endforeach;
+endif;?><script type="text/javascript">
+<!--
+<?php foreach ($_banners as $_banner): ?>
+pageTracker._trackEvent("Promotional Banner", "Display", "<?php echo $_banner['identifier'] ?> / <?php echo $_banner['url'] ?>");
+<?php endforeach; ?>
+//-->
+</script><?php endif;?>

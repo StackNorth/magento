@@ -1,0 +1,16 @@
+<?php
+   $address = $this->getCustomer()->getPrimaryBillingAddress();
+   if( $address instanceof Varien_Object ):
+   ?>
+  <?php echo $address->getLastName().' '.$address->getFirstname();?><br />
+  MALE<br />
+  ADDRESS: <?php echo $address->format('oneline');?> <br />
+  PHONE: <?php echo $address->getTelephone();?>
+  <!--a href="<?php echo $this->getPrimaryBillingAddressEditUrl() ?>"><?php echo $this->__('EDIT') ?></a-->
+  <a class="edit-info btn" href="<?php echo $this->getUrl('customer/account/edit') ?>"><?php echo $this->__('EDIT') ?></a>
+<?php
+  else:
+    echo $this->__('You have not set a default shipping address.');
+  ?>
+<?php 
+  endif;?>

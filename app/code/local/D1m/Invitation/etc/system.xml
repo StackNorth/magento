@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<config>
+    <tabs>
+        <d1m_invitation translate="label" module="d1m_invitation">
+            <label>邀请</label>
+            <sort_order>197</sort_order>
+        </d1m_invitation>
+    </tabs>
+    <sections>
+        <d1m_invitation translate="label" module="d1m_invitation">
+            <label>邀请相关配置</label>
+            <tab>d1m_invitation</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>51</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="d1m_invitation">
+                    <label>相关参数</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <gift_rule_id translate="label" module="d1m_invitation">
+                            <label>赠送优惠券对应购物车价格规则Id</label>
+                            <comment>the rule id which prepare to send the custome who invite somethine successfully.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </gift_rule_id>
+                        <cent translate="label" module="d1m_invitation">
+                            <label>推荐人获得的积分</label>
+                            <comment>推荐人推荐其他人获得赠送积分.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <value>1</value>
+                        </cent>
+                    </fields>
+                </general>
+            </groups>
+        </d1m_invitation>
+    </sections>
+</config>

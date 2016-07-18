@@ -1,0 +1,116 @@
+<div class="paybox">
+    <h1 class="sec-head">订单支付</h1>
+    <div class="paybox-con">
+        <h1 class="paybox-head">课程订购</h1>
+        <div class="paybox-num clearfix">
+            <div class="paybox-numl">
+                <div class="paybox-numl-l">
+                    <h2>课程名称</h2>
+                    <p>GROUPMET CLASS</p>
+                    <p>10月10日 下午14:00</p>
+                    <p>上海世博园FA Cafe</p>
+                </div>
+                <div class="paybox-numl-r">
+                    <p>人数:2</p>
+                </div>
+            </div>
+            <div class="paybox-numr">
+                <h2>价格</h2>
+                <p>560.00MB</p>
+            </div>
+        </div>
+        <div class="paybox-discount">
+
+            <span>如果你有优惠券可以在此输入:</span><input type="text" name="" id="" class="oinput"><button class="discount-btn">确认</button>
+        </div>
+        <div class="paybox-way">
+            <h2>请选择支付方式</h2>
+            <div class="paybox-waya">
+                <div class="paybox-waya-t clearfix">
+                    <div class="paybox-waya-tl">
+                        <h1>使用课程点数支付</h1>
+                        <button class="paybox-way-btn">点数不足</button>
+                        <p>你还剩余0点</p>
+                    </div>
+                    <div class="paybox-waya-txt">或</div>
+                    <div class="paybox-waya-tr">
+                        <a href="#">购买课程点数</a>
+                    </div>
+                </div>
+                <div class="paybox-waya-b">
+                    <button class="paybox-way-btn">银联快捷支付</button>
+                    <button class="paybox-way-btn"><img src="./images/pay_way.jpg" alt=""></button>
+                </div>
+            </div>
+            <div class="paybox-wayb">
+                <h1 class="paybox-wayb-head">学员信息</h1>
+                <ul class="paybox-wayb-list">
+                    <li class="clearfix">
+                        <div class="paybox-wayb-li">姓名:<input type="text" name="" id="" class="oinput">
+                        </div>
+                        <div class="paybox-wayb-li">手机号:<input type="text" name="" id="" class="oinput">
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="paybox-wayb-li">姓名:<input type="text" name="" id="" class="oinput">
+                        </div>
+                        <div class="paybox-wayb-li">手机号:<input type="text" name="" id="" class="oinput">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="paybox-sure">
+
+            <button class="paybox-way-btn">提交订单</button>
+        </div>
+    </div>
+</div>
+<style>
+    .clearfix{ *zoom:1; } /* 触发IE hasLayout */
+    .clearfix:before,
+    .clearfix:after{content:"\200B"; display:block;font-size:0;height:0;clear:both;}
+
+    .paybox{width: 100%;background: #000;color:#927029;margin: 90px auto 0 auto;}
+    .paybox a{color:#927029;}
+    .sec-head{width:110px;  font-size: 24px;text-align: center;line-height: 60px;border-bottom:2px solid #927029;margin: 20px auto;}
+    .paybox-con{width:860px;height: 1000px;margin: 0 auto; border: 2px solid #927029;}
+    .paybox-head{width: 100;height: 30px;line-height: 30px; text-align: center;font-size: 18px;color: #000;background:#927029; }
+    .paybox-num{width: 100%;height: 150px; border-bottom: 2px solid #927029; }
+    .paybox-numl{float: left;width: 50%;}
+    .paybox-numl h2{font-weight: bold;margin: 30px 0 10px 0; }
+    .paybox-numl-l{float: left;width: 70%;}
+    .paybox-numl-l h2,.paybox-numl-l p{margin-left: 50px;}
+    .paybox-numl-r{float: left;width: 30%;line-height: 150px;}
+    .paybox-numr{float: left;width: 48%;height: 100px;margin: 25px 0; border-left:2px solid #927029;}
+    .paybox-numr h2{font-weight: bold;margin: 5px 0 10px 50px; }
+    .paybox-numr p{font-size: 30px;margin-left: 50px; }
+
+    .paybox-discount{width: 100%;height: 90px;border-bottom:2px solid #927029;line-height: 90px;text-align: center; }
+    .oinput{width: 150px;height: 24px; background: #000;border:2px solid #927029;color:#927029; margin: 0 0 0 5px;}
+    .discount-btn{height: 28px;padding: 0 10px;cursor:pointer; color:#927029; background: #000; border:2px solid #927029;margin-left: -2px;line-height: 28px;}
+
+    .paybox-way{width: 100%;height: 570px; border-bottom:2px solid #927029; }
+    .paybox-way h2{width: 90%;height: 100px;text-align: center; line-height: 100px; margin:0 auto;border-bottom:2px solid #927029;  }
+    .paybox-way-btn{padding: 8px 40px;background: #000;color:#927029; border:2px solid #927029 ;cursor: pointer;}
+    .paybox-waya{width: 90%;height: 300px; margin: 0 auto;border-bottom:2px solid #927029;}
+    .paybox-waya-t{width: 100%; height: 150px;overflow: hidden;}
+    .paybox-waya-tl{float: left; width: 48%;height: 100%; border-bottom:2px solid #927029;box-sizing:border-box;}
+    .paybox-waya-tr{float: left; width: 48%;height: 100%;border-bottom:2px solid #927029;box-sizing:border-box;}
+
+    .paybox-waya-txt{ float: left;width: 4%;height: 100%;line-height: 280px; text-align: center;}
+    .paybox-waya-tl,.paybox-waya-tr {text-align: center;}
+    .paybox-waya-tl h1{margin: 20px 0 0 0;}
+    .paybox-waya-tl .paybox-way-btn{margin: 10px 0;}
+    .paybox-waya-tr{line-height:150px; }
+    .paybox-waya-b{width: 100%;height: 150px;}
+    .paybox-waya-b .paybox-way-btn{display: inline-block;height: 25px;float: left;margin: 50px 0 0 120px;}
+    .paybox-waya-b .paybox-way-btn img{height: 25px}
+
+    .paybox-wayb{width: 90%;margin: 0 auto;}
+    .paybox-wayb-head{text-align: center;line-height: 35px;}
+    .paybox-wayb-list{}
+    .paybox-wayb-li{float: left;margin: 12px 0 0 120px;}
+    .paybox-sure {width: 100%;height: 155px;}
+    .paybox-sure .paybox-way-btn{display:inline-block; margin:80px 0 0 40%; }
+</style>

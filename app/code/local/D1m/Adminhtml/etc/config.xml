@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_Adminhtml>
+            <version>0.1.0</version>
+        </D1m_Adminhtml>
+    </modules>
+    <global>
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <customer_grid>D1m_Adminhtml_Block_Customer_Grid</customer_grid>
+					<sales_order_grid>D1m_Adminhtml_Block_Sales_Order_Grid</sales_order_grid>
+                    <catalog_product_grid>D1m_Adminhtml_Block_Catalog_Product_Grid</catalog_product_grid>
+				</rewrite>
+            </adminhtml>
+        </blocks>
+        <sales>
+            <order>
+                <statuses>
+                <refund translate="label">
+                    <label>refund</label>
+                </refund>
+                </statuses>
+                    </order>
+                </sales>
+
+        <models>
+            <d1m_adminhtml>
+                <class>D1m_Adminhtml_Model</class>
+            </d1m_adminhtml>
+        </models>
+
+        <events>
+            <sales_order_save_before>
+                <observers>
+                    <evebit_qiansong_online_payment>
+                        <class>d1m_adminhtml/observer</class>
+                        <method>salesOrderSaveBefore</method>
+                    </evebit_qiansong_online_payment>
+                </observers>
+            </sales_order_save_before>
+        </events>
+    </global>
+</config>

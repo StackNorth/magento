@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<translate>
+		<modules>
+			<TM_EasyBanner>
+				<files>
+					<default>TM_EasyBanner.csv</default>
+				</files>
+			</TM_EasyBanner>
+		</modules>
+	</translate>
+	<menu>
+		<templates_master>
+			<title>Templates Master</title>
+			<sort_order>71</sort_order>
+			<children>
+				<easybanner translate="title" module="easybanner">
+					<title>Easy Banner</title>
+					<sort_order>10</sort_order>
+					<children>
+						<banner translate="title">
+							<title>Manage Banners</title>
+							<action>easybanner/adminhtml_banner</action>
+							<sort_order>10</sort_order>
+						</banner>
+						<placeholder translate="title">
+							<title>Manage Placeholders</title>
+							<action>easybanner/adminhtml_placeholder</action>
+							<sort_order>20</sort_order>
+						</placeholder>
+					</children>
+				</easybanner>
+			</children>
+		</templates_master>
+	</menu>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<easybanner translate="title" module="easybanner">
+										<title>Easy Banner Section</title>
+									</easybanner>
+								</children>
+							</config>
+						</children>
+					</system>
+					<templates_master>
+						<title>Templates Master</title>
+						<sort_order>71</sort_order>
+						<children>
+							<easybanner translate="title" module="easybanner">
+								<title>Easy Banner</title>
+								<sort_order>0</sort_order>
+							</easybanner>
+						</children>
+					</templates_master>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+ </config>

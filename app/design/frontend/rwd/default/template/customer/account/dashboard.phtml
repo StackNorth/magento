@@ -1,0 +1,113 @@
+<?php
+/* @var $this Mage_Customer_Block_Account_Dashboard */
+    $customer = $this->getCustomer();
+    $id=$customer->getId();
+    $email=$customer->getData('email');
+/* @var $model Mage_Customer_Model_Customer */
+    $model=Mage::getModel('customer/customer')->load($id);
+    $phone=$model->getdata('phone');
+    $username=$model->getdata('username');
+// 积分bar的规则会员级别：Fissler Academy 会员级别，自2015年1月至2016年12月底有效积分累计2万分即可成为银牌会员；5万分即可成为金牌会员
+    $creditAmount =Mage::helper('d1m_integral')->getUserPoints($phone);
+//Mage::helper('d1m_integral')->getCreditAmountByCustomerId($customer->getId());
+    settype($creditAmount,"integer");
+
+?>
+<div class="account" xmlns="http://www.w3.org/1999/html">
+    <h2 class="pc"><span><?php echo $this->__('My Account') ?></span></h2>
+    <div class="myaccount_link">
+        <a href="<?php  echo mage::getUrl('customer/account/home');?>">会员中心</a>
+        <a href="<?php  echo mage::getUrl('customer/account/coupons');?>">优惠劵中心</a>
+        <a href="<?php  echo mage::getUrl('credits/checkout/view');?>">我的课点</a>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+    <div class="form">
+        <!-- p class="title"><?php echo $this->__('PROFILE') ?></p>
+        <div class="block-item basic-info">
+          <p class="t"><?php echo $this->__('BASIC INFOMATION') ?></p>
+          <div class="detail">
+            <?php echo $this->getChildHtml('address') ?>
+          </div>
+        </div -->
+
+        <!-- div class="block-item s-offer">
+          <p class="t"><?php echo $this->__('SPECIAL OFFER') ?></p>
+          <table class="table" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <th class="th1">TITLE</th>
+              <th class="pc th2">LOCATION</th>
+              <th class="th3">PRICE</th>
+              <th class="pc th4">DATE</th>
+              <th class="th5">CODE</th>
+              <th class="pc th6">BOOK</th>
+            </tr>
+            <tr>
+              <td>KIDS CLASS</td>
+              <td class="pc">FISSLER ACADEMY BABAIBAN</td>
+              <td>900RMB</td>
+              <td class="pc">2014.6.20</td>
+              <td>12345</td>
+              <td class="pc"><a class="btn" href="#">BOOK</a></td>
+            </tr>
+            <tr>
+              <td>KIDS CLASS</td>
+              <td class="pc">FISSLER ACADEMY BABAIBAN</td>
+              <td>900RMB</td>
+              <td class="pc">2014.6.20</td>
+              <td>12345</td>
+              <td class="pc"><a class="btn" href="#">BOOK</a></td>
+            </tr>
+          </table>
+        </div -->
+        <div class="block-item current-level">
+          <p class="t"><?php echo $this->__('当前等级');?></p>
+          <div class="lv-block">
+            <div class="processbar">
+				<div class="p-bar" data-total="50000" data-current="<?php echo $creditAmount;?>">
+				  <span class="process"></span>
+				</div>
+				<div class="accountlevel">
+					<span class="glevel" data-level="0"><span>普通<span>0分</span></span></span>
+					<span class="ylevel" data-level="20000"><span>银牌<span>20,000分</span></span><i></i></span>
+					<span class="jlevel" data-level="50000"><span>金牌<span>50,000分</span></span><i></i></span>
+				</div>
+            </div>
+			<p class="level-text">Fissler Academy 会员级别，自2016年2月至2016年12月底有效积分累计2万分即可成为银牌会员；5万分即可成为金牌会员</p>
+          </div>
+            <p class="t"><?php echo $this->__('帐户信息');?></p>
+            <div class="lv-block">
+                <div class="lv-block">
+                   <p style="font-size: 14px;color:#94712b">用户名: <?php echo $username;  ?></p>
+                   <p style="font-size: 14px;color:#94712b">Email: <?php echo $email;  ?></p>
+                   <p style="font-size: 14px;color:#94712b">手机: <?php echo $phone;  ?></p>
+                </div>
+                <a class="buy-c btn" href="<?php  echo mage::getUrl('customer/account/edit');?>">修改帐户信息</a>
+            </div>
+
+            <p class="t"><?php echo $this->__('当前积分');?></p>
+            <div class="lv-block">
+                <?php           echo $creditAmount;?>
+            </div>
+
+          <p class="t"><?php echo $this->__('当前课点');?></p>
+          <div class="lv-block"><?php
+
+        			$creditAmount = Mage::helper('d1m_credits')->getCreditAmountByCustomerId($customer->getId());
+                    settype($creditAmount,"integer");
+            		echo $creditAmount;?></div>
+          <a class="buy-c btn" href="<?php echo $this->getUrl('credits/checkout/view');?>"><?php echo $this->__('BUY CREDITS');?></a>
+        </div>
+
+        <?php echo $this->getChildHtml('orderedclasses');?>
+
+        <?php echo $this->getChildHtml('pastedorderedclasses');?>
+
+        <?php echo $this->getChildHtml('available');?>
+
+
+        <div class="block-item invite-friend"><?php echo $this->getChildHtml('invitaionform');?></div>
+      </div>
+
+</div>
+

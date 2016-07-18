@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_CouponRule>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <D1m_Common/>
+                <D1m_Core/>
+            </depends>
+        </D1m_CouponRule>
+    </modules>
+</config>

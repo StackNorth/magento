@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_Customer>
+            <version>0.1.0</version>
+        </D1m_Customer>
+    </modules>
+    <global>
+
+		<models>
+			<customer>
+				<rewrite>
+					<convert_adapter_customer>D1m_Customer_Model_Convert_Adapter_Customer</convert_adapter_customer>
+					<entity_customer>D1m_Customer_Model_Entity_Customer</entity_customer>
+					<customer>D1m_Customer_Model_Customer</customer>
+				</rewrite>
+			</customer>
+			
+			<customer_resource>
+		        <rewrite>
+		            <customer>D1m_Customer_Model_Resource_Customer</customer>
+		        </rewrite>
+		    </customer_resource>
+			
+		</models>
+		
+		
+		<resources>
+            <d1m_customer_setup>
+                <setup>
+                    <module>D1m_Customer</module>
+                    <class>Mage_Customer_Model_Entity_Setup</class>
+                </setup>
+            </d1m_customer_setup>
+            
+        </resources>
+		<!--routers>
+		 <customer>
+		   <rewrite>
+		     <account>
+		       <to>mycustomer/account</to>
+		       <override_actions>true</override_actions>
+		       <actions>
+		          <loginpost>
+		            <to>mycustomer/account/loginPost</to>
+		          </loginpost>
+		       </actions>
+		     </account>
+		   </rewrite>
+		 </customer>
+		</routers-->
+
+        <rewrite>
+		  <customer_rewrite>
+		          <from><![CDATA[#^/customer/account/#]]></from>
+		          <to>/mycustomer/account/</to>
+	     </customer_rewrite>
+		</rewrite>
+    </global>
+	
+    <frontend>
+	  <routers>
+	   <d1m_customer>
+	    <use>standard</use>
+	    <args>
+	    <module>D1m_Customer</module>
+	    <frontName>mycustomer</frontName>
+	    </args>
+	   </d1m_customer>
+	  </routers>
+	</frontend>
+   
+</config>

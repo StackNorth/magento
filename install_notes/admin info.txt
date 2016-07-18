@@ -1,0 +1,9 @@
+url:
+http://academy.d1m/index.php/academyadmin/
+--------------------------------------------
+user:
+
+username: admin
+pwd: qwer1234
+
+------------------------------------------

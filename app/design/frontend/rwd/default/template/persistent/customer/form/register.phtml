@@ -1,0 +1,46 @@
+<div class="register">
+    <h2 class="pc"><span><?php echo $this->__('REGISTER');?></span></h2>
+
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    
+    <form method="post" action="<?php echo $this->getPostActionUrl() ?>" enctype="multipart/form-data">
+        <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+        <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+        
+        <div class="form-item phone">
+            <label for="phone"><?php echo $this->__('Mobile Phone');?></label>
+            <input type="text" id="phone" value="<?php echo $this->escapeHtml($this->getFormData()->getPhone()) ?>" name="phone">
+        </div>
+         <div class="geeTestBox">   <?php
+        $block =  $this->getLayout()->createBlock('d1m_geeTest/captcha');
+        $block->setFormId('send_register_sms');
+        echo $block->toHtml();
+        ?></div>
+        <div class="form-item verification">
+            <label for="verification"><?php echo $this->__('Verifiction');?></label>
+            <input type="text" id="verification" value="<?php echo $this->escapeHtml($this->getFormData()->getVerification()) ?>" name="verification">
+            <div class="send-code"><?php echo $this->__('Verify');?></div>
+        </div>
+        
+        <div class="form-item useremail">
+            <label for="username"><?php echo $this->__('User name');?></label>
+            <input type="text" id="username" value="<?php echo $this->escapeHtml($this->getFormData()->getUsername()) ?>" name="username">
+        </div>
+        <div class="form-item email">
+            <label for="email"><?php echo $this->__('Email');?></label>
+            <input type="text" id="email" name="email" value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>">
+        </div>
+        <div class="form-item password">
+            <label for="password"><?php echo $this->__('Password');?></label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div class="form-item confirm">
+            <label for="confirmation"><?php echo $this->__('Confirm');?></label>
+            <input type="password" id="confirmation" name="confirmation">
+        </div>
+        <div class="agree">
+            <label><input type="checkbox" value="1" name="agree" checked="checked"> <a target=_blank href="<?php echo  $this->getUrl('eula'); ?>"><?php echo $this->__('请查看并同意用户协议');?></a></label>
+        </div>
+        <button class="block-btn submit" style="width: 380px;"><?php echo $this->__('REGISTER');?></button>
+    </form>
+</div>

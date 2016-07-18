@@ -1,0 +1,5 @@
+<?php
+class D1m_Credits_Block_Adminhtml_Credittest_Grid_Column_Renderer_Action extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Text
+{
+
+}

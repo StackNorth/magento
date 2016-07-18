@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <D1m_Common>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Core/>
+            </depends>
+        </D1m_Common>
+    </modules>
+</config>

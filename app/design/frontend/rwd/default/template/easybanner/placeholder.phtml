@@ -1,0 +1,48 @@
+<?php
+/**
+ * DO NOT REMOVE OR MODIFY THIS NOTICE
+ * 
+ * EasyBanner module for Magento - flexible banner management
+ * 
+ * @author Templates-Master Team <www.templates-master.com>
+ */
+?>
+
+<?php
+
+//echo varien_debug::getParents($this->getRequest(),true);
+//echo ($this->getRequest()->getControllerName());
+$i = 1;
+if (($_banners = $this->getBanner()) && count($_banners) && !$this->getIsProductPage()):
+ if ( $this->getRequest()->getActionName() != 'viewall' ) {?>
+<div class="box box-easybanner-placeholder">
+    <div class="easybanner-placeholder-wrapper group">
+    <?php foreach ($_banners as $_banner):  ?>
+        <?php 
+        $id = $_banner['banner_id']; $identifier = $_banner['identifier'];
+      
+        if ( $i == 1 && stripos($identifier,'youth') === false) { ?>
+           <h2 class="boxTitle subtitle"><?php echo $this->__('New & Noteworthy')?></h2> 	
+        	
+        <?php } ?>
+        <div class="easybanner-banner boxContent <?php echo ($i == count($_banners)) ? 'last' : (($i == 1) ? 'first' : 'middle') ?>">
+        <?php
+        	echo Mage::helper('easybanner/banner')->load($_banner)->toHtml();
+        ?>
+        </div>
+    <?php 
+    $i++;
+    
+    endforeach ?>
+    </div>
+</div>
+
+<?php }
+
+if ($this->getMode() == 'slider'): ?>
+<script type="text/javascript">
+    //insert js for slider
+</script>
+<?php endif ?>
+
+<?php endif ?>

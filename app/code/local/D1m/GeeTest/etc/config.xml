@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_GeeTest>
+            <version>1.0.0</version>
+        </D1m_GeeTest>
+    </modules>
+
+    <global>
+
+        <blocks>
+            <d1m_geeTest>
+                <class>D1m_GeeTest_Block</class>
+            </d1m_geeTest>
+        </blocks>
+        
+        <helpers>
+            <d1m_geeTest>
+                <class>D1m_GeeTest_Helper</class>
+            </d1m_geeTest>
+        </helpers>
+
+        <models>
+            <d1m_geeTest>
+                <class>D1m_GeeTest_Model</class>
+            </d1m_geeTest>
+        </models>
+
+        <events>
+            <!--系统默认的开启   登陆-->
+        <!--    <controller_action_predispatch_customer_account_loginPost>
+                <observers>
+                    <gee_check_login_captcha>
+                        <class>d1m_geeTest/captcha_observer</class>
+                        <method>checkUserLogin</method>
+                    </gee_check_login_captcha>
+                </observers>
+            </controller_action_predispatch_customer_account_loginPost>-->
+
+            <!--注册发送短信-->
+            <controller_action_predispatch_customer_account_verify>
+                <observers>
+                    <gee_check_sms_captcha>
+                        <class>d1m_geeTest/captcha_observer</class>
+                        <method>checkSmsCanSend</method>
+                    </gee_check_sms_captcha>
+                </observers>
+            </controller_action_predispatch_customer_account_verify>
+
+            <!--系统默认的开启   忘记密码-->
+         <!--   <controller_action_predispatch_customer_account_forgotpasswordpost>
+                <observers>
+                    <gee_check_forgetPwd_captcha>
+                        <class>d1m_geeTest/captcha_observer</class>
+                        <method>checkForgotPassword</method>
+                    </gee_check_forgetPwd_captcha>
+                </observers>
+            </controller_action_predispatch_customer_account_forgotpasswordpost>
+-->
+            <!--系统默认的开启   创建用户-->
+      <!--      <controller_action_predispatch_customer_account_createpost>
+                <observers>
+                    <gee_check_createUser_captcha>
+                        <class>d1m_geeTest/captcha_observer</class>
+                        <method>checkUserCreate</method>
+                    </gee_check_createUser_captcha>
+                </observers>
+            </controller_action_predispatch_customer_account_createpost>-->
+        </events>
+    </global>
+
+    <frontend>
+        <routers>
+            <geetest>
+                <use>standard</use>
+                <args>
+                    <module>D1m_GeeTest</module>
+                    <frontName>geetest</frontName>
+                </args>
+            </geetest>
+        </routers>
+
+        <translate>
+            <modules>
+                <D1m_GeeTest>
+                    <files>
+                        <default>D1m_GeeTest.csv</default>
+                    </files>
+                </D1m_GeeTest>
+            </modules>
+        </translate>
+
+        <layout>
+            <updates>
+                <geetest>
+                    <file>geetest.xml</file>
+                </geetest>
+            </updates>
+        </layout>
+    </frontend>
+
+    <default>
+     <!--geeTest 默认开放的Form, 目前只针对 前台开放 -->
+        <geeTest  translate="label">
+            <frontend>
+                <areas>
+                  <!--  <user_create>
+                        <label>Create user</label>
+                    </user_create>
+                    <user_login>
+                        <label>Login</label>
+                    </user_login>-->
+                    <send_register_sms>
+                        <label>Send Register Sms Message</label>
+                    </send_register_sms>
+
+                   <!-- <user_forgotpassword>
+                        <label>Forgot password</label>
+                    </user_forgotpassword>
+                    <guest_checkout>
+                        <label>Checkout as Guest</label>
+                    </guest_checkout>
+                    <register_during_checkout>
+                        <label>Register during Checkout</label>
+                    </register_during_checkout>-->
+
+
+                </areas>
+            </frontend>
+        </geeTest>
+    </default>
+
+
+</config>

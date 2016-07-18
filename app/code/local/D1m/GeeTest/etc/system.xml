@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<config>
+    <sections>
+        <geetest translate="label" module="d1m_geeTest">
+            <label>GeeTest Setting</label>
+            <class>separator-top</class>
+            <tab>robi_checkout</tab>
+            <sort_order>50</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <captcha translate="label">
+                    <label>CAPTCHA</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Active geetest</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable>
+
+                        <forms translate="label">
+                            <label>Forms</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>d1m_geeTest/config_form_frontend</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </forms>
+                    </fields>
+                </captcha>
+
+                <account translate="label">
+                    <label>Account Info</label>
+                    <frontend_type>text</frontend_type>
+                    <comment><![CDATA[
+                    <div style="padding:10px;background-color:#fff;border:1px solid #CCC;margin-bottom:7px;">In each template you can use dynamic data. You can add <br />- {NAME} - customer name <br />- {ORDERSTATUS} - status of an order <br />- {ORDERNUMBER} - order number<br />- {TRACKINGNUMBER} - tracking number (if exists)<br />- {STORENAME} - the name of the store<br />Example: Your order #{ORDERNUMBER} waits for a fee. Regards {STORENAME}<br />SMS Content: Your order #100000012 waits for a fee. Regards infobip.com</div><div id="storesmsCounterContainer">Message length: <span id="storesmsCounter">0</span> chars.<br /> <span id="storesmsTooLongAlert"> Warning: The template can be to long for 1 SMS. Please shorten the message or allow to send long messages in Main Configuration.</span></div><br />
+                    ]]></comment>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <captcha_id translate="label">
+                            <label>Captcha ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </captcha_id>
+
+                        <private_key translate="label">
+                            <label>Private key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </private_key>
+                    </fields>
+                </account>
+
+                <maccount translate="label">
+                    <label>Mobile Account Info</label>
+                    <frontend_type>text</frontend_type>
+                    <comment><![CDATA[
+                    <div style="padding:10px;background-color:#fff;border:1px solid #CCC;margin-bottom:7px;">In each template you can use dynamic data. You can add <br />- {NAME} - customer name <br />- {ORDERSTATUS} - status of an order <br />- {ORDERNUMBER} - order number<br />- {TRACKINGNUMBER} - tracking number (if exists)<br />- {STORENAME} - the name of the store<br />Example: Your order #{ORDERNUMBER} waits for a fee. Regards {STORENAME}<br />SMS Content: Your order #100000012 waits for a fee. Regards infobip.com</div><div id="storesmsCounterContainer">Message length: <span id="storesmsCounter">0</span> chars.<br /> <span id="storesmsTooLongAlert"> Warning: The template can be to long for 1 SMS. Please shorten the message or allow to send long messages in Main Configuration.</span></div><br />
+                    ]]></comment>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <captcha_id translate="label">
+                            <label>Captcha ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </captcha_id>
+
+                        <private_key translate="label">
+                            <label>Private key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </private_key>
+                    </fields>
+                </maccount>
+            </groups>
+        </geetest>
+    </sections>
+</config>

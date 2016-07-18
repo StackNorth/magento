@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_UnionQuick>
+            <version>1.0.0</version>
+        </D1m_UnionQuick>
+    </modules>
+    <global>
+        <models>
+            <d1m_unionquick>
+                <class>D1m_UnionQuick_Model</class>
+            </d1m_unionquick>
+        </models>
+        <blocks>
+            <d1m_unionquick>
+                <class>D1m_UnionQuick_Block</class>
+            </d1m_unionquick>
+        </blocks>
+        <helpers>
+            <d1m_unionquick>
+                <class>D1m_UnionQuick_Helper</class>
+            </d1m_unionquick>
+        </helpers>
+    </global>
+    <frontend>
+        <secure_url>
+            <unionquick>/unionquick/payment</unionquick>
+        </secure_url>
+        <routers>
+            <d1m_unionquick>
+                <use>standard</use>
+                <args>
+                    <module>D1m_UnionQuick</module>
+                    <frontName>unionquick</frontName>
+                </args>
+            </d1m_unionquick>
+        </routers>
+    </frontend>
+
+    <default>
+        <payment>
+            <unionquick_payment>
+                <model>d1m_unionquick/payment</model>
+                <title>Unionpay Quick</title>
+                <allowspecific>0</allowspecific>
+                <transaction_type>O</transaction_type>
+            </unionquick_payment>
+        </payment>
+    </default>
+
+</config>

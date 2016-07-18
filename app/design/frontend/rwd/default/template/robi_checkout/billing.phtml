@@ -1,0 +1,81 @@
+<?php
+$credit_qty = 10;
+?>
+<div style="margin-top:150px;background-color:#fff;padding:50px;">
+
+ <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<form action="<?php echo Mage::getUrl('checkout/onepage/saveBilling');;?>" method="post" name="savebillingForm" id="billingaddressForm"  >
+    
+<?php echo $this->getChildHtml('totals'); ?>
+
+<br/>
+<br/>
+
+
+<style>
+li {
+	margin-bottom:10px;
+}
+.usemyinfo {
+	margin-bottom:10px;
+}
+</style>
+<?php 
+	var_dump($this->getDefaultBillingAddress());
+?>
+<p>请使用下面的JS 参数给默认账单赋值。</p>
+<script>
+var defaultBillingAddress = <?php echo json_encode($this->getDefaultBillingAddress());?>
+</script>
+
+<p class="usemyinfo"><input type="checkbox" name="use_default_billing" value="1"/>
+<?php echo __('use my information');?> 
+</p>
+<?php $postData = $this->getPostBillingAddress();?>
+<ul>
+	<li>
+		<?php echo __('First Name');?> 
+		<input type="text" name="billing[firstname]" value="<?php echo $postData['firstname'];?>"/>
+	</li>
+	<li>
+		<?php echo __('Last Name');?> 
+		<input type="text" name="billing[lastname]" value="<?php echo $postData['lastname'];?>"/>
+	</li>
+	<li>
+		<?php echo __('Email address');?> 
+		<input type="text" name="billing[email]" value="<?php echo $postData['email'];?>"/>
+	</li>
+	<li>
+		<?php echo __('Organization');?> 
+		<input type="text" name="billing[company]" value="<?php echo $postData['company'];?>"/>
+	</li>
+	<li>
+		<?php echo __('Phone');?> 
+		<input type="text" name="billing[telephone]" value="<?php echo $postData['telephone'];?>"/>
+	</li>
+	<li>
+		<?php echo __('City');?> 
+		<input type="text" name="billing[city]" value="<?php echo $postData['city'];?>"/>
+	</li>
+	<li>
+		<?php echo __('Zipcode');?> 
+		<input type="text" name="billing[postcode]" value="<?php echo $postData['zipcode'];?>"/>
+	</li>
+	<li>
+		<?php echo __('Address');?> 
+		<input type="text" name="billing[street][]" value="<?php echo $postData['street_address'];?>"/>
+	</li>
+</ul>
+
+
+</li>
+
+
+<br/>
+<input type="button" onclick="location.href='<?php echo Mage::getUrl('checkout/cart');?>'" value="<?php echo __('previous');?>"/>
+<input type="hidden" name="billing[country_id]" id="billing_country_id" value="CN"/>
+<input type="submit" value="<?php echo __('proceed');?>"/>
+
+</form>
+</div>

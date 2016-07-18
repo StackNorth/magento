@@ -1,0 +1,1413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <couponRule translate="label" module="core">
+            <label>Coupon Setting(customer coupon)</label>
+            <tab>etam</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <coupon translate="label">
+                    <label>Generate Birthday Coupon generate setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_couponlist</source_model>
+                            <validate>validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </coupon>
+
+                <brithday_coupon_setting translate="label">
+                    <label>birthday coupon setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <send_date_isactive translate="label">
+                            <label>enable send date</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>If empty,the date is 1 week(7days).</comment>
+                        </send_date_isactive>
+
+
+                        <send_date translate="label">
+                            <label>send date setting(ahead of time)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_source_dateSetting</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <depends><send_date_isactive>1</send_date_isactive></depends>
+                        </send_date>
+
+
+                        <useage_date_isactive translate="label">
+                            <label>enable useage date</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>If empty,the date is 1 week(7days) before brithday day!</comment>
+                        </useage_date_isactive>
+
+                        <useage_date translate="label">
+                            <label>usage time setting(before birthday date)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_source_dateSetting</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <depends><useage_date_isactive>1</useage_date_isactive></depends>
+                        </useage_date>
+
+
+                    </fields>
+                </brithday_coupon_setting>
+
+                <new_customer_coupon translate="label">
+                    <label>Register Customer Coupon generate setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_couponlist</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </new_customer_coupon>
+
+                <new_customer_coupon_setting translate="label">
+                    <label>Register Customer Coupon  Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <useage_date_isactive translate="label">
+                            <label>enable useage date</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>If empty,the date is 1 week(7days) after sent day!</comment>
+                        </useage_date_isactive>
+
+                        <useage_date translate="label">
+                            <label>usage time setting(after register date)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_source_dateSetting</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <depends><useage_date_isactive>1</useage_date_isactive></depends>
+                        </useage_date>
+
+                    </fields>
+                </new_customer_coupon_setting>
+
+                <upgrade_customer_level_normal_vip translate="label">
+                    <label>upgrade customer level(vip)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_couponlist</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </upgrade_customer_level_normal_vip>
+
+                <upgrade_customer_level_silver_vip translate="label">
+                    <label>upgrade customer level(Silver Vip)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>70</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable Upgrade Customer Coupon</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_couponlist</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </upgrade_customer_level_silver_vip>
+
+                <upgrade_customer_level_gold_vip translate="label">
+                    <label>upgrade customer level(Gold Vip)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>80</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_couponlist</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </upgrade_customer_level_gold_vip>
+
+                <upgrade_customer_level_setting translate="label">
+                    <label>Upgrade Customer Level Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>90</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <useage_date_isactive translate="label">
+                            <label>enable useage date</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>If empty,the date is 1 week(7days) after sent day!</comment>
+                        </useage_date_isactive>
+
+                        <useage_date translate="label">
+                            <label>usage time setting(after send  date)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_source_dateSetting</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <depends><useage_date_isactive>1</useage_date_isactive></depends>
+                        </useage_date>
+                    </fields>
+                </upgrade_customer_level_setting>
+
+                <reviews_coupon translate="label">
+                    <label>Reviews Coupon Generate Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_couponlist</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </reviews_coupon>
+
+                <reviews_coupon_setting translate="label">
+                    <label>Reviews Coupon Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>110</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <useage_date_isactive translate="label">
+                            <label>enable useage date</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>If empty,the date is 1 week(7days) after sent day!</comment>
+                        </useage_date_isactive>
+
+                        <useage_date translate="label">
+                            <label>usage time setting(after send  date)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_source_dateSetting</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <depends><useage_date_isactive>1</useage_date_isactive></depends>
+                        </useage_date>
+                    </fields>
+                </reviews_coupon_setting>
+
+                <coupon_expire_alert>
+                    <label>Setting Coupon Expire Date</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2410</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<strong>Setting Coupon Expire Date And Expire Alert----------
+                     优惠券过期时间以及优惠券过期提示时间是一致的!!!!
+                                        </strong>]]></comment>
+                    <fields>
+                        <enable_coupon_expire_alert translate="label">
+                            <label>Enable Coupon Expire And  Alert Setting</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_coupon_expire_alert>
+                        <expire_date translate="label">
+                            <label>seting expire and expire alert  date</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_source_expireDate</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <depends><enable_coupon_expire_alert>1</enable_coupon_expire_alert></depends>
+                        </expire_date>
+                    </fields>
+                </coupon_expire_alert>
+
+
+                <releaseCoupon translate="label">
+                    <label>release coupon setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2450</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <cancel_order_release_coupon_enable translate="label">
+                            <label>enable cancel order to release coupon</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>enable cancel order to release coupon</comment>
+                        </cancel_order_release_coupon_enable>
+
+                        <release_coupon_creditmemoRefund_enable translate="label">
+                            <label>enable release coupon creditmemoRefund</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>enable release coupon creditmemoRefund</comment>
+                        </release_coupon_creditmemoRefund_enable>
+                    </fields>
+                </releaseCoupon>
+
+
+                <!-- add for after register XX dyas -->
+                <after_register_7days_coupon translate="label">
+                    <label>After Register 7 Days Coupon generate setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2550</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_rules_list</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </after_register_7days_coupon>
+
+                <after_register_14days_coupon translate="label">
+                    <label>After Register 14 Days Coupon generate setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2560</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_rules_list</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </after_register_14days_coupon>
+
+                <after_register_30days_coupon translate="label">
+                    <label>After Register 30 Days Coupon generate setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2570</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_rules_list</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </after_register_30days_coupon>
+
+                <!-- no purchase start -->
+                <no_purchase_30days_coupon translate="label">
+                    <label>No Purchase 30 Days Coupon generate setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2650</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_rules_list</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </no_purchase_30days_coupon>
+
+                <no_purchase_60days_coupon translate="label">
+                    <label>No Purchase 60 Days Coupon generate setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2660</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_rules_list</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </no_purchase_60days_coupon>
+
+                <no_purchase_90days_coupon translate="label">
+                    <label>No Purchase 90 Days Coupon generate setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2670</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_rules_list</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </no_purchase_90days_coupon>
+                <!-- // no purchase start -->
+
+                <!-- ShipmentConfirm start -->
+                <shipment_confirm_coupon translate="label">
+                    <label>Shipment confirm coupon generate setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2700</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <isactive translate="label">
+                            <label>Enable coupon Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </isactive>
+                        <roleid translate="label">
+                            <label>Shopping Cart Price Rule</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Add new rule: "Admin -> Promotion -> Shopping Cart Price Rule" </comment>
+                            <source_model>couponRule/system_config_rules_list</source_model>
+                            <validate>required-entry validate-select</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </roleid>
+                        <length translate="label">
+                            <label>Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Excluding prefix, suffix and separators.</comment>
+                            <validate>required-entry validate-digits</validate>
+                            <depends><isactive>1</isactive></depends>
+                        </length>
+                        <format translate="label">
+                            <label>Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>couponRule/system_config_coupon</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </format>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </prefix>
+                        <suffix translate="label">
+                            <label>Suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><isactive>1</isactive></depends>
+                        </suffix>
+                        <dash translate="label">
+                            <label>Dash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty no separation.</comment>
+                            <depends><isactive>1</isactive></depends>
+                        </dash>
+                    </fields>
+                </shipment_confirm_coupon>
+                <!-- // ShipmentConfirm End -->
+
+
+
+
+            </groups>
+        </couponRule>
+        <payment>
+            <groups>
+                <couponRule_payment module="couponRule">
+                    <label>预收款结账</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>310</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </title>
+
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <order_status_payment_accepted translate="label">
+                            <label>Order status when payment accepted by chinapay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status_payment_accepted>
+                        <order_status_payment_refused translate="label">
+                            <label>Order status when payment refused by chinapay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status_payment_refused>
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>15</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from Specific countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>16</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </specificcountry>
+                        <prefix_order translate="label">
+                            <label>课程订单前缀</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                <![CDATA[一旦确定请不要改变]]>
+                            </comment>
+                        </prefix_order>
+                        <prefix_creditorder translate="label">
+                            <label>课点订单前缀</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>18</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                <![CDATA[一旦确定请不要改变]]>
+                            </comment>
+                        </prefix_creditorder>
+                        <sort_order translate="label">
+                            <label>Sort order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sort_order>
+                    </fields>
+                </couponRule_payment>
+            </groups>
+        </payment>
+    </sections>
+
+</config>

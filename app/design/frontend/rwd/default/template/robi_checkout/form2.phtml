@@ -1,0 +1,291 @@
+<script src="/js/rwd/newmod.js"></script>
+<?php
+/* @var $this Robi_Checkout_Block_Form */
+?>
+<?php //pc版 ?>
+    <div class="paybox pc">
+        <h1 class="sec-head">订单支付</h1>
+        <div style="color:red;text-align: center;width: 860px;margin:auto">
+            <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+        </div>
+        <?php $cartQty = $this->getSummaryCount();?>
+        <?php if($cartQty>0):?>
+            <?php
+            $myCredit=$this->getCreditsByCustomer();
+            $require=0;
+            foreach($this->getItems() as $_item)
+            {
+                $require=$require+$_item->getQty();
+            }
+            $savepid=0;
+            $saveqty=0;
+            ?>
+
+            <div class="paybox-con">
+            <h1 class="paybox-head">课程订购</h1>
+            <div class="paybox-num clearfix">
+                <div class="paybox-numl">
+
+
+                    <?php $ptotal=0;?>
+                    <?php foreach($this->getItems() as $_item): ?>
+                    <?php
+                        $o= $_item->getProduct();
+                        $pid=$o->getId();
+                        $o2=Mage::getModel('catalog/product')->load($pid);
+                        $ptotal=$ptotal+ $_item->getPrice()* $_item->getQty();
+                        $savepid=$pid;
+                        $saveqty=$_item->getQty();
+                        // var_dump($o2);                        die();
+                    ?>
+
+                    <div class="paybox-numl-l">
+                        <h2>课程名称</h2>
+                        <p><?php echo $o2->getName(); ?></p>
+                        <p><?php  echo substr($o2->getClassDate(),0,10);?> <?php  echo $o2->getNClasstime1();?>-<?php   echo $o2->getNClasstime2();?></p>
+                        <p><?php echo $o2->getAttributeText('province');?> <?php echo $o2->getClassAddress(); ?></p>
+                    </div>
+                    <div class="paybox-numl-r">
+                        <p>人数: <?php echo $_item->getQty();?></p>
+                    </div>
+                    <?php endforeach;?>
+
+                </div>
+                <div class="paybox-numr">
+                    <h2>价格</h2>
+                    <p><?php echo $this->helper('checkout')->formatPrice($this->getGrandtotal());?>元</p>
+                </div>
+            </div>
+
+            <div class="paybox-discount">
+                <form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
+                    <span>如果你有优惠券可以在此输入:</span>
+                    <input class="oinput" type="text" id="coupon_code" name="coupon_code" value="<?php echo $this->escapeHtml($this->getCouponCode()) ?>" />
+                    <button class="discount-btn" onclick="discountFormsubmit(false,this);"> 输入优惠券</button>
+                    <button class="discount-btn" onclick="discountFormsubmit(true,this);"> 取消</button>
+                </form>
+				<p class="couponmsg">使用优惠券订购的课程，一旦预约完成不可更改时间。</p>
+            </div>
+
+            <div class="paybox-way">
+                <h2>请选择支付方式</h2>
+                <div class="paybox-waya">
+                    <div class="paybox-waya-t clearfix">
+                        <div class="paybox-waya-tl">
+                            <h1>使用课程点数支付</h1>
+                            <form id="discount-coupon-form2" action="<?php echo $this->getUrl('checkout/cart/creditsPost') ?>" method="post">                                
+                                <div class="paybox-way-box">
+                                    <input class="oinput" type="text" id="use_credit_amount" name="use_credit_amount" value="<?php echo $this->getUsedCreditsAmount() ?>" />
+                                    <button class="discount-btn" onclick="discountFormsubmit(false,this);"> 使用课点</button>
+                                    <button class="discount-btn" onclick="discountFormsubmit(true,this);"> 取消</button>
+                                </div>
+                            <p>你还剩余 <?php echo $this->getCreditsByCustomer();?> 点</p>							
+                            </form>
+                        </div>
+                        <div class="paybox-waya-tr">
+                            <a href="<?php echo $this->getUrl('credits/checkout/view');?>"><?php echo $this->__('购买课点');?></a>
+                        </div>
+                    </div>
+
+                </div>
+                <form action="<?php echo Mage::getUrl('checkout/onepage/saveOrder');?>" method="post" name="saveorderForm" id="saveorderForm" >
+
+                    <div class="paybox-waya-b">
+                        <div class="payment-method">
+                            <label  for="c1"  data-payment="couponRule_payment" class="coupon paybox-way-btn" style="display: none">
+                                <?php echo $this->__('预收款结账') ?>
+                            </label>
+                            <label  for="c1"  data-payment="chinapay_payment" class="zfb paybox-way-btn"><!--  current-->
+                                <?php echo $this->__('银联支付') ?>
+                            </label>
+                            <label  for="c2" data-payment="alipay_payment" class="zfb paybox-way-btn">
+                                <?php echo $this->__('支付宝支付') ?>
+                            </label>
+                            <?php if (Mage::getStoreConfig('payment/sandpay_payment/active')): ?>
+                                <label  for="c3" data-payment="sandpay_payment" class="zfb paybox-way-btn">
+                                    <?php echo $this->__('杉德支付') ?>
+                                </label>
+                            <?php endif;?>
+                        </div>
+
+                    </div>
+                <?php echo $this->getBlockHtml('formkey'); ?>
+                <input type="hidden" name="payment[method]" id="payment_method" value="couponRule_payment" class="payment_method">
+                <div class="paybox-wayb">
+                    <h1 class="paybox-wayb-head">学员信息</h1>
+                    <ul class="paybox-wayb-list">
+                        <?php  $total = $this->getSummaryCount();?>
+                        <?php for($i = 0; $i< $total; $i++ ):?>
+                            <li class="clearfix">
+                                <div class="paybox-wayb-li">姓名:<input class="oinput" type="text" name="contact[<?php echo $i;?>][name]" id="contact_name_<?php echo $i;?>"/>
+                                </div>
+                                <div class="paybox-wayb-li">手机号:<input class="oinput"  type="text" name="contact[<?php echo $i;?>][phone]" id="contact_phone_<?php echo $i;?>"/>
+                                </div>
+                            </li>
+                        <?php  endfor;?>
+                    </ul>
+                </div>
+                <div class="paybox-sure">
+                    <button id="checkout_cart" type="submit" class="paybox-way-btn">提交订单</button>
+                    <div style="text-align:center;margin-top:10px">请您在30分钟内完成付款，否则系统将自动取消您的订单，谢谢。 </div>
+                </div>
+                    <input type="hidden" name="saveqty" value="<?php echo $saveqty;?>">
+                    <input type="hidden" name="savepid" value="<?php echo $savepid;?>">
+
+                </form>
+            </div>
+
+        </div>
+        <?php else:?>
+
+            <div style="color:red;text-align: center;width: 860px;margin:auto">
+               <a  href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('3');?>;">活动时间表</a>
+            </div>
+        <?php endif;?>
+    </div>
+<?php //手机版 ?>
+<div class="paybox mobile">
+    <h1 class="sec-head">订单支付</h1>
+    <div style="color:red;text-align: center;width:90%;margin:auto">
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    </div>
+    <?php $cartQty = $this->getSummaryCount();?>
+    <?php if($cartQty>0):?>
+        <?php
+        $myCredit=$this->getCreditsByCustomer();
+        $require=0;
+        foreach($this->getItems() as $_item)
+        {
+            $require=$require+$_item->getQty();
+        }
+        //记住产品id和数量
+        $savepid=0;
+        $saveqty=0;
+        ?>
+
+        <div class="paybox-con">
+            <h1 class="paybox-head">课程订购</h1>
+            <div class="paybox-num clearfix">
+                <div class="paybox-numl">
+                    <?php $ptotal=0;?>
+                    <?php foreach($this->getItems() as $_item): ?>
+                        <?php
+                        $o= $_item->getProduct();
+                        $pid=$o->getId();
+                        $o2=Mage::getModel('catalog/product')->load($pid);
+                        $ptotal=$ptotal+ $_item->getPrice()* $_item->getQty();
+                        $saveqty=$_item->getQty();
+                        $savepid=$pid;
+                        ?>
+                        <div class="paybox-numl-l">
+                            <h2>课程名称</h2>
+                            <p><?php echo $o2->getName(); ?></p>
+                            <p><?php  echo substr($o2->getClassDate(),0,10);?> <?php  echo $o2->getNClasstime1();?>-<?php   echo $o2->getNClasstime2();?></p>
+                            <p><?php echo $o2->getClassAddress(); ?></p>
+                            <h2>人数</h2>
+                            <p><?php echo $_item->getQty();?></p>
+                        </div>
+                    <?php endforeach;?>
+                        <div class="paybox-numl-l">
+                            <h2>价格</h2>
+                            <p><?php echo $this->helper('checkout')->formatPrice($this->getGrandtotal());?>元</p>
+                        </div>
+                </div>
+            </div>
+
+            <div class="paybox-discount">
+                <form id="discount-coupon-form3" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">                    
+                    <span>如果你有优惠券可以在此输入:</span><br/>
+                    <input class="oinput" type="text" id="coupon_code" name="coupon_code" value="<?php echo $this->escapeHtml($this->getCouponCode()) ?>" /><br/>
+                    <button class="discount-btn" onclick="discountFormsubmit(false,this);"> 输入优惠券</button>
+					<button class="discount-btn" onclick="discountFormsubmit(true,this);"> 取消</button>
+                </form>
+				<p class="couponmsg">使用优惠券订购的课程，一旦预约完成不可更改时间。</p>
+            </div>
+            <div class="paybox-way">
+                <h2>请选择支付方式</h2>
+                <div class="paybox-waya">
+                    <div class="paybox-waya-t clearfix">
+                        <div class="paybox-waya-tl">
+                            <h1>使用课程点数支付</h1>
+                            <form id="discount-coupon-form4" action="<?php echo $this->getUrl('checkout/cart/creditsPost') ?>" method="post">                                
+                                <div class="paybox-way-box">
+                                    <input class="oinput" type="text" id="use_credit_amount" name="use_credit_amount" value="<?php echo $this->getUsedCreditsAmount() ?>" />
+                                    <button class="discount-btn" onclick="discountFormsubmit(false,this);"> 使用课点</button>
+									<button class="discount-btn" onclick="discountFormsubmit(true,this);"> 取消</button>
+                                </div>
+                                <p>你还剩余 <?php echo $this->getCreditsByCustomer();?> 点</p>
+                                <p><a href="<?php echo $this->getUrl('credits/checkout/view');?>"><?php echo $this->__('购买课点');?></a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                    <form action="<?php echo Mage::getUrl('checkout/onepage/saveOrder');?>" method="post" name="saveorderForm" id="saveorderForm"  >
+
+                        <div class="paybox-waya-b">
+                            <div class="payment-method">
+                                <label  for="c1"  data-payment="chinapay_payment" class="zfb paybox-way-btn  current">
+                                    <?php echo $this->__('银联支付') ?>
+                                </label>
+
+                                <label  for="c2" data-payment="alipay_payment" class="zfb paybox-way-btn">
+                                    <?php echo $this->__('支付宝支付') ?>
+                                </label>
+
+                                <?php if (Mage::getStoreConfig('payment/sandpay_payment/active')): ?>
+                                    <label  for="c3" data-payment="sandpay_payment" class="zfb paybox-way-btn">
+                                        <?php echo $this->__('杉德支付') ?>
+                                    </label>
+                                <?php endif;?>
+                            </div>
+                        </div>
+
+                    <?php echo $this->getBlockHtml('formkey'); ?>
+                    <input type="hidden" name="payment[method]" id="payment_method" value="chinapay_payment" class="payment_method">
+                    <div class="paybox-wayb">
+                        <h1 class="paybox-wayb-head">学员信息</h1>
+                        <ul class="paybox-wayb-list">
+                            <?php  $total = $this->getSummaryCount();?>
+                            <?php for($i = 0; $i< $total; $i++ ):?>
+                                <li class="clearfix">
+                                    <p>姓名:<input class="oinput" type="text" name="contact[<?php echo $i;?>][name]" id="contact_name_<?php echo $i;?>"/>
+                                    <br/>
+                                    手机:<input class="oinput"  type="text" name="contact[<?php echo $i;?>][phone]" id="contact_phone_<?php echo $i;?>"/>
+                                    </p>
+                                </li>
+                            <?php  endfor;?>
+
+                        </ul>
+                    </div>
+                     <div class="paybox-sure">
+                         <button id="checkout_cart" type="submit" class="paybox-way-btn">提交订单</button>
+                     </div>
+                        <input type="hidden" name="saveqty" value="<?php echo $saveqty;?>">
+                        <input type="hidden" name="savepid" value="<?php echo $savepid;?>">
+                    </form>
+            </div>
+
+
+        </div>
+    <?php else:?>
+
+        <div style="color:red;text-align: center;width: 90%;margin:auto">
+            <a  href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('3');?>;">活动时间表</a>
+        </div>
+
+    <?php endif;?>
+
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	function discountFormsubmit(isRemove,e)
+	{	
+		if(isRemove){
+			jQuery(e).parents('form').find('#coupon_code').val('');
+			jQuery(e).parents('form').find('#use_credit_amount').val('0');
+		}
+		jQuery(e).parents('form').submit();
+	}
+//]]>
+
+</script>

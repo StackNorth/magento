@@ -1,0 +1,22 @@
+<?php $collection=$this->_getCollection();?>
+<?php foreach ($collection as $item): ?>
+<div class="show_bigshow" id="show_bigshow">
+    <div class="show_bigboxshadow"></div>
+    <div class="show_bigbox">
+        <div class="show_bigbox_close"></div>
+        <!-- 上面图片 -->
+        <div class="show_bigbox_t">
+            <img src="<?php  echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); echo $item->getCbigpic(); ?>" alt="">
+        </div>
+        <!-- 下边介绍 -->
+        <div class="show_bigbox_b">
+            <!--名字-->
+            <h1 class="show_bigbox_bhead"><?php  echo $item->getCname(); ?></h1>
+            <?php            $data=$item->getClong();            $arr=explode("\n",$data); ?>
+            <?php foreach ($arr as $line):?>
+            <p><?php echo $line;?></p>
+            <?php endforeach ?>
+        </div>
+    </div>
+</div>
+<?php endforeach;?>

@@ -1,0 +1,16 @@
+<?php $collection=$this->_getCollection();?>
+<?php foreach ($collection as $item): ?>
+    <li class="item carousel_list" data-cooker="<?php echo $item->getChefId();?>">
+        <div class="carousel_list_t">
+            <h3><?php echo $item->getCname();?></h3>
+            <p class="title">专业厨师</p>
+            <?php  $data=$item->getCshort();       $arr=explode("\n",$data); ?>
+            <?php foreach ($arr as $line):?>
+                <p><?php if ($line!='暂缺') echo $line;?></p>
+            <?php endforeach ?>
+        </div>
+        <div class="img-box">
+            <img src="<?php  echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); echo $item->getCsmallpic(); ?>" alt="">
+        </div>
+    </li>
+<?php endforeach;?>

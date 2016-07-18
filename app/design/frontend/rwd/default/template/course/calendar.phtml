@@ -1,0 +1,30 @@
+<?php
+    $province= $this->getProvince();
+    $monthdate = $this->getMonthdate();
+    $coursetype = $this->getCourseType();
+
+    $course_index_link     = Mage::getUrl('course/index/calendar');
+    
+?>
+<div>
+    
+    <div id="Content">
+
+        <table class="admintable" align="center" width="600" style="margin:0 auto;text-align:center;">
+        <tr>
+            <th colspan="2">
+            </th>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <?php echo $this->getCalendar();?>
+
+            </td>
+        </tr>
+        </table>
+
+    </div>
+
+
+</div>

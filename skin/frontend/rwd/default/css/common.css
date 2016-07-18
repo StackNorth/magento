@@ -1,0 +1,107 @@
+/* for commons stylesheet */
+.d1-debug {position: fixed; top: 0; left: 0; z-index: 1600; background: rgba(255, 0, 0, 0.8); width: 100%; line-height: 1.6em; color: #000; font-size: 12px;}
+.d1-error-reporter {position: fixed; top: 0; left: 0; z-index: 1500; background: rgba(255, 0, 0, 0.8); width: 100%; line-height: 1.6em; color: #000; font-size: 16px; text-indent: 10px; transition: opacity .4s ease; -webkit-transition: opacity .4s ease;}
+.d1-error-reporter.hide {opacity: 0;}
+.d1-error-reporter .success {background: rgba(200, 255, 200, 1)}
+
+.fixfixed .footer {top: -999px; left: -999px;}
+.fixfixed .d1-error-reporter {display: none}
+
+.popup-section {background: #000; width: 100%; overflow: hidden; position: fixed; left: 3000px; top: 90px; z-index: 100;
+-webkit-transform: translateZ(0);
+-moz-transform: translateZ(0);
+-ms-transform: translateZ(0);
+-o-transform: translateZ(0);
+transform: translateZ(0);
+transition: left .7s ease-in;
+-webkit-transition: left .7s ease-in;
+}
+.popup-section .close {width: 28px; height: 28px; position: absolute; right: 25px; top: 25px; background: url(../images/icons.png) no-repeat 1px -61px; text-indent: -99em; overflow: hidden; z-index: 20}
+.popup-show .popup-section {top: 90px; left: 0; z-index: 100;}
+
+@media all and (max-width: 960px) {/*mobile*/
+  .popup-section {display: block; position: fixed; top: 85px; left: 100%; z-index: 100; width: 100%;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: left .2s ease-in .2s;
+  -webkit-transition: left .2s ease-in .2s;}
+  .popup-show .popup-section {left: 0;}
+}
+
+/*carousel*/
+.not .prev-s,
+.not .next-s {opacity: 0.3; filter: alpha(opacity=30); cursor: default;}
+.prev-s {position: absolute; width: 1px; height: 1px; font-size: 0; border-top: 20px solid transparent; border-bottom: 20px solid transparent; border-right: 25px solid #94712b; left: 50%; top: 52%; margin-top: -20px; opacity: 0.8; filter: alpha(opacity=80); margin-left: -10px;}
+.next-s {position: absolute; border-top: 20px solid transparent; border-bottom: 20px solid transparent; border-left: 25px solid #94712b; width: 1px; height: 1px; font-size: 0;  right: 50%; top: 52%; margin-top: -20px; opacity: 0.8; filter: alpha(opacity=80); margin-right: -10px;}
+
+/*nice select*/
+.cmNiceSelect {width: auto; height: 25px; /* position: relative; */ z-index: 5; cursor: pointer;}
+.cmNiceSelect.on {z-index: 10}
+.cmNiceSelect .select-box {/* line-height: 25px; */}
+.cmNiceSelect .show-text {padding-left: 10px; padding-right: 20px; line-height: 25px; color: #94712b;}
+.cmNiceSelect .place-holder {color: #999;}
+.cmNiceSelect .option-list {border: 2px solid #94712b; background: #000; overflow-y: auto; display: none;    box-sizing: content-box;width: 100%; max-height: 140px; opacity: 1;z-index: 22;position: absolute;_height: 140px;top: 28px;left: -2px;}
+.cmNiceSelect.up .option-list {top: auto; bottom: 25px}
+.cmNiceSelect ul.on {display: block;}
+.cmNiceSelect .option-list li {padding: 0 0 0 10px; height: 25px; line-height: 25px; color: #94712b; cursor: pointer; background: #000; }
+.cmNiceSelect .option-list li:first-child{}
+.cmNiceSelect .option-list li:hover {background: #222}
+.cmNiceSelect .arr {position: absolute; right: 0px; top: 0; height: 20px; width: 18px; content: ''; z-index: 2; background: url(../images/icons.png) no-repeat -158px -41px;}
+
+/*fake select*/
+.fake-select {background: #000; position: relative; border: 2px solid #94712b; text-align: left;}
+.fake-select select {display: none}
+@media all and (max-width: 960px) {/*mobile*/
+ .fake-select {background: #000; position: relative; border: 2px solid #94712b; text-align: left;}
+ .fake-select select {display: inline; -webkit-appearance: none; -moz-appearance: none; border: 0 none; background: none; height: 20px; line-height: 20px; font-size: 14px; color: #94712b; -webkit-box-sizing: content-box; -moz-box-sizing: content-box;}
+ .fake-select::before {position: absolute; right: 0px; top: 0; height: 20px; width: 18px; content: ''; z-index: 2; background: url(../images/icons.png) no-repeat -158px -41px;}
+}
+
+/*star*/
+.cmStarReady {display: inline-block; *display: inline; *zoom: 1; vertical-align: middle}
+.cmStarReady .cmStar-item {cursor: pointer; display: inline-block; *display: inline; *zoom: 1; height: 16px; width: 17px; overflow: hidden; background: url(../images/icons.png) no-repeat -46px -115px; text-indent: -99em}
+.cmStarReady .on {background-position: -46px -134px}
+.cmStarReady.hover .hover-on {opacity: 0.5; filter: alpha(opacity=50); background-position: -22px 0}
+.cmStarReady.hover .on {opacity: 0.9; filter: alpha(opacity=90);}
+.cmStarReady.readonly .cmStar-item {cursor: default;}
+
+/*login*/
+.login{margin:90px auto 0 auto; width:380px;}
+.login .form-item{overflow:hidden; border: 2px solid #94712b; margin-bottom:6px;}
+.login .form-item input[type=text], .login .form-item input[type=password]{display:block; float: left; height: 24px;line-height: 24px;width: 69%; color:#94712b;background-color:transparent; border:0;font-family: 'Courier New','Times New Roman','微软雅黑',arial,sans-serif;font-size: 14px;}
+.login .form-item label{display:block; float:left; width:31%; box-sizing: border-box;height: 24px;color:#94712b;padding:0 0 0 2%;border-right: 2px solid #94712b;}
+.login .block-btn{display:block;color:#94712b;border: 2px solid #94712b;padding:3px 0; margin-top:20px; text-decoration:none; text-align:center;width:100%;font-family:"Courier New","Times New Roman","微软雅黑",arial,sans-serif; font-size: 14px;background-color:transparent;cursor: pointer;}
+.login .creat-account{width:376px; margin-left:auto; margin-right:auto;}
+.login h2 {font-size: 24px; width: 80px; margin: 0 auto; border-bottom: 2px solid  #94712b; color: #94712b; padding: 20px 0 25px; text-align: center; font-style: normal; position: relative; height: 28px; margin-bottom:25px;}
+.login h2 span {white-space: nowrap; position: absolute; width: 1000px; text-align: center; left: 50%; top: 30px; line-height: 28px; height: 28px; margin-left: -500px; font-weight: normal;}
+@media all and (max-width: 960px) {/*mobile*/
+	.login{width:auto;}
+	.login .creat-account{width:auto;}
+	.login .form-item label{width:25%;}
+	.login .form-item input[type=text], .login .form-item input[type=password]{width:70%;}
+}
+/*register*/
+.register{margin:auto; width:380px;margin: 90px auto 0 auto;}
+.register .form-item{overflow:hidden; border: 2px solid #94712b; margin-bottom:6px;}
+.register .form-item input[type=text], .register .form-item input[type=password]{display:block; float: left; width: 69%; height: 24px;line-height: 24px;color:#94712b;background-color:transparent; border:0;font-family: 'Courier New','Times New Roman','微软雅黑',arial,sans-serif;font-size: 14px;}
+.register .form-item label{display:block; height: 24px;float:left; width:31%; box-sizing: border-box;color:#94712b;padding:0 0 0 2%;border-right: 2px solid #94712b;}
+.register .form-item {position: relative}
+.register .form-item .send-code {position: absolute; width: 25%; background: #000; top: 0; right: 0; height: 24px;font-size: 12px;line-height: 24px;color: #94712b; text-align: center; border-left: 1px solid #94712b; cursor: pointer}
+.register .form-item .send-code.disable {color: #999;cursor: text;}
+.register .form-item .send-code.sent{color: #94712b;cursor: text;}
+.register .geeTestBox .gt_holder.float{margin: 1px auto 6px;position: relative;left: -18px;}
+.register .block-btn{display:block;color:#94712b;border: 2px solid #94712b;padding:3px; margin-top:20px; text-decoration:none; text-align:center;background-color:transparent;}
+.register .creat-account{width:190px; margin-left:auto; margin-right:auto;}
+.register h2 {font-size: 24px; width: 80px; margin: 0 auto; border-bottom: 2px solid  #94712b; color: #94712b; padding: 20px 0 25px; text-align: center; font-style: normal; position: relative; height: 28px; margin-bottom:25px;}
+.register h2 span {white-space: nowrap; position: absolute; width: 1000px; text-align: center; left: 50%; top: 30px; line-height: 28px; height: 28px; margin-left: -500px; font-weight: normal;}
+@media all and (max-width: 960px) {/*mobile*/
+	.register{width:auto;}
+	.register .creat-account{width:auto;}
+	.register .form-item label{width:25%;}
+	.register .form-item input[type=text], .register .form-item input[type=password]{width:70%;}
+}
+
+

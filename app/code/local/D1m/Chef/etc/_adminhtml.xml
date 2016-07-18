@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <d1m>
+            <title>D1M</title>
+            <sort_order>100</sort_order>
+            <children>
+                <chef translate="title" module="d1m_chef">
+                    <title>厨师管理</title>
+                    <sort_order>200</sort_order>
+                    <children>
+                        <chef_management>
+                            <title>厨师管理</title>
+                            <sort_order>20</sort_order>
+                            <action>chef/adminhtml_chef/index</action>
+                        </chef_management>
+                    </children>
+                </chef>
+            </children>
+        </d1m>
+    </menu>
+
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <etam>
+                        <title>厨师管理</title>
+                        <sort_order>300</sort_order>
+                        <children>
+                        <chef_management>
+                            <title>厨师管理</title>
+                            <sort_order>20</sort_order>
+                        </chef_management>
+                        </children>
+                    </etam>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <chef translate="title" module="d1m_chef">
+                                        <title>厨师管理</title>
+                                        <sort_order>200</sort_order>
+                                    </chef>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

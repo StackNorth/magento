@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+	 <modules>
+        <Robi_Settleaccount>
+		  <active>true</active>
+		  <codePool>local</codePool>
+		  <depends>
+                <Mage_Catalog />
+                <Mage_Checkout />
+                <Mage_Sales />
+            </depends>
+		</Robi_Settleaccount>
+        <Robi_Checkout>
+		  <active>true</active>
+		  <codePool>local</codePool>
+		  <depends>
+                <Mage_Checkout />
+            </depends>
+		</Robi_Checkout>
+        <Robi_Msgnotice>
+		  <active>true</active>
+		  <codePool>local</codePool>
+		</Robi_Msgnotice>
+		<Robi_Chinapay>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Payment/>
+            </depends>
+        </Robi_Chinapay>
+	</modules>
+</config>

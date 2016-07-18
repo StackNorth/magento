@@ -1,0 +1,214 @@
+<?php
+/* @var $this Mage_Customer_Block_Account_Dashboard */
+$customer = $this->getCustomer();
+$id=$customer->getId();
+
+$email=$customer->getData('email');
+/* @var $model Mage_Customer_Model_Customer */
+$model=Mage::getModel('customer/customer')->load($id);
+
+$phone=$model->getdata('phone');
+$username=$model->getdata('username');
+// 积分bar的规则会员级别：Fissler Academy 会员级别，自2015年1月至2016年12月底有效积分累计2万分即可成为银牌会员；5万分即可成为金牌会员
+$creditAmount = Mage::helper('d1m_integral')->getCreditAmountByCustomerId($customer->getId());
+settype($creditAmount,"integer");
+
+?>
+<style>
+
+
+    .vip {margin-top:90px;}
+    .vip .myaccount_link {position:absolute; width:864px; margin-left:-432px; font-size:16px; color:#000; left:50%; top:198px; overflow:hidden;}
+    .vip .myaccount_link a {float:right; display:block; margin-left:3px; background:#94712b; padding:6px 13px; color:#000;}
+    .vip h2 {
+        font-size: 24px;
+        width: 80px;
+        margin: 0 auto;
+        border-bottom: 2px solid #94712b;
+        color: #94712b;
+        padding: 70px 0 25px;
+        text-align: center;
+        font-style: normal;
+        position: relative;
+        height: 28px;
+    }
+    .vip h2 span {
+        white-space: nowrap;
+        position: absolute;
+        width: 1000px;
+        text-align: center;
+        left: 50%;
+        top: 80px;
+        line-height: 1em;
+        height: 28px;
+        margin-left: -500px;
+        font-weight: normal;
+    }
+
+    .vip .block-item {
+        border-top: 1px solid #94712b;
+        padding: 30px 0;
+        border-bottom: 1px solid #94712b;
+        border-left: 2px solid #94712b;
+        border-right: 2px solid #94712b;
+        width: calc(100% - 4px);
+        max-width: 860px;
+        margin:0 auto;
+    }
+    .vip .block-item .t{
+        text-align: center;
+        margin: 6px 0;
+        color: #94712b;
+        font-size: 14px;
+        font-family: Verdana,'微软雅黑',arial,sans-serif;
+    }
+    .vip .my-vip {
+        padding: 15px 0;
+    }
+    .vip .my-vip .t{
+        font-size: 20px;
+
+    }
+    .vip .my-vip .points{
+        color: #fff;
+        text-align: center;
+        font-size: 25px;
+        margin: 15px 0;
+    }
+    .vip .my-vip .l{
+        color: #94712b;
+        text-align: center;
+        font-size: 14px;
+        margin: 15px 0;
+        padding:  0 15%;
+    }
+    .vip .my-vip .l a{
+        color: #94712b;
+    }
+    .vip .my-vip .text-left{text-align: left;}
+    .vip .my-vip .tab{
+        text-align: center;
+    }
+
+    .vip .vip-top{
+        padding: 5px 0px;
+        background: #94712b;
+        margin-top: 20px;
+    }
+    .vip .vip-top .t{
+        color: #000;
+        font-size: 22px;
+    }
+
+    .vip .margin-0{margin-top: 0;}
+
+    .vip .my-vip table{color: #94712b;font-size: 13px;width: 100%;max-width:800px;margin: 0 30px;padding: 5px 0;}
+    .vip .my-vip table tr{font-size: 13px;text-align: center;}
+    .vip .my-vip table.vip-data{border-top: 1px solid #94712b;border-bottom: 1px solid #94712b;}
+    .vip .my-vip table.vip-data tr{font-size: 14px;}
+    .vip .my-vip table tr td:first-child{width: 25%;}
+    .vip .my-vip table tr td:last-child{width: 75%}
+
+
+    @media all and (max-width: 960px) {/*mobile*/
+        .vip .vip-top{margin-top: 124px;}
+        .vip .margin-0{margin-top: 0;}
+        .vip .myaccount_link {width:100%; margin-left:-50%; text-align:right; top:87px;}
+        .vip .myaccount_link a {display:inline-block;}
+        .vip h2 {border: 0;}
+        .vip h2 span{display: none;}
+        .vip .my-vip table{width: 96%;margin: 0 2%;}
+
+    }
+
+
+
+</style>
+
+<div class="vip">
+    <h2 class="pc">
+        <span>会员中心</span>
+    </h2>
+    <div class="myaccount_link">
+        <a href="<?php  echo mage::getUrl('customer/account/home');?>">会员中心</a><a href="<?php  echo mage::getUrl('customer/account/coupons');?>">优惠劵中心</a><a href="<?php  echo mage::getUrl('credits/checkout/view');?>">我的课点</a>
+    </div>
+    <div class="block-item vip-top">
+        <p class="t">会员级别说明</p>
+    </div>
+    <div class="block-item my-vip">
+        <table>
+            <tbody>
+            <tr>
+                <td>会员级别</td>
+                <td>入会门槛</td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="vip-data" cellpadding="3">
+            <tbody>
+            <tr>
+                <td>金牌</td>
+                <td>累计200分即可成为金牌会员</td>
+            </tr>
+            <tr>
+                <td>银牌</td>
+                <td>累计100分即可成为银牌会员</td>
+            </tr>
+            <tr>
+                <td>普通</td>
+                <td>活动期间有消费，即有机会累积消费积分</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="block-item my-vip">
+        <table>
+            <tbody>
+            <tr>
+                <td>会员级别</td>
+                <td>会员福利</td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="vip-data" cellpadding="3">
+            <tbody>
+            <tr>
+                <td>金牌</td>
+                <td>可享有纯积分兑换、积分加够、指定生日产品价格专享、大型活动邀约等</td>
+            </tr>
+            <tr>
+                <td>银牌</td>
+                <td>可享有纯积分兑换、积分加购、指定生日产品价格专享等</td>
+            </tr>
+            <tr>
+                <td>普通</td>
+                <td>可享有纯积分加购、促销短信通知等</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="block-item vip-top margin-0">
+        <p class="t">会员积分</p>
+    </div>
+    <div class="block-item my-vip">
+        <p class="t">当前积分</p>
+        <p class="points">
+            <?php
+           echo Mage::helper('d1m_integral')->getUserPoints($phone);
+
+            ?>
+
+        </p>
+        <p class="l">目前积分尚未植入，如需查看积分请登录：<a href="#">www.jifenduihuan.com</a></p>
+    </div>
+    <div class="block-item my-vip">
+        <p class="t">积分规则</p>
+
+        <p class="l text-left">活动期间，如您在菲仕乐门店、学院、餐厅消费，按以下规则积分即可成为菲仕乐会员。门店：请将您的购买小票在购买后的7个工作日（法定节假日除外）内，拍照上传至菲仕乐官方微信或cust.svs@fissler.com.cn邮箱，专人核查后将在3个工作日（法定节假日除外）内，每100元获得1积分（积分四舍五入）。<br>
+            学院、餐厅：积分自动累积，无需上传购买小票。<br>
+            本活动的消费积分累计时间为2016年2月1日至2016年12月31日，使用积分时间为积分产生时间至2017年1月31日，超过兑换期限未使用的积分将自动清零。
+        </p>
+    </div>
+
+
+</div><br /><br /><br />

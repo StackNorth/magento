@@ -1,0 +1,99 @@
+<?php
+/* @var $this  D1m_Course_Block_Choose */
+?>
+    <?php $collection=$this->getCity();?>
+    <div class="fake-select city">
+
+        <div class="cmNiceSelect">
+            <?php $i=0;?>
+            <?php foreach ($collection as $item):?>
+                <?php if($i==0):?>
+                    <div class="select-box" data-city="<?php echo $item->getData('value');?>" data-n_shops="<?php echo $item->getData('n_shops');?>">
+                        <span class="show-text"><?php echo $item->getData('label');?><a class="arr"><b></b></a></span>
+                    </div>
+                    <ul class="option-list">
+                <?php endif;?>
+                    <li data-city="<?php echo $item->getData('value');?>" data-n_shops="<?php echo $item->getData('n_shops');?>"><?php echo $item->getData('label');?></li>
+                <?php $i++; ?>
+            <?php endforeach;?>
+                    </ul>
+        </div>
+    </div>
+    
+    <?php $collection=$this->getNShop();?>
+    <div class="fake-select n_shop">
+        <div class="cmNiceSelect">
+            <?php $i=0;?>
+            <?php foreach ($collection as $item):?>
+                <?php if($i==0):?>
+                    <div class="select-box" data-n_shop="<?php echo $item->getData('value');?>">
+                        <span class="show-text"><?php echo $item->getData('label');?><a class="arr"><b></b></a></span>
+                    </div>
+                    <ul class="option-list">
+                <?php endif;?>
+                    <li data-n_shop="<?php echo $item->getData('value');?>"><?php echo $item->getData('label');?></li>
+                <?php $i++; ?>
+            <?php endforeach;?>
+                    </ul>
+        </div>
+    </div>
+
+
+    <?php $collection=$this->getYear();?>
+    <div class="fake-select year">
+
+        <div class="cmNiceSelect">
+            <?php $i=0;?>
+            <?php foreach ($collection as $item):?>
+            <?php if($i==0):?>
+            <div class="select-box" data-year="<?php echo $item->getData('value');?>">
+                        <span class="show-text"><?php echo $item->getData('label');?><a class="arr"><b></b></a></span>
+            </div>
+            <ul class="option-list">
+                <?php endif;?>
+                <li data-year="<?php echo $item->getData('value');?>"><?php echo $item->getData('label');?></li>
+                <?php $i++; ?>
+                <?php endforeach;?>
+            </ul>
+        </div>
+    </div>
+
+
+    <?php $collection=$this->getMonth();?>
+    <div class="fake-select month">
+
+        <div class="cmNiceSelect">
+            <?php $i=0;?>
+            <?php foreach ($collection as $item):?>
+            <?php if($i==0):?>
+            <div class="select-box" data-month="<?php echo $item->getData('value');?>">
+                        <span class="show-text"><?php echo $item->getData('label');?><a class="arr"><b></b></a></span>
+            </div>
+            <ul class="option-list">
+                <?php endif;?>
+                <li data-month="<?php echo $item->getData('value');?>"><?php echo $item->getData('label');?></li>
+                <?php $i++; ?>
+                <?php endforeach;?>
+            </ul>
+        </div>
+    </div>
+
+    <?php $collection=$this->getCate();?>
+    <div class="fake-select cate">
+
+        <div class="cmNiceSelect">
+            <?php $i=0;?>
+            <?php foreach ($collection as $item):?>
+            <?php if($i==0):?>
+            <div class="select-box" data-cate="all">
+                        <span class="show-text">全部<a class="arr"><b></b></a></span>
+            </div>
+            <ul class="option-list">
+                <li data-cate="all">全部</li>
+                <?php endif;?>
+                <li data-cate="<?php echo $item->getData('value');?>"><?php echo $item->getData('label');?></li>
+                <?php $i++; ?>
+                <?php endforeach;?>
+            </ul>
+        </div>
+    </div>

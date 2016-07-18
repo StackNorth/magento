@@ -1,0 +1,114 @@
+html,body {overflow: auto}
+.buy-credits {margin-top: 90px;}
+.buy-credits .btn {padding: 1px 5px; line-height: 15px; text-align: center; color: #000; background: #94712b; display: inline-block; border: 1px solid #94712b}
+.buy-credits h2 {font-size: 24px; width: 80px; margin: 0 auto; border-bottom: 2px solid  #94712b; color: #94712b; padding: 70px 0 25px; text-align: center; font-style: normal; position: relative; height: 28px;}
+.buy-credits h2 span {white-space: nowrap; position: absolute;  text-align: center; top: 80px; line-height: 1em; height: 28px; font-weight: normal;}
+.buy-credits .form {width: 860px; border: 2px solid #94712b; border-bottom: 1px solid #94712b; margin: 20px auto;}
+.buy-credits .form .title {height: 45px; line-height: 45px; text-align: center; font-size: 22px; background: #94712b; font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif}
+.buy-credits .block-item {border-top: 1px solid #94712b; padding: 36px 0; border-bottom: 1px solid #94712b}
+.buy-credits .process .step1 {width: 740px; height: 40px; margin: 0 auto; background: url(images/buy-credits/steps.png) no-repeat 0 0; text-indent: -99em;}
+.buy-credits .process .step2 {width: 740px; height: 40px; margin: 0 auto; background: url(images/buy-credits/steps.png) no-repeat 0 -41px; text-indent: -99em;}
+.buy-credits .process .step3 {width: 740px; height: 40px; margin: 0 auto; background: url(images/buy-credits/steps.png) no-repeat 0 -82px; text-indent: -99em;}
+.buy-credits .current-credits p {font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; color: #94712b; text-align: center; font-size: 18px; line-height: 1.8em}
+.buy-credits .current-credits p strong {font-size: 30px; font-weight: normal;}
+.buy-credits .point-select p {font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; color: #94712b; text-align: center; font-size: 18px}
+.buy-credits .points {width: 742px; overflow: hidden; margin: 0 auto; border-bottom: 1px solid #94712b; margin-bottom: 16px;}
+.buy-credits .point-select ol {margin-top: 16px; font-size: 0; padding-bottom: 20px; width: 100%; text-align: center;clear: both;}
+.buy-credits .point-select ol li {font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; width: 106px; height: 22px; line-height: 22px; border: 2px solid #94712b; color: #94712b; text-align: center; font-size: 18px; background: #000; margin: 20px 0 30px 60px; display: inline-block; float: left;cursor: pointer}
+.buy-credits .point-select ol li.text {border:0;display: inline-block;width: auto;margin: 20px 0 0 20px;}
+.buy-credits .point-select ol li.current {background: #94712b; color: #000;}
+.buy-credits .point-select ol li.current input{background: #94712b; color: #000; text-align:center;}
+.buy-credits .point-select ol li:last-child{/* vertical-align:2px; */margin: 20px 0 0 20px;}
+.buy-credits .point-select ol li input {border: 0 none; display: block; height: 100%; width: 100%; text-align:center; background: #000; font-size: 18px; color: #94712b;}
+.buy-credits .point-select p strong {font-size: 30px; font-weight: normal;}
+.buy-credits .payment-method {font-size: 0; padding-bottom: 20px; width: 742px; margin: 20px auto 0; text-align: center;}
+.buy-credits .payment-method label {font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; width: 144px; height: 40px; line-height: 40px; border: 2px solid #94712b; color: #94712b; text-align: center; font-size: 18px; background: #000; margin: 10px 24px 0 0; display: inline-block; cursor: pointer}
+.buy-credits .payment-method label.current {background: #94712b; color: #000;}
+/*.buy-credits .payment-method .zfb {text-indent: -99em; background: url(images/buy-credits/zfb.jpg) no-repeat center center;}*/
+.buy-credits .to-next {text-align: center; font-size: 0}
+.buy-credits .to-next a,
+.buy-credits .to-next button {font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; width: 144px; height: 40px; line-height: 36px;box-sizing:border-box; border: 2px solid #94712b; color: #94712b; text-align: center; font-size: 18px; background: #000; margin: 0 10px; display: inline-block;cursor: pointer;}
+
+/*step2*/
+.buy-credits .credits-status {overflow: hidden}
+.buy-credits .credits-status .num,
+.buy-credits .credits-status .much {height: 66px; float: left; width: 50%; text-align: center;}
+.buy-credits .credits-status .much {width: 48%; border-left: 2px solid #94712b}
+
+.buy-credits .credits-status  p {font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; color: #94712b; text-align: center; font-size: 18px; line-height: 1.8em}
+.buy-credits .credits-status  p strong {font-size: 30px; font-weight: normal;}
+.buy-credits .use-card .t {font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; width: 144px; height: 40px; line-height: 40px; border: 2px solid #94712b; color: #94712b; text-align: center; font-size: 18px; background: #000; margin: 0 auto 24px; display: block;}
+.buy-credits label {display: block; color: #94712b; font-size: 18px; font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; line-height: 1.6em}
+.buy-credits .f-item input {background: #000; border: 1px solid #94712b; height: 32px; line-height: 32px; color: #94712b; font-size: 16px;}
+.buy-credits .use-card {display: none}
+.buy-credits .use-card .f-ctx {width: 740px; margin: 0 auto}
+.buy-credits .use-card .f-item {display: inline-block; vertical-align: top}
+.buy-credits .use-card .c-num {width: 310px}
+.buy-credits .select-date {font-size: 0}
+.buy-credits .use-card .fake-select {width: 95px; display: inline-block; border: 1px solid #94712b; height: 32px; line-height: 32px; font-size: 16px;}
+.buy-credits .use-card .cmNiceSelect .arr {top: 4px;}
+.buy-credits .use-card .cmNiceSelect .show-text {line-height: 32px}
+.buy-credits .address-form .t {font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; color: #94712b; text-align: center; font-size: 18px; line-height: 1.8em}
+.buy-credits .address-form .box {width: 740px; margin: 0 auto; overflow: hidden;}
+.buy-credits .address-form .f-ctx {width: 780px; margin: 0 auto; font-size: 0;}
+.buy-credits .address-form .f-item {display: inline-block; width: 358px; margin-right: 20px; font-size: 16px;}
+.buy-credits .address-form .f-item input {width: 358px;}
+
+/*step3*/
+.buy-credits .address-data .t {font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; color: #94712b; text-align: center; font-size: 18px; line-height: 1.8em} 
+.buy-credits .address-data ul {width: 740px; font-size: 0; margin: 20px auto 10px}
+.buy-credits .address-data ul li {display: inline-block; width: 50%; padding: 0 0 10px; font-size: 14px; color: #94712b; font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif;}
+.buy-credits .address-data .btn-box {width: 740px; margin: 10px auto; height: 15px;}
+.buy-credits .address-data .btn-box a {float: right}
+.buy-credits .purchase-method .t {font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; color: #94712b; text-align: center; font-size: 18px; line-height: 1.8em}
+.buy-credits .purchase-method p.p {font-size: 18px; width: 80px; margin: 10px auto; border-bottom: 2px solid  #94712b; color: #94712b; text-align: center; font-style: normal; position: relative; height: 50px;} 
+.buy-credits .purchase-method p.p span {white-space: nowrap; position: absolute; width: 1000px; text-align: center; left: 50%; top: 0px; line-height: 1em; height: 28px; margin-left: -500px; font-weight: normal;}
+.buy-credits .purchase-method  p {font-family: Verdana,'å¾®è½¯é›…é»‘',arial,sans-serif; color: #94712b; text-align: center; font-size: 18px; line-height: 1.8em}
+.buy-credits .purchase-method p strong {font-size: 30px; font-weight: normal;}
+
+@media all and (max-width: 960px) {/*mobile*/
+  .buy-credits .form {border: 0 none; width: 100%}
+  .buy-credits .block-item {border-top: 0 none; padding-left: 20px; padding-right: 20px;}
+  .buy-credits .process .step1 {width: 295px; height: 31px; margin: 0 auto; background: url(images/buy-credits/steps.png) no-repeat 0 -122px; text-indent: -99em;}
+  .buy-credits .process .step2 {width: 295px; height: 31px; margin: 0 auto; background: url(images/buy-credits/steps.png) no-repeat 0 -154px; text-indent: -99em;}
+  .buy-credits .process .step3 {width: 295px; height: 31px; margin: 0 auto; background: url(images/buy-credits/steps.png) no-repeat 0 -185px; text-indent: -99em;}
+  .buy-credits .payment-method,
+  .buy-credits .points {width: 283px}
+  .buy-credits .point-select ol {width: 308px}
+  .buy-credits .point-select ol li {width: 130px; margin-right: 8px; margin-bottom: 14px}
+  .buy-credits .point-select ol li.text{margin:20px 0 0 0;}
+  .buy-credits .point-select ol li:last-child{margin:10px 0 30px 60px;}
+  .buy-credits .payment-method {padding: 0}
+  .buy-credits .payment-method li {font-size: 16px; width: 128px; margin-left: 0; margin-right: 8px; margin-bottom: 14px}
+  /*step2*/
+  .buy-credits .credits-status .num,
+  .buy-credits .credits-status .much {float: none; height: auto; width: 100%}
+  .buy-credits .credits-status .num p strong {border-bottom: 2px solid #94712b; padding: 0 10px 20px}
+  .buy-credits .credits-status .much {border-left: 0 none; margin-top: 40px}
+  .buy-credits .use-card .f-ctx {width: auto;}
+  .buy-credits .use-card .f-item {display: block; width: auto; margin: 0 0 10px}
+  .buy-credits .use-card .f-item input {width: 100%}
+  .buy-credits .use-card .fake-select {height: 25px; line-height: 25px; width: 49%}
+  .buy-credits .use-card .fake-select select {width: 100%}
+  .buy-credits .use-card .cmNiceSelect .arr {top: 0px;}
+  .buy-credits .use-card .cmNiceSelect .show-text {line-height: 25px}
+  .buy-credits .address-form .box,
+  .buy-credits .address-form .f-item,
+  .buy-credits .address-form .f-ctx {width: auto;}
+  .buy-credits .address-form .f-item {display: block; margin: 0 0 10px;}
+  .buy-credits .address-form .f-item input {width: 99%}
+  /*step3*/
+  .buy-credits.step3 .credits-status .num p strong {border-bottom: 0 none}
+  .buy-credits .address-data .btn-box,
+  .buy-credits .address-data ul {width: auto}
+  .buy-credits .address-data ul li {display: block; width: auto}
+  .buy-credits .address-data .btn-box a {float: none}
+}
+.buy-credits .form .point-select ol {margin-top:0;}
+
+
+
+
+
+
+

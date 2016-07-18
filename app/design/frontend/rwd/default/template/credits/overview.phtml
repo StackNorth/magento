@@ -1,0 +1,53 @@
+<?php /* @@var $this D1m_Credits_Block_Overview  */ ?>
+<div class="buy-credits step12">
+    <?php
+      $subtotal = $this->getQtySubtotal();
+      $giftSubtotal = $this->getGiftCreditsAmount();
+    ?>
+
+
+
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <h2 class="pc"><span><?php echo$this->__('My Account');?></span></h2>
+    <form action="<?php echo Mage::getUrl('credits/checkout/saveorder');;?>" method="post" name="saveorderForm" id="saveorderForm">
+        <div class="form">
+          <p class="title"><?php echo __('BUY CREDITS');?></p>
+          <!--div class="block-item process">
+            <div class="step3"><?php echo __('check out');?></div>
+          </div-->
+          <div class="block-item credits-status">
+            <div class="num">
+              <p><span class="pc"><?php echo __('购买');?> </span><?php echo __('课点数');?></p>
+              <p><strong><?php echo $this->getQty();?>+赠<?php echo $this->getGiftCredits();?>=<?php echo $this->getQty()+$this->getGiftCredits(); ?></strong></p>
+            </div>
+            <div class="much pc">
+              <p class="pc"><?php echo __('金额');?></p>
+              <p><strong><?php echo $subtotal;?> RMB</strong></p>
+            </div>
+          </div>
+          <?php $postData = $this->getBillingAddress();?>
+          <!-- div class="block-item address-data">
+            <div class="t"><?php echo __('BILLING ADDRESS');?></div>
+            <ul class="detail">
+              <li><b><?php echo __('FIRST NAME');?>: </b><?php echo $this->escapeHtml($postData['firstname']);?></li>
+              <li><b><?php echo __('LAST NAME');?>: </b><?php echo $this->escapeHtml($postData['lastname']);?></li>
+              <li><b><?php echo __('EMAIL ADDRESS');?>: </b><?php echo $this->escapeHtml($postData['email']);?></li>
+              <li><b><?php echo __('ORGANIZATION');?>: </b><?php echo $this->escapeHtml($postData['company']);?></li>
+              <li><b><?php echo __('PHONE');?>: </b><?php echo $this->escapeHtml($postData['telephone']);?></li>
+              <li><b><?php echo __('ADDRESS');?>: </b><?php echo $this->escapeHtml($postData['city']);?> <?php echo $this->escapeHtml($postData['street_address']);?></li>
+              <li><b><?php echo __('ZIPCODE');?>: </b><?php echo $this->escapeHtml($postData['zipcode']);?></li>
+            </ul>
+            <p class="btn-box"><a class="btn" href="#"><?php echo __('EDIT');?></a></p>
+          </div -->
+          <div class="block-item purchase-method mobile">
+            <div class="t"><?php echo __('PURCHASE METHOD');?></div>
+            <p class="p"><span><?php echo __('CREDIT CARD');?> XXX-XXX-1234</span></p>
+            <p><strong>2000 RMB</strong></p>
+          </div>
+          <div class="block-item to-next">
+            <a href="<?php echo Mage::getUrl('credits/checkout/view/qty/'.$this->getQty() .'/method/'.$this->getPaymentMethod());?>"><?php echo __('上一步');?></a>
+            <button><?php echo __('提交订单');?></button>
+          </div>
+        </div>
+    </form>
+</div>

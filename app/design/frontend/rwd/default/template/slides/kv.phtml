@@ -1,0 +1,39 @@
+<?php
+/**
+ * Created by Victor Guo
+ * Date: 13-8-19
+ * Time: 下午3:47
+ */
+?>
+<div class="kv">
+    <div class="wrapper">
+        <div id="kv-slides">
+            <?php
+            $slides = $this->getSlides();?>
+            <div class="slides_container">
+                <?php
+                foreach($slides as $slide)
+                {
+                    ?>
+                <div><img src="<?php echo $this->getResizedImage($slide->getFilename(), 1000, 433)?>" alt="<?php echo $slide->getTitle();?>" /></div>
+                    <?php
+                }
+                ?>
+            </div>
+            <ul class="pagination">
+                <?php
+                foreach($slides as $slide)
+                {
+                    $rowIndex = 1;
+                    ?>
+                    <li class="kv-thumbnail"><a href="#<?php echo $rowIndex?>"><img src="<?php echo $this->getResizedImage($slide->getFilename(), 253, 124);?>" alt="<?php echo $slide->getTitle();?>" /></a>
+                        <div class="kv-title"><?php echo $slide->getTitle();?></div>
+                    </li>
+                <?php
+                    $rowIndex++;
+                }
+                ?>
+            </ul>
+        </div>
+    </div>
+</div>

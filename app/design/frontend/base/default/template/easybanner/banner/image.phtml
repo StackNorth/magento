@@ -1,0 +1,21 @@
+<?php
+/**
+ * EasyBanner module for Magento - flexible banner management
+ */ 
+$onclick = '';
+$options = '\'\'';
+if ($this->getTarget() == 'popup') {
+    $options = '\'width='.$this->getPopupWidth().',height='.$this->getPopupHeight().'\'';
+}
+if ($this->getTarget() != 'self') {
+    // add GA trace code
+    $onclick = 'onclick="javascript:pageTracker._trackEvent(\'Promotional Banner\', \'Click-through\', \'' . $this->getTitle() . ' / ' . $this->getUrl() . '\'); return !window.open(this.href, \'easybanners'.$this->getBannerId().'\', '.$options.')"';
+}
+// add GA trace code
+if (empty($onclick)) {
+  $onclick = 'onclick="javascript:pageTracker._trackEvent(\'Promotional Banner\', \'Click-through\', \'' . $this->getTitle() . ' / ' . $this->getUrl() . '\');"';
+}
+
+$sperate =  ( substr($this->getUrl(), strlen($this->getUrl())-1  ) != '/' ) ? '/' : '' ;
+
+?><a rel="nofollow" href="<?php echo $this->getUrl() . $sperate . $this->getBannerUrl() ?>" title="<?php echo $this->getTitle() ?>" <?php echo $onclick ?>><?php //Mage::helper('easybanner/image')->init($this->getImage())->resize(190) ?><img src="<?php echo Mage::getBaseUrl('media') . trim(Mage::getStoreConfig('easybanner/general/image_folder'), ' /\\') . '/' . $this->getImage() ?>" alt="<?php echo $this->getTitle() ?>"/></a>

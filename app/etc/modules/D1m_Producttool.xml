@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_Producttool>
+            <active>true</active>
+            <codePool>local</codePool>
+            <!-- depends>
+                <D1m_Common/>
+            </depends -->
+        </D1m_Producttool>
+    </modules>
+</config>

@@ -1,0 +1,284 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <weChat_payment module="weChat">
+                    <label>WeChat Payment</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>400</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
+                        </title>
+
+                        <subject translate="label">
+                            <label>subject</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <comment><![CDATA[例如:网站标题-流水号]]></comment>
+                            <depends><active>1</active></depends>
+                        </subject>
+
+                        <appId translate="label">
+                            <label>微信公众号 ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <depends><active>1</active></depends>
+                            <comment><![CDATA[微信公众号身份的唯一标识]]></comment>
+                        </appId>
+
+                        <Mchid translate="label">
+                            <label>商户ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
+                            <validate>required-entry</validate>
+                            <comment><![CDATA[商户ID，身份标识]]></comment>
+                        </Mchid>
+
+                        <Key translate="label">
+                            <label>商户支付密钥 Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
+                            <validate>required-entry</validate>
+                            <comment><![CDATA[商户支付密钥 Key,<br />登录微信商户后台，进入栏目【账户设置】【密码安全】<【API安全】【API密钥】]]></comment>
+                        </Key>
+
+                        <Appsecret translate="label">
+                            <label>App Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
+                            <validate>required-entry</validate>
+                            <comment><![CDATA[Appsecret，审核后在公众平台开启开収模式后可查看]]></comment>
+                        </Appsecret>
+
+                        <gateway translate="label">
+                            <label>Gateway</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><active>1</active></depends>
+                            <comment><![CDATA[Leave empty to use default value:<br />URL地址：https://api.mch.weixin.qq.com/pay/unifiedorder]]></comment>
+                        </gateway>
+
+                        <showwxpaytitle translate="label">
+                            <label>是否使用微信支付安全标题</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active>1</active></depends>
+                        </showwxpaytitle>
+
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>150</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><active>1</active></depends>
+                        </allowspecific>
+
+                        <specificcountry translate="label">
+                            <label>Payment from Specific countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>160</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><active>1</active></depends>
+                        </specificcountry>
+
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+
+                        <order_status_payment_accepted translate="label">
+                            <label>Order status when payment accepted by WeChat Pay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status_payment_accepted>
+
+                        <order_status_payment_refused translate="label">
+                            <label>Order status when payment refused by WeChat Pay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>190</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status_payment_refused>
+
+                        <enable_query_order translate="label">
+                            <label>Enable Query Order To Sync Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>192</sort_order>
+                            <comment><![CDATA[<strong>微信支付本身是不保证notify可以完全成功的,因此需要使用query order来确保微信已经完全成功的通知了系统</strong>]]></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_query_order>
+
+                        <sort_order translate="label">
+                            <label>Sort order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sort_order>
+
+                        <debug translate="label">
+                            <label>Enable Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>210</sort_order>
+                            <comment><![CDATA[<strong>如果开启,则支付的金额统一为0.01元</strong>]]></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </debug>
+
+                        <debug_group translate="label">
+                            <label>Debug Customer Group</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>weChat/system_config_source_group</source_model>
+                            <sort_order>220</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><debug>1</debug></depends>
+                        </debug_group>
+
+                        <test_open_id translate="label">
+                            <label>test Open Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><debug>1</debug></depends>
+                        </test_open_id>
+
+                    </fields>
+                </weChat_payment>
+            </groups>
+        </payment>
+    </sections>
+
+    <sections>
+        <weChat translate="label" module="weChat">
+            <label>WeChat Setting</label>
+            <tab>d1m</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>400</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+               <!--  微信仅有的设置-->
+                <common translate="label">
+                    <label>WeChat General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <appId translate="label">
+                            <label>App Id</label>
+                            <comment><![CDATA[微信公众号身份的唯一标识]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </appId>
+
+                        <appsecret translate="label">
+                            <label>App Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <comment><![CDATA[审核后在公众平台开启开収模式后可查看]]></comment>
+                        </appsecret>
+
+                        <token translate="label">
+                            <label>Token</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <comment><![CDATA[在微信公众平台上即可查看]]></comment>
+                        </token>
+                    </fields>
+                </common>
+
+
+
+            </groups>
+        </weChat>
+    </sections>
+</config>

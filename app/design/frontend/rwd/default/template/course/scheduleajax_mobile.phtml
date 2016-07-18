@@ -1,0 +1,107 @@
+<div class="buy-lesson" id="buy-lesson">
+<?php
+//手机版
+// http://.../course/index/scheduleajax_mobile?fixeddate=2014-11-23&p=1&province=12
+
+//换课模式
+$mode=Mage::getSingleton('customer/session')->getData('reorder_mode');
+
+
+/* @var $this D1m_Course_Block_List */
+$province= $this->getProvince();
+$monthdate = $this->getMonthdate();
+$coursetype = $this->getCourseType();
+$_helper = $this->helper('catalog/output');
+$t=1;
+$courses  = $this->getCourseSchedule();
+$total=$courses->count();
+
+/* @var $_product Mage_Catalog_Model_Product */
+foreach($courses as $course):
+    $_product = $this->getCourseFullData($course->getId());
+    $t++;
+
+    $d1=substr($_product->getClassDate(),0,10).' '.$_product->getNClasstime1();
+//忽略秒
+    $time  = mktime(date('H')+8, date('i'), 0, date("m") , date("d")+2, date("Y"));//UTC->GMT
+    $d2=date("Y-m-d H:i",$time);
+    //echo $d1; echo "<br>"; echo $d2; die();
+    echo '<!-- '.$d2.' -->';
+
+    $ok=$d1>=$d2;
+    $num=(int)$_product->getStockItem()->getQty();
+    $status=$_product->getStatus();
+    /* @var $status Mage_Catalog_Model_Product_Status */
+    if($status!=Mage_Catalog_Model_Product_Status::STATUS_ENABLED) $seats=0; else $seats=$_product->getSeats();
+    if($status!=Mage_Catalog_Model_Product_Status::STATUS_ENABLED) $num=0;
+    ?>
+<div class="lesson-box">
+    <div class="lesson-head"><?php echo $_product->getNClasstime1();?>-<?php echo $_product->getNClasstime2();?></div>
+    <div class="lesson-info">
+        <div class="info-list"><span class="head"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></span></div>
+        <?php if ($ok and ($num>0) ):?>
+            <div class="info-list"><span class="head">可预订座位</span> : <?php echo $num;?></div>
+        <?php endif;?>
+        <div class="info-list"><span class="head">厨师</span> : <?php echo $_product->getAttributeText('chef');?></div>
+        <div class="info-list">
+
+            <span class="head">评级:</span> :
+            <ul class="cmStarReady readonly" data-rate="<?php echo $this->getRatingSummary($_product->getId());?>">
+                <li data-index="0" class="cmStar-item ">0</li>
+                <li data-index="1" class="cmStar-item ">1</li>
+                <li data-index="2" class="cmStar-item ">2</li>
+                <li data-index="3" class="cmStar-item ">3</li>
+                <li data-index="4" class="cmStar-item ">4</li>
+            </ul>
+        </div>
+        <div class="info-detail">
+            <?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?>
+        </div>
+        <div class="info-style">
+            <span class="head">地点</span> :
+            <ul class="info-other">
+                <li><?php echo  $_product->getData('class_address'); ?></li>
+            </ul>
+        </div>
+        <div class="info-style">
+            <span class="head">菜式</span> :
+            <ul class="info-other">
+                <li><?php echo  $_product->getAttributeText('western_cuisine'); ?></li>
+            </ul>
+        </div>
+        <div class="info-style">
+            <span class="head">要求</span> :
+            <ul class="info-other">
+                <li><?php echo $_helper->productAttribute($_product, nl2br($_product->getRequirement()), 'requirement') ?></li>
+            </ul>
+        </div>
+        <?php  if ($ok and $num and ($status==Mage_Catalog_Model_Product_Status::STATUS_ENABLED) ):?>
+        <div class="fake-select people">
+            <div class="cmNiceSelect">
+                <div class="select-box" data-people="1">
+                    <span class="show-text">1<a class="arr"><b></b></a></span>
+                </div>
+                <ul class="option-list">
+                    <?php for($i=1;$i<=$num;$i++):?>
+                        <li data-people="<?php echo $i;?>"><?php echo $i;?>人</li>
+                    <?php endfor;?>
+                </ul>
+            </div>
+        </div>
+            <?php if ($mode=='1'):?>
+                <a   class="lesson-book" href="<?php echo  Mage::getUrl('course/index/reorder2/nid/'.$_product->getId());?>">换课</a>
+            <?php else:?>
+                <a class="lesson-book" href="<?php echo  Mage::helper('checkout/cart')->getAddUrl($_product);?>">预订</a>
+            <?php endif;?>
+
+        <?php elseif(!$ok): ?>
+            <div class="desc">课程已过期或不可预订（距开课时间小于48小时)</div>
+        <?php elseif($status!=Mage_Catalog_Model_Product_Status::STATUS_ENABLED): ?>
+            <div class="desc">本课程已预订满</div>
+        <?php else:?>
+            <div class="desc">课程报名人数已满</div>
+        <?php endif;?>
+    </div>
+</div>
+<?php endforeach;?>
+</div>

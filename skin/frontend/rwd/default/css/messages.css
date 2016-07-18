@@ -1,0 +1,16 @@
+/**
+ * 	messages
+ */
+
+.messages  {
+	border: 2px solid #94712b;
+	color:blue;
+	margin: 20px auto;
+	line-height: 30px;
+	text-indent: 1em;
+	/* width: 860px; */
+	box-sizing: border-box;
+}
+div.buy-credits ul.messages {width: 860px;margin-top:100px}
+.error-msg { color:red;}
+	

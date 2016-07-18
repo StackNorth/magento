@@ -1,0 +1,126 @@
+<div style="margin-top:150px;background-color:#fff;padding:50px;height:600px;overflow:auto;">
+
+ <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<form action="<?php echo Mage::getUrl('checkout/onepage/saveOrder');;?>" method="post" name="saveorderForm" id="saveorderForm"  >
+<?php echo $this->getBlockHtml('formkey'); ?>
+
+<br/>    
+
+
+
+<?php
+	$cartQty = $this->getSummaryCount();?>
+	
+	<h1><?php echo $this->__('SHOPPING REVIEW');?></h1>
+	
+	
+	<div class="steps" style="margin:10px;">
+		<ul>
+			<li><?php echo $this->__('CHECK OUT');?></li>
+			<li><?php echo $this->__('FILL IN YOUR INFO.');?></li>
+			<li><?php echo $this->__('SUBMIT PURCHASE');?></li>
+		</ul>
+	</div>
+	
+	<br/>
+	<br/>
+	
+	<div>
+	<p><?php echo $this->__(' %s COURSE',  $this->getSummaryCount());?>: </p>
+	<?php 
+		$i = 1;
+		foreach($this->getItems() as $_item): ?>
+        <?php echo $i;?>. <?php echo $_item->getProduct()->getName(); ?> x <?php echo $_item->getQty();?>
+    <?php 
+    	$i++;
+    endforeach ?>
+    
+    <br/>
+    <?php echo $this->__('PRICE');?><br/>
+    <?php echo $this->helper('checkout')->formatPrice($this->getGrandtotal());?>
+    
+	
+	</div>
+	
+	<br/>
+    <br/>
+
+
+<div>
+<style>
+li {
+	margin-bottom:10px;
+}
+.usemyinfo {
+	margin-bottom:10px;
+}
+</style>
+<?php $billingAddress = $this->getBillingAddress();?>
+<ul>
+	<li>
+		<?php echo __('First Name');?> :
+		<?php echo $this->escapeHtml($billingAddress->getFirstname());?>
+	</li>
+	<li>
+		<?php echo __('Last Name');?>  :
+		<?php echo $this->escapeHtml($billingAddress->getLastname());?>
+	</li>
+	<li>
+		<?php echo __('Email address');?>  :
+		<?php echo $this->escapeHtml($billingAddress->getEmail());?>
+	</li>
+	<li>
+		<?php echo __('Organization');?>  :
+		<?php echo $this->escapeHtml($billingAddress->getCompany());?>
+	</li>
+	<li>
+		<?php echo __('Phone');?>  :
+		<?php echo $this->escapeHtml($billingAddress->getTelephone());?>
+	</li>
+	<li>
+		<?php echo __('City');?>  :
+		<?php echo $this->escapeHtml($billingAddress->getCity());?>
+	</li>
+	<li>
+		<?php echo __('Zipcode');?>  :
+		<?php echo $this->escapeHtml($billingAddress->getPostcode());?>
+	</li>
+	<li>
+		<?php echo __('Address');?>  :
+		<?php echo $this->escapeHtml($billingAddress->getStreet(1));?>
+	</li>
+</ul>
+
+
+<div>
+	<h3><?php echo $this->__('Contact Infomartion');?></h3>
+	<ul>
+		<?php
+		 $total = $this->getSummaryCount();
+		 for($i = 0; $i< $total; $i++ ):?>
+		 <li>
+		 	<label for="contact_name_<?php echo $i;?>"><?php echo $this->__('NAME');?></label>
+		 	<input type="text" name="contact[<?php echo $i;?>][name]" id="contact_name_<?php echo $i;?>"/>
+		 	<label for="contact_phone_<?php echo $i;?>"><?php echo $this->__('PHONE');?></label>
+		 	<input type="text" name="contact[<?php echo $i;?>][phone]" id="contact_phone_<?php echo $i;?>"/>
+		 </li>
+		<?php
+		endfor;?>
+</div>
+
+
+
+<div>
+<?php echo $this->getChildHtml('totals'); ?>
+</div>
+
+<br/>
+
+
+<br/>
+<input type="button" onclick="location.href='<?php echo Mage::getUrl('checkout/onepage/billing');?>'" value="<?php echo __('previous');?>"/>
+<input type="submit" value="<?php echo __('proceed');?>"/>
+
+</form>
+</div>

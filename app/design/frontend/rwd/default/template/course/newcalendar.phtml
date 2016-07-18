@@ -1,0 +1,82 @@
+<?php
+/* @var $this D1m_Course_Block_Calendar */
+$this->dowork();
+$arrCoursetype=$this->getArrCoursetype();
+$arrDay=$this->getArrDay();
+    //$arrDay=Mage::registry('d1m_calender_arrDay');
+    //$arrCoursetype=Mage::registry('d1m_calender_arrCoursetype');
+$num=8;
+$tag='...';
+?>
+<div class="calendar2">
+            <table cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <th><span>周一</span></th>
+                    <th><span>周二</span></th>
+                    <th><span>周三</span></th>
+                    <th><span>周四</span></th>
+                    <th><span>周五</span></th>
+                    <th><span>周六</span></th>
+                    <th><span>周日</span></th>
+                </tr>
+
+                <?php
+                $i=0;
+                foreach ($arrDay as $day):?>
+				<?php //print_r($day);?>
+                <?php $i=$i+1; ?>
+                <?php if ($i % 7==1 ):?> <tr><?php endif;?>
+
+                    <td class="<?php if (!$day->getIsThisMonth()):?>disable<?php endif;?> d<?php echo $day->getDayno();?>" data-date="<?php echo $day->getDate(); ?>" data-city="<?php echo $day->getCity(); ?>" data-n_shop="<?php echo $day->getNShop(); ?>">
+                        <div class="item">
+                            <div id="course" class="am">
+                                <?php if ($day->getAm()):?>
+                                <span class="cls">
+                                    <span class="coursetype<?php echo $day->getAmCoursetypeclass();?>">
+                                        <?php $amcoursees = $day->getData('amcoursees') ?>
+                                        <?php if(isset($amcoursees[0])):?>
+                                            <?php $course = $amcoursees[0];?>
+                                            <span class="coursename"><?php  echo  Mage::helper('core/string')->truncate($course['coursename'],$num,$tag); ?></span>
+                                        <?php endif;?>
+                                        <?php if(isset($amcoursees[1])):?>
+                                            <br/>
+                                            <?php $course = $amcoursees[1];?>
+                                            <span class="coursename"><?php  echo  Mage::helper('core/string')->truncate($course['coursename'],$num,$tag); ?></span>
+                                        <?php endif;?>
+                                    </span>
+                                </span>
+                                <?php endif;?>
+                            </div>
+                            <div id="course" class="pm">
+                                <?php if ($day->getPm()):?>
+                                    <span class="cls">
+                                        <span class="coursetype<?php echo $day->getPmCoursetypeclass();?>">
+                                            <?php $pmcoursees = $day->getData('pmcoursees') ?>
+                                            <?php if(isset($pmcoursees[0])):?>
+                                                <?php $course = $pmcoursees[0];?>
+                                                <span class="coursename"><?php  echo  Mage::helper('core/string')->truncate($course['coursename'],$num,$tag); ?></span>
+                                            <?php endif;?>
+                                            <?php if(isset($pmcoursees[1])):?>
+                                                <br/>
+                                                <?php $course = $pmcoursees[1];?>
+                                                <span class="coursename"><?php  echo  Mage::helper('core/string')->truncate($course['coursename'],$num,$tag); ?></span>
+                                            <?php endif;?>
+                                        </span>
+                                    </span>
+                                <?php endif;?>
+                            </div>
+                            <div class="d"><?php echo $day->getDayno();?></div>
+                        </div>
+                    </td>
+
+                <?php if ($i % 7 ==0 ):?></tr><?php endif;?>
+                <?php endforeach;?>
+          </tbody>
+          </table>
+        </div>
+    <ul class="mobile tips">
+        <?php foreach($arrCoursetype as $coursetype):?>
+            <li class="coursetype<?php  echo $coursetype->getNo(); ?>" data-coursetype="<?php  echo  $coursetype->getValue();?>"><?php  echo $coursetype->getLabel(); ?></li>
+        <?php endforeach;?>
+    </ul>

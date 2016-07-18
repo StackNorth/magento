@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_Updatedb>
+            <version>0.1.0</version>
+        </D1m_Updatedb>
+    </modules>
+    <global>
+        <resources>
+            <d1m_updatedb_setup>
+                <setup>
+                    <module>D1m_Updatedb</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </d1m_updatedb_setup>
+            <d1m_updatedb_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </d1m_updatedb_write>
+            <d1m_updatedb__read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </d1m_updatedb__read>
+        </resources>
+    </global>
+</config>

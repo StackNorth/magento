@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_Common>
+            <version>1.0.0</version>
+        </D1m_Common>
+    </modules>
+    <frontend>
+        <translate>
+            <modules>
+                <D1m_Common>
+                    <files>
+                        <default>D1m_Common.csv</default>
+                    </files>
+                </D1m_Common>
+            </modules>
+        </translate>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <D1m_Common>
+                    <files>
+                        <default>D1m_Common.csv</default>
+                    </files>
+                </D1m_Common>
+            </modules>
+        </translate>
+    </adminhtml>
+    <global>
+        <helpers>
+            <d1m_common>
+                <class>D1m_Common_Helper</class>
+            </d1m_common>
+        </helpers>
+    </global>
+</config>
+

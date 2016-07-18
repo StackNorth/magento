@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_Invitation>
+            <version>1.0.1</version>
+        </D1m_Invitation>
+    </modules>
+
+    <frontend>
+        <routers>
+            <invitation>
+                <use>standard</use>
+                <args>
+                    <module>D1m_Invitation</module>
+                    <frontName>invitation</frontName>
+                </args>
+            </invitation>
+        </routers>
+        <layout>
+			<updates>
+				<D1m_Invitation>
+					<file>d1m_invitation.xml</file>
+				</D1m_Invitation>
+			</updates>
+		</layout>
+		<events>
+			<customer_register_success>
+                <observers>
+                    <d1m_invitation>
+                        <class>d1m_invitation/observer</class>
+                        <method>sendCouponToRecommender</method>
+                    </d1m_invitation>
+                </observers>
+            </customer_register_success>
+			
+		</events>
+        <translate>
+            <modules>
+                <D1m_Invitation>
+                    <files>
+                        <default>D1m_Invitation.csv</default>
+                    </files>
+                </D1m_Invitation>
+            </modules>
+        </translate>
+    </frontend>
+
+    <admin>
+		<routers>
+			<adminhtml>			
+				<args>
+					<modules>
+	 					<D1m_Invitation before="Mage_Adminhtml">D1m_Invitation_Adminhtml</D1m_Invitation>
+					</modules>
+					<frontName>invitation</frontName>
+				</args>
+			</adminhtml>
+		</routers>		
+   </admin>
+   <adminhtml>
+   		<translate>
+            <modules>
+                <D1m_Invitation>
+                    <files>
+                        <default>D1m_Invitation.csv</default>
+                    </files>
+                </D1m_Invitation>
+            </modules>
+        </translate>
+        <menu>
+            <etam>
+                <children>
+                    <d1m_invitation translate="title" module="d1m_invitation">
+                        <title>User Invitation</title>    
+                        <action>adminhtml/invitation/</action> 
+                        <sort_order>128</sort_order>                     
+                    </d1m_invitation>                    
+                </children>
+             </etam>
+        </menu>
+		<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <catalog>
+                            <children>
+                                <d1m_invitation translate="title" module="d1m_invitation">
+                                    <title>邀请</title>
+                                </d1m_invitation>
+                            </children>
+                        </catalog>
+                        <system>
+		                    <children>
+		                        <config>
+		                            <children>		                            	
+		                                <d1m_invitation translate="title" module="d1m_invitation">
+		                                    <title>邀请相关配置</title>
+		                                </d1m_invitation>
+		                            </children>
+		                        </config>
+		                    </children>
+		                </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <global> 
+		<models>
+			<d1m_invitation>
+				<class>D1m_Invitation_Model</class>
+				<resourceModel>d1m_invitation_mysql4</resourceModel>
+			</d1m_invitation>
+			<d1m_invitation_mysql4>
+            	<class>D1m_Invitation_Model_Mysql4</class>
+            	<entities>
+		            <invitation>
+		                <table>invitation</table>
+		            </invitation>
+            	</entities>            	  
+        	</d1m_invitation_mysql4>
+		</models>
+		<resources>
+            <d1m_invitation_setup>
+                <setup>
+                    <module>D1m_Invitation</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </d1m_invitation_setup>
+            <d1m_invitation_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</d1m_invitation_write>
+			<d1m_invitation_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</d1m_invitation_read>    
+   		</resources>
+   		
+   		<template>
+            <email>
+                <invitation_account_email_template translate="label" module="d1m_invitation">
+                    <label>invitation account email</label>
+                    <file>invitation_new.html</file>
+                    <type>html</type>
+                </invitation_account_email_template>
+            </email>
+        </template>
+   		
+		<blocks>     
+			  <d1m_invitation>
+			  	 <class>D1m_Invitation_Block</class>
+			  </d1m_invitation>	
+		</blocks>
+		
+		
+		
+		<helpers>
+			<d1m_invitation>
+				<class>D1m_Invitation_Helper</class>
+			</d1m_invitation>
+		</helpers>
+    </global>
+</config>

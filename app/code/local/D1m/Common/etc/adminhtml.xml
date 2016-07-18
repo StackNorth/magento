@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <etam module="d1m_common">
+            <title>Etam</title>
+            <sort_order>300</sort_order>
+         </etam>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <etamSetting translate="title" module="d1m_common">
+                                        <title>Etam Setting</title>
+                                        <sort_order>50</sort_order>
+                                    </etamSetting>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

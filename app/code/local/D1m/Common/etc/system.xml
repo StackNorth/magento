@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <etam translate="label" module="d1m_common">
+            <label>Etam Setting</label>
+            <sort_order>500</sort_order>
+        </etam>
+    </tabs>
+    <sections>
+        <etamSetting>
+            <label>Etam notifications</label>
+            <tab>etam</tab>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <sort_order>10</sort_order>
+            <groups>
+                <notifications translate="label" module="d1m_common">
+                    <label>used to know</label>
+                    <comment><![CDATA[
+                        <h4>used to know before you setting this!</h4>
+                        <div>
+                           1. readme. <br />
+                           2. readme. <br />
+                        </div>
+                    ]]></comment>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                </notifications>
+            </groups>
+        </etamSetting>
+    </sections>
+</config>

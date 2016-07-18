@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_Credits>
+            <version>1.0.9</version>
+        </D1m_Credits>
+    </modules>
+
+    <frontend>
+        <routers>
+            <credits>
+                <use>standard</use>
+                <args>
+                    <module>D1m_Credits</module>
+                    <frontName>credits</frontName>
+                </args>
+            </credits>
+        </routers>
+        <layout>
+			<updates>
+				<D1m_Credits>
+					<file>d1m_credits.xml</file>
+				</D1m_Credits>
+			</updates>
+		</layout>
+        <translate>
+            <modules>
+                <D1m_Credits>
+                    <files>
+                        <default>D1m_Credits.csv</default>
+                    </files>
+                </D1m_Credits>
+            </modules>
+        </translate>
+    </frontend>
+
+    <admin>
+		<routers>
+			<adminhtml>			
+				<args>
+					<modules>
+	 					<D1m_Credits before="Mage_Adminhtml">D1m_Credits_Adminhtml</D1m_Credits>
+					</modules>
+					<frontName>credits</frontName>
+				</args>
+			</adminhtml>
+		</routers>		
+   </admin>
+   <adminhtml>
+   		<translate>
+            <modules>
+                <D1m_Credits>
+                    <files>
+                        <default>D1m_Credits.csv</default>
+                    </files>
+                </D1m_Credits>
+            </modules>
+        </translate>
+        <menu>
+            <etam>
+                <children>
+                    <d1m_credits translate="title" module="d1m_credits">
+                        <title>课点</title>
+                        <action>adminhtml/credits/</action> 
+                        <sort_order>116</sort_order>
+
+                    </d1m_credits>
+                    <!--测试段代码  start-->
+                    <d1m_credits_test translate="title" module="d1m_credits">
+                        <title>测试</title>
+                        <action>adminhtml/credittest/</action>
+                        <sort_order>119</sort_order>
+                        <!--<children>
+                            <creditsOrder translate="title" module="d1m_credits">
+                                <title>测试二级菜单</title>
+                                <sort_order>4</sort_order>
+                                <action>adminhtml/report/courseOrder</action>
+                            </creditsOrder>
+
+                        </children>-->
+                    </d1m_credits_test>
+
+                    <!--测试段代码  end-->
+                    <d1m_credits_order translate="title" module="d1m_credits">
+                        <title>课点订单</title>
+                        <action>adminhtml/creditsorder/</action> 
+                        <sort_order>117</sort_order>                     
+                    </d1m_credits_order>                    
+                    <d1m_course_order translate="title" module="d1m_credits">
+                        <title>课程订单</title>
+                        <action>adminhtml/courseorder/</action> 
+                        <sort_order>118</sort_order>                     
+                    </d1m_course_order>
+                    <d1m_course_report  translate="title" module="d1m_credits">
+                        <title>学院报表</title>
+                        <sort_order>110</sort_order>
+                        <children>
+                            <courseOrder translate="title" module="d1m_credits">
+                                <title>导课程订单</title>
+                                <sort_order>4</sort_order>
+                                <action>adminhtml/report/courseOrder</action>
+                            </courseOrder>
+                            <creditsOrder translate="title" module="d1m_credits">
+                                <title>导课点订单</title>
+                                <sort_order>5</sort_order>
+                                <action>adminhtml/report/creditsOrder</action>
+                            </creditsOrder>
+                            <singOrder translate="title" module="d1m_credits">
+                                <title>导课程使用明细</title>
+                                <sort_order>6</sort_order>
+                                <action>adminhtml/report/singOrder</action>
+                            </singOrder>
+                            <monthOrder translate="title" module="d1m_credits">
+                                <title>导月度余额</title>
+                                <sort_order>7</sort_order>
+                                <action>adminhtml/report/monthOrder</action>
+                            </monthOrder>
+                        </children>
+
+                    </d1m_course_report>
+
+                </children>
+             </etam>
+        </menu>
+		<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <etam translate="title">
+                        <title>定制功能</title>
+                            <children>
+                                <d1m_credits translate="title" module="d1m_credits">
+                                    <title>用户课点</title>
+                                </d1m_credits>
+                                <d1m_credits_order translate="title" module="d1m_credits">
+                                    <title>课点订单</title>
+                                </d1m_credits_order>
+
+                                <d1m_course_new translate="title" module="d1m_course">
+                                    <title>添加课点订单</title>
+                                </d1m_course_new>
+                            </children>
+                        </etam>
+                        <system>
+		                    <children>
+		                        <config>
+		                            <children>		                            	
+		                                <d1m_credits translate="title" module="d1m_credits">
+		                                    <title>课点配置</title>
+		                                </d1m_credits>
+                                        <d1m_credits_order translate="title" module="d1m_credits">
+                                            <title>课点订单</title>
+                                        </d1m_credits_order>
+                                        <d1m_course_new translate="title" module="d1m_course">
+                                            <title>添加课点订单</title>
+                                        </d1m_course_new>
+		                            </children>
+		                        </config>
+		                    </children>
+		                </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <global> 
+		<models>
+			<d1m_credits>
+				<class>D1m_Credits_Model</class>
+				<resourceModel>d1m_credits_mysql4</resourceModel>
+			</d1m_credits>
+			<d1m_credits_mysql4>
+            	<class>D1m_Credits_Model_Mysql4</class>
+            	<entities>
+		            <credits>
+		                <table>credits</table>
+		            </credits>
+		            <history>
+		                <table>credits_history</table>
+		            </history>
+                    <test>
+                        <table>credits_test</table>
+                    </test>
+		            <order>
+		                <table>credits_order</table>
+		            </order>
+                    <balance>
+                        <table>d1m_balance</table>
+                    </balance>
+                    <sandcard>
+                        <table>d1m_sandcard</table>
+                    </sandcard>
+            	</entities>            	  
+        	</d1m_credits_mysql4>
+		</models>
+		<resources>
+            <d1m_credits_setup>
+                <setup>
+                    <module>D1m_Credits</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </d1m_credits_setup>
+            <d1m_credits_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</d1m_credits_write>
+			<d1m_credits_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</d1m_credits_read>    
+   		</resources>
+		<blocks>     
+			  <d1m_credits>
+			  	 <class>D1m_Credits_Block</class>
+			  </d1m_credits>
+		</blocks>
+
+		<helpers>
+			<d1m_credits>
+				<class>D1m_Credits_Helper</class>
+			</d1m_credits>
+		</helpers>
+    </global>
+
+    <default>
+        <d1m_credits>
+            <general>
+                <creditunit>1</creditunit>
+                <creditparam>1000/100,2000/300,3000/500</creditparam>
+                <creditmemo>满1000赠100，满2000赠300，满3000赠500</creditmemo>
+            </general>
+        </d1m_credits>
+    </default>
+
+</config>

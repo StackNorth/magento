@@ -1,0 +1,14 @@
+<?php
+/* @var $this D1m_Course_Block_Reorder */
+    //id  订单编号
+    $id=$this->getRequest()->getParam('id',0);
+    settype($id,"integer");
+    if ($id<=0) return;
+?>
+<div class="reorder" style="color:#94712b; width: 80%; margin-top: 120px; margin-right: auto; margin-left: auto;font-size: 22px;">
+    <p>换课提示：<br/>
+        1)48小时内开课的课程不能更换<br/>
+        2)您所更换的课程价格及数量需和原预订课程价格及数量一致。
+     </p>
+    <a style="color:gold" href="<?php  echo Mage::geturl('course/index/reorderin',array('id'=>$id));?>">进入换课模式</a>
+</div>

@@ -1,0 +1,47 @@
+<?php
+/* @var $this   Mage_Core_Block_Template  */
+$url=urldecode($this->getRequest()->getparam('url',''));
+$pid=urldecode($this->getRequest()->getparam('pid',''));
+$qty=urldecode($this->getRequest()->getparam('qty',''));
+
+//echo $session->getLastRealOrderId();die;
+//www.fissleracademy.cc/chinapay/payment/redirect/
+//www.fissleracademy.cc/alipay/payment/redirect/
+
+//www.fissleracademy.cc/sandpay/payment/redirect/
+//$session = Mage::getSingleton('checkout/session');
+//$decodeOrderId=200000515
+//$session->setLastRealOrderId($decodeOrderId);
+
+if (($pid>0) and ($qty>0))
+    $url2=$this->getUrl('checkout/cart/add',array('product'=>$pid,'qty'=>$qty));
+else
+    $url2='javascript:'.Mage::helper('robi_checkout')->isHomepage('3').';';
+$homepage=Mage::getBaseUrl();
+?>
+<?php //pc版 ?>
+<div class="paybox pc">
+    <h1 class="sec-head">订单支付</h1>
+    <div style="color:red;text-align: center;width: 860px;margin:auto">
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    </div>
+        <div style="color:#94712b; text-align:center;width: 860px;margin:auto">
+            <p style="color:#94712b;margin-top: 20px" align="center">确认支付,  <a style="color:gold" target=_blank href="<?php echo $url;?>">点击完成支付</a> </p>
+            <p style="color:#94712b;margin-top: 20px" align="center">放弃支付,  <a style="color:gold" target=_blank href="<?php echo $homepage;?>">点击返回首页</a> </p>
+            <p style="margin-top:10px"">“请在24小时内完成支付，否则订单将被取消。如您递交订单后，可在我的账户内查看订单状态，若订单显示未支付，请重新下单支付。”</p>
+            <!-- 你的订单已经提交, 请 <a  style="color:gold" target=_blank href="<?php echo $url;?>">在新窗口完成支付</a>。<br/>如果支付未完成或失败，可 <a style="color:gold"  href="<?php echo $url2;?>">重新购买</a> -->
+        </div>
+</div>
+<?php //手机版 ?>
+<div class="paybox mobile">
+    <h1 class="sec-head">订单支付</h1>
+    <div style="color:red;text-align: center;width:90%;margin:auto">
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    </div>
+        <div style="color:#94712b;text-align: center;width: 90%;margin:auto">
+            <p style="color:#94712b;margin-top: 20px" align="center">确认支付,  <a style="color:gold" target=_blank href="<?php echo $url;?>">点击完成支付</a> </p>
+            <p style="color:#94712b;margin-top: 20px" align="center">放弃支付,  <a style="color:gold" target=_blank href="<?php echo $homepage;?>">点击返回首页</a> </p>
+            <p style="margin-top:10px"">提交订单后，可于我的账户内查看订单状态；若订单显示未支付，请重新下单支付。</p>
+            <!-- 你的订单已经提交, 请 <a  style="color:gold"  target=_blank href="<?php echo $url;?>">在新窗口完成支付</a>。<br/>如果支付未完成或失败，可 <a style="color:gold"  href="<?php echo $url2?>">重新购买</a> -->
+        </div>
+</div>

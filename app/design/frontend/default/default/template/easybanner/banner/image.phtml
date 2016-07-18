@@ -1,0 +1,25 @@
+<?php
+$lang =  Mage::app()->getStore()->getCode();
+$onclick = '';
+$options = '\'\'';
+if ($this->getTarget() == 'popup') {
+    $options = '\'width=600,height=400\'';
+}
+if ($this->getTarget() != 'self') {
+   $onclick = 'onclick="return !window.open(this.href, \'easybanners'.$this->getBannerId().'\', '.$options.')"';
+}
+?>
+<a rel="nofollow" href="<?php echo $this->getUrl() . $this->getBannerUrl() ?>" title="<?php echo $this->getTitle() ?>" <?php echo $onclick ?>>
+    <?php //Mage::helper('easybanner/image')->init($this->getImage())->resize(190) ?>
+    <img src="<?php echo Mage::getBaseUrl('media') . trim(Mage::getStoreConfig('easybanner/general/image_folder'), ' /\\') . '/' . $this->getImage() ?>" alt="<?php echo $this->getTitle() ?>"/>
+</a>
+<script type="text/javascript">
+try {
+	var pageTracker = _gat._getTracker('<?php echo Mage::getStoreConfig('google/analytics/account') ?>');
+	pageTracker._setDomainName('.editionscec.com');
+	pageTracker._setAllowLinker(true);
+	pageTracker._setAllowHash(false);
+	} catch(err) {
+		console.log(err);
+	}
+</script>

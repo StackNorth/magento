@@ -1,0 +1,265 @@
+
+<style>
+    body{background: #000;}
+    a{text-decoration: none;}
+    .academy {margin-top:90px;}
+    .academy .myaccount_link {position:absolute; width:864px; margin-left:-432px; font-size:16px; color:#000; left:50%; top:198px; overflow:hidden;}
+    .academy .myaccount_link a {float:right; display:block; margin-left:3px; background:#94712b; padding:6px 13px; color:#000;}
+    .academy h2 {
+        font-size: 24px;
+        width: 80px;
+        margin: 0 auto;
+        border-bottom: 2px solid #94712b;
+        color: #94712b;
+        padding: 70px 0 25px;
+        text-align: center;
+        font-style: normal;
+        position: relative;
+        height: 28px;
+    }
+    .academy h2 span {
+        white-space: nowrap;
+        position: absolute;
+        width: 1000px;
+        text-align: center;
+        left: 50%;
+        top: 80px;
+        line-height: 1em;
+        height: 28px;
+        margin-left: -500px;
+        font-weight: normal;
+    }
+
+    .academy .block-item {
+        border-top: 1px solid #94712b;
+        padding: 30px 0;
+        border-bottom: 1px solid #94712b;
+        border-left: 2px solid #94712b;
+        border-right: 2px solid #94712b;
+        width: calc(100% - 4px);
+        max-width: 860px;
+        margin:0 auto;
+    }
+    .academy .block-item .t{
+        text-align: center;
+        margin: 6px 0;
+        color: #94712b;
+        font-size: 14px;
+        font-family: Verdana,'微软雅黑',arial,sans-serif;
+    }
+    .academy .my-academy .t{
+        font-size: 20px;
+
+    }
+    .academy .my-academy .tab{
+        text-align: center;
+    }
+    .academy .my-academy .tab a{font-size: 16px;color: #94712b;border: 2px solid #94712b;padding: 5px;margin: 0 2px;}
+    .academy .my-academy .tab a:hover{opacity: 0.9;}
+    .academy .my-academy {padding: 15px 0;}
+    .academy .block-item form{color: #94712b;font-size: 14px;font-family: Verdana,'微软雅黑',arial,sans-serif;text-align: center;}
+    .academy .block-item form input{border: 2px solid #94712b;color: #94712b;background: #000;height: 28px;margin: 0 1px;padding: 0 5px;position: relative;top:-2px;}
+    .academy .block-item form input[type=text]{box-sizing: border-box;}
+    .academy .block-item form p.input_tips{display: inline;font-size: 18px;}
+
+    .academy .academy-top{
+        padding: 5px 0px;
+        background: #94712b;
+        margin-top: 20px;
+    }
+    .academy .academy-top .t{
+        color: #000;
+        font-family: Verdana,'宋体',arial,sans-serif;
+        font-size: 20px;
+    }
+    .academy .my-academy table{color: #94712b;font-size: 13px;width: 100%;max-width:800px;margin: 0 30px;padding: 5px 0;}
+    .academy .my-academy table.table_1 tr td{width: 19%;}
+    .academy .my-academy table.table_1 tr td:nth-child(1){width: 24%;}
+    .academy .my-academy table.table_1 tr.used{color: #443b2a;}
+    .academy .my-academy table.table_2 tr td{width: 33.333333333%;}
+    .academy .my-academy table.academy-data{border-top: 2px solid #94712b;border-bottom: 2px solid #94712b;font-size: 14px;}
+    .academy .my-academy table tr td{text-align: center;}
+
+    @media all and (max-width: 960px) {/*mobile*/
+        .academy .form {margin:124px auto 20px;}
+        .academy .myaccount_link {width:100%; margin-left:-50%; text-align:right; top:87px;}
+        .academy .academy-top{margin-top:124px;}
+        .academy .myaccount_link a {display:inline-block; float:none;}
+        .academy h2 {border: 0;}
+        .academy h2 span{
+            display: none;
+        }
+
+        .academy .block-item form p.input_tips{display: block;}
+        .academy .block-item form{text-align: center;}
+        .academy .my-academy table{width: 96%;margin: 0 2%;}
+        .academy .my-academy table.table_1 tr td{width: 50%;}
+        .academy .my-academy table.table_1 tr td:nth-child(1){display: none;}
+        .academy .my-academy table.table_1 tr td:nth-child(2){display: none;}
+        .academy .my-academy table.table_1 tr td:nth-child(5){display: none;}
+        .academy .my-academy table.table_2 tr td:nth-child(1){display: none;}
+
+    }
+
+
+
+</style>
+<div class="academy">
+    <h2 class="pc">
+        <span>优惠券中心</span>
+    </h2>
+    <div class="myaccount_link">
+        <a href="<?php  echo mage::getUrl('customer/account/home');?>">会员中心</a><a href="<?php  echo mage::getUrl('customer/account/coupons');?>">优惠劵中心</a><a href="<?php  echo mage::getUrl('credits/checkout/view');?>">我的课点</a>
+    </div>
+    <div class="block-item academy-top">
+        <p class="t">优惠券兑换课点</p>
+    </div>
+    <div class="block-item">
+        <form>
+            <p class="input_tips">如果您有课点优惠券可以在此输入：</p>
+            <input type="text" value="" name="academy" id="coupon_code">
+            <input type="button" value="确认并兑换" name="academy-submit" onclick="addcoupons('<?php  echo mage::getUrl('customer/account/couponsPost');?>')">
+
+        </form>
+        <p class="t">使用优惠券订购的课程，一旦预约完成不可更改时间。</p>
+    </div>
+    <!--购物车优惠券-->
+    <script language="javascript">
+        function addcoupons(url){
+            couponCode=$('#coupon_code').val();
+
+            if(couponCode.length<5){
+                alert('优惠券不存在');
+                return false;
+            }else{
+                $.post(url,{'coupon_code':couponCode},function(date){
+                 //   alert(date);
+                    jsonstr=eval('('+date+')');
+                    $('#coupon_code').val('');
+                    alert(jsonstr.msg);
+
+                });
+
+            }
+        }
+        function showtable(showid,hidenId){
+            $('#'+showid).show();
+            $('#'+hidenId).hide();
+        }
+
+    </script>
+    <div class="block-item my-academy">
+        <p class="t">我的优惠券</p><br />
+        <p class="tab"><a href="javascript:showtable('cardCopons','credits')">课程优惠券</a><a href="javascript:showtable('credits','cardCopons')">课点优惠券</a></p>
+        <br />
+        <div id="cardCopons">
+        <table class="table_1" cellspacing="0">
+            <tbody>
+            <tr>
+                <td>使用日期</td><td>使用地点</td><td>适用课程</td><td>优惠券码</td><td>操作</td>
+            </tr>
+            </tbody>
+        </table>
+        <?php $coupon_list = $this->getCollection(); ?>
+        <?php if($coupon_list  && $coupon_list->getSize()): ?>
+
+        <table class="table_1 academy-data" cellspacing="4">
+            <tbody>
+            <?php
+            $shopCoupons=false;
+            foreach ($coupon_list as $coupon_info):
+                if($coupon_info->getIsCredits()){continue;}
+            $shopCoupons=true;
+            $has_all_use_flag      = $this->hasAllUse($coupon_info->getUsagePerCustomer(),$coupon_info->getCouponId(),$coupon_info->getRuleId());
+            $coupon_expire_flag    = Mage::helper('couponRule')->isExpireForCoupon($coupon_info->getExpirationDate(),$coupon_info->getToDate());
+            $need_expire_notice_flag = Mage::helper('couponRule')->compareExpire($coupon_info->getExpirationDate(),$coupon_info->getToDate());
+            ?>
+            <?php
+            $rule_from_date                     =       $coupon_info->getFromDate();
+            $coupon_begin_use_date              =       $coupon_info->getBeginUseDate();
+            ?>
+            <tr class="<?php echo $coupon_info->getTimesUsed()?'used':'';?>">
+                <td><?php echo substr($coupon_info->getFromDate(),0,10);?>至<?php echo  substr($coupon_info->getToDate(),0,10);?></td>
+                <td>
+                    <?php $addressCourseString= explode("\r\n",$coupon_info->getRuleDescription());
+                   echo $addressCourseString[0];
+                    ?>
+                </td>
+                <td> <?php echo   $addressCourseString[1]; ?></td>
+                <td><?php echo $coupon_info->getCode() ?></td>
+                <td>   <?php
+
+                    //if(Mage::helper('couponRule')->isExpireForCoupon($coupon_info->getExpirationDate(),$coupon_info->getToDate())):
+                    if( $coupon_info->getTimesUsed() ):
+                        ?>
+                        已经使用
+                    <?php elseif($coupon_expire_flag):?>
+                        优惠券过期
+                    <?php  else: ?>
+                        未使用
+                    <?php  endif;?></td>
+
+            </tr>
+            <?php endforeach; ?>
+
+            </tbody>
+        </table>
+        <?php endif ?>
+        <?php if(!$shopCoupons): ?>
+            <div style="text-align: center; color: #94712b"><?php echo $this->__('您还没有优惠券');  ?></div>
+        <?php endif ?>
+        </div>
+<div id="credits"  style="display: none">
+    <!--课点优惠券-->
+    <table class="table_2" cellspacing="0">
+        <tbody>
+        <tr>
+            <td>使用日期</td>
+            <td>优惠券码</td>
+            <td>操作</td>
+        </tr>
+        </tbody>
+    </table>
+        <?php if($coupon_list  && $coupon_list->getSize()): ?>
+    <table class="table_2 academy-data" cellspacing="4">
+        <tbody>
+        <?php  foreach ($coupon_list as $coupon_info): ?>
+        <?php
+            if($coupon_info->getIsCredits()!=1){continue;}
+        $has_all_use_flag      = $this->hasAllUse($coupon_info->getUsagePerCustomer(),$coupon_info->getCouponId(),$coupon_info->getRuleId());
+        $coupon_expire_flag    = Mage::helper('couponRule')->isExpireForCoupon($coupon_info->getExpirationDate(),$coupon_info->getToDate());
+        $need_expire_notice_flag = Mage::helper('couponRule')->compareExpire($coupon_info->getExpirationDate(),$coupon_info->getToDate());
+        ?>
+        <?php
+        $rule_from_date                     =       $coupon_info->getFromDate();
+        $coupon_begin_use_date              =       $coupon_info->getBeginUseDate();
+        ?>
+        <tr class="<?php echo $coupon_info->getTimesUsed()?'used':'';?>">
+            <td><?php echo substr($coupon_info->getFromDate(),0,10);?>至<?php echo  substr($coupon_info->getToDate(),0,10);?></td>
+            <td><?php echo $coupon_info->getCode() ?></td>
+            <td>  <?php
+                //if(Mage::helper('couponRule')->isExpireForCoupon($coupon_info->getExpirationDate(),$coupon_info->getToDate())):
+                if( $coupon_info->getTimesUsed() ):
+                    ?>
+                    已经使用
+                <?php elseif($coupon_expire_flag):?>
+                    优惠券过期
+                <?php  else: ?>
+                    未使用
+                <?php  endif;?></td>
+        </tr>
+        <?php endforeach; ?>
+
+        </tbody>
+    </table>
+        <?php endif ?>
+        <?php if(!$shopCoupons): ?>
+            <div style="text-align: center; color: #94712b"><?php echo $this->__('您还没有优惠券');  ?></div>
+        <?php endif ?>
+        </div>
+        <div class="pagenavBar">
+            <?php echo $this->getPagerHtml(); ?>
+        </div>
+</div>
+
+</div>

@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Robi_Msgnotice>
+            <version>1.0.0</version>
+        </Robi_Msgnotice>
+    </modules>
+    <global>
+        <models>
+            <msgnotice>
+                <class>Robi_msgnotice_Model</class>
+				<resourceModel>msgnotice_mysql4</resourceModel>
+            </msgnotice>
+			<msgnotice_mysql4>
+            	<class>Robi_msgnotice_Model_Mysql4</class>
+            	<entities>
+		            <failedaction>
+		                <table>msgnotice_failedaction</table>
+		            </failedaction>
+            	</entities>            	  
+        	</msgnotice_mysql4>
+        </models>
+        <resources>
+            <msgnotice_setup>
+                <setup>
+                    <module>Robi_Msgnotice</module>
+                </setup>
+				<connection>
+                    <use>core_setup</use>
+                </connection>
+            </msgnotice_setup>
+			
+			<msgnotice_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </msgnotice_write>
+			
+            <msgnotice_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </msgnotice_read>  
+			
+        </resources>
+		
+        <blocks>
+                <msgnotice>
+                    <class>Robi_Msgnotice_Block</class>
+                </msgnotice>
+        </blocks>
+		
+		<helpers>
+			<msgnotice>
+				<class>Robi_Msgnotice_Helper</class>
+			</msgnotice>
+     </helpers>
+	 <template>
+            <email>
+                <msgnotice_notification translate="label" module="msgnotice">
+                    <label>Robi System Mail Notice</label>
+                    <file>robi_msgnotice/mail_notification.html</file>
+                    <type>html</type>
+                </msgnotice_notification>
+            </email>
+        </template>    		
+    </global>
+	
+
+   
+    <adminhtml>
+        <translate>
+            <modules>
+                <msgnotice>
+                    <files>
+                        <default>Robi_Msgnotice.csv</default>
+                    </files>
+                </msgnotice>
+            </modules>
+        </translate>
+    </adminhtml>
+	
+	
+    <frontend>
+    	<events>
+                    <!--customer_registration_success>
+                        <observers>
+                            <sendSMSUponRegistration>
+                                <type>singleton</type>
+                                <class>msgnotice/observer</class>
+                                <method>msgnoticeUponRegistration</method>
+                            </sendSMSUponRegistration>
+                        </observers>
+                    </customer_registration_success-->
+					
+					<!--checkout_type_onepage_save_order>
+						<observers>
+                            <recordProductOrderCount>
+                                <type>singleton</type>
+                                <class>msgnotice/observer</class>
+                                <method>recordProductOrderTotal</method>
+                            </recordProductOrderCount>
+                        </observers>
+					</checkout_type_onepage_save_order-->
+        </events>
+			
+        <routers>
+            <msgnotice>
+                <use>standard</use>
+                <args>
+                    <module>Robi_Msgnotice</module>
+                    <frontName>msgnotice</frontName>
+                </args>
+            </msgnotice>
+        </routers>
+        
+        <translate>
+            <modules>
+                <msgnotice>
+                    <files>
+                        <default>Robi_Msgnotice.csv</default>
+                    </files>
+                </msgnotice>
+            </modules>
+        </translate>
+		
+        <layout>
+            <updates>
+                <msgnotice module="Robi_Msgnotice">
+                    <file>msgnotice.xml</file>
+                </msgnotice>
+            </updates>
+        </layout>
+       
+    </frontend>
+	
+</config>

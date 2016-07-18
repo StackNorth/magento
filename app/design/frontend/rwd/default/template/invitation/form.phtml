@@ -1,0 +1,29 @@
+<?php
+$data = $this->getFormData();
+$name = isset($data['name']) ? $data['name'] : '';
+$email = isset($data['email']) ? $data['email'] : '';
+$phone = isset($data['phone']) ? $data['phone'] : '';
+$note = isset($data['note']) ? $data['note'] : '';
+?>
+<form method="POST" name="invitation_form" action="<?php echo $this->getUrl('invitation/invitation/send');?>">
+  <p class="t"><?php echo $this->__('INVITE A FRIEND');?></p>
+  <div class="f-ctx">
+    <div class="f-item">
+      <label for="name"><?php echo $this->__('NAME');?></label>
+      <input type="text" name="invitation[name]" id="name" value="<?php echo $this->escapeHtml($name);?>"/>
+    </div>
+    <div class="f-item">
+      <label for="email"><?php echo $this->__('EMAIL');?></label>
+      <input type="text" name="invitation[email]" id="email" value="<?php echo $this->escapeHtml($email);?>"/>
+    </div>
+    <div class="f-item">
+      <label for="phone"><?php echo $this->__('PHONE NUMBER');?></label>
+      <input type="text" name="invitation[phone]" id="phone" value="<?php echo $this->escapeHtml($phone);?>"/>
+    </div>
+    <div class="f-item">
+      <label for="note"><?php echo $this->__('NOTE');?></label>
+      <input type="text" name="invitation[note]" id="note" value="<?php echo $this->escapeHtml($note);?>"/>
+    </div>
+    <button class="send btn"><?php echo $this->__('SEND');?></button>
+  </div>
+</form>

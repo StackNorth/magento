@@ -1,0 +1,88 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+
+
+?>
+
+<div class="header">
+    <div class="header-nav<?php if(Mage::getSingleton('customer/session')->isLoggedIn()):?> signup<?php endif;?>">
+        <a class="logo" href="<?php echo $this->getUrl('') ?>"><?php echo $this->__('Academy logo');?></a>
+        <div class="list-nav menu-nav"><!--be shown @ tv-->
+            <a class="nav-item" data-section="1" href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('1');?>;"><?php echo $this->__('THE ACADEMY');?></a>
+            <a class="nav-item" data-section="2" href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('2');?>;"><?php echo $this->__('COOKING CLASS');?></a>
+            <a class="nav-item" data-section="3" href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('3');?>;"><?php echo $this->__('SCHEDULE');?></a>
+            <a class="nav-item" data-section="4" href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('4');?>;"><?php echo $this->__('MEMBERSHIP');?></a>
+            <a class="nav-item" data-section="5" href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('5');?>;"><?php echo $this->__('THE CREW');?></a>
+            <a class="nav-item" data-section="6" href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('6');?>;"><?php echo $this->__('CONTACT');?></a>
+            <?php if(Mage::getSingleton('customer/session')->isLoggedIn()):?>
+                <a class="nav-item"  href="<?php echo Mage::getUrl('customer/account/index');?>"><?php echo $this->__('My Account');?></a>
+                <a class="nav-item"  href="<?php echo Mage::getUrl('customer/account/logout');?>"><?php echo $this->__('LOGOUT');?></a>
+            <?php else:?>
+                <a class="nav-item"  href="<?php echo Mage::getUrl('customer/account/login');?>"><?php echo $this->__('LOGIN');?></a>
+            <?php endif;?>
+        </div>
+        <div class="list-nav star-nav"><!--be shown @ tv-->
+
+            <?php if(Mage::getSingleton('customer/session')->isLoggedIn()):?>
+                <a class="nav-item login" data-section="10" href="<?php echo Mage::getUrl('customer/account/index');?>"><span></span><?php echo $this->__('My Account');?></a>
+                <a class="nav-item login" data-section="10" href="<?php echo Mage::getUrl('customer/account/logout');?>"><span></span><?php echo $this->__('LOGOUT');?></a>
+            <?php else:?>
+                <a class="nav-item login" data-section="10" href="<?php echo Mage::getUrl('customer/account/login');?>"><span></span><?php echo $this->__('LOGIN');?></a>
+                <a class="nav-item register" data-section="10" href="<?php echo Mage::getUrl('customer/account/create');?>"><span></span><?php echo $this->__('REGISTER');?></a>
+            <?php endif;?>
+            <?php echo $this->getChildHtml('store_language') ?>
+        </div>
+        <a class="menu" href="javascript:;"><span><?php echo $this->__('menu');?></span></a>
+        <a class="star" href="javascript:;"><span><?php echo $this->__('star');?></span></a>
+    </div>
+    <div class="dropdown-nav-box">
+        <div class="iscroll">
+            <div class="menu-nav">
+                <a class="nav-item" data-section="1" href="javascript:<?php echo  Mage::helper('robi_checkout')->isHomepage('1');?>;"><?php echo $this->__('THE ACADEMY');?></a>
+                <a class="nav-item" data-section="2" href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('2');?>;"><?php echo $this->__('COOKING CLASS');?></a>
+                <a class="nav-item" data-section="3" href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('3');?>;"><?php echo $this->__('SCHEDULE');?></a>
+                <a class="nav-item" data-section="4" href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('4');?>;"><?php echo $this->__('MEMBERSHIP');?></a>
+                <a class="nav-item" data-section="5" href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('5');?>;"><?php echo $this->__('THE CREW');?></a>
+                <a class="nav-item" data-section="6" href="javascript:<?php echo Mage::helper('robi_checkout')->isHomepage('6');?>;"><?php echo $this->__('CONTACT');?></a>
+                <?php if(Mage::getSingleton('customer/session')->isLoggedIn()):?>
+                    <a class="nav-item"  href="<?php echo Mage::getUrl('customer/account/index');?>"><?php echo $this->__('My Account');?></a>
+                    <a class="nav-item"  href="<?php echo Mage::getUrl('customer/account/logout');?>"><?php echo $this->__('LOGOUT');?></a>
+                <?php else:?>
+                    <a class="nav-item"  href="<?php echo Mage::getUrl('customer/account/login');?>"><?php echo $this->__('LOGIN');?></a>
+                <?php endif;?>
+            </div>
+            <div class="star-nav">
+
+                <a class="nav-item login" data-section="10" href="<?php echo Mage::getUrl('customer/account/login');?>"><span></span><?php echo $this->__('LOGIN');?></a>
+                <a class="nav-item register" data-section="10" href="<?php echo Mage::getUrl('customer/account/create');?>"><span></span><?php echo $this->__('REGISTER');?></a>
+                <?php echo $this->getChildHtml('store_language') ?>
+            </div>
+        </div>
+    </div>
+</div>

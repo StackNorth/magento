@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<config>
+    <tabs>
+        <d1m_credits translate="label" module="d1m_credits">
+            <label>课点</label>
+            <sort_order>194</sort_order>
+        </d1m_credits>
+    </tabs>
+    <sections>
+        <d1m_credits translate="label" module="d1m_credits">
+            <label>课点相关配置</label>
+            <tab>d1m_credits</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>51</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="d1m_credits">
+                    <label>课点</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <!-- free_credits_per_fixed_credits translate="label comment" module="d1m_credits">
+                            <label>get x per buy 10 credtis</label>
+                            <comment>get x per buy 10 credtis</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </free_credits_per_fixed_credits -->
+
+                        <creditunit translate="label comment" module="d1m_credits">
+                            <label>课点单价</label>
+                            <comment>每课点价格</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </creditunit>
+                        <creditparam translate="label comment" module="d1m_credits">
+                            <label>优惠公式</label>
+                            <comment>10/1;20/3;30/5表示:满10赠1,满20赠3,满30赠5</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </creditparam>
+                        <creditmemo translate="label comment" module="d1m_credits">
+                            <label>优惠说明</label>
+                            <comment>输入优惠文字说明</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </creditmemo>
+                    </fields>
+                </general>
+            </groups>
+        </d1m_credits>
+    </sections>
+</config>

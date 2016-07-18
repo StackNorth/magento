@@ -1,0 +1,30 @@
+<?php
+/* @var $this Robi_Checkout_Block_Available */
+    $_helper = $this->helper('catalog/output');
+?>
+<div class="block-item available-courses">
+          <p class="t"><?php echo $this->__('AVAILABLE COURSES');?></p>
+          <table class="table" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <th class="th1"><?php echo $this->__('DATE');?></th>
+              <th class="th2"><?php echo $this->__('TITLE');?></th>
+              <th class="th3 pc"><?php echo $this->__('REVIEW');?></th>
+              <th class="th4 pc"><?php echo $this->__('LOCATION');?></th>
+              <!-- th class="th5 pc"><?php echo $this->__('LEARN MORE');?></th -->
+              <th class="th3 mobile"><?php echo $this->__('LINK');?></th>
+            </tr>
+            <?php
+            	$products = $this->getProductCollection();
+            	foreach($products as $_product):?>
+            <tr>
+              <td><?php echo $this->formatDate($_product->getClassDate());?></td>
+              <td class="d29" data-date="<?php echo $this->formatDate($_product->getClassDate());?>" data-city="12" data-n_shop="26"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></td>
+              <td class="pc"><input class="cmStar" value="<?php echo $this->getRatingSummary($_product->getId());?>" data-readonly="1" type="hidden" /></td>
+              <td class="pc"><?php echo $_product->getAttributeText('province');?> <?php echo $this->escapeHtml($_product->class_address);?></td>
+              <!-- td class="pc"><a class="btn" href="#"><?php echo $this->__('LEARN MORE');?></a></td -->
+              <td class="mobile"><a class="btn" href="#"><?php echo $this->__('GO');?></a></td>
+            </tr>
+            <?php
+            	endforeach;?>
+          </table>
+        </div>

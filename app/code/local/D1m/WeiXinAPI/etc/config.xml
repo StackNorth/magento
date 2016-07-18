@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+	<modules>
+		<D1m_WeiXinAPI>
+		<version>0.0.1</version>
+		</D1m_WeiXinAPI>
+	</modules>
+	<frontend>
+		<!-- 配置路由 -->
+		<routers>
+			<weixinapi>
+				<use>standard</use>
+					<args>
+						<module>D1m_WeiXinAPI</module>
+						<frontName>wxapi</frontName>
+					</args>
+			</weixinapi>
+		</routers>
+
+	</frontend>
+	<global>
+		<models>
+			<wxapi>
+				<class>D1m_WeiXinAPI_Model</class>
+			</wxapi>
+		</models>
+
+         <helpers>
+            <wxapi>
+                <class>D1m_WeiXinAPI_Helper</class>
+            </wxapi>
+        </helpers>
+	</global>
+
+</config>

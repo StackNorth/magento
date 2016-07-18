@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <D1m_Course>
+            <active>true</active>
+            <codePool>local</codePool>
+        </D1m_Course>
+    </modules>
+</config>

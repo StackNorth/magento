@@ -1,0 +1,5 @@
+<?php if (($_banners = $this->getBanner()) && count($_banners)):
+foreach ($_banners as $_banner):
+echo Mage::helper('easybanner/banner')->load($_banner)->toHtml();
+endforeach;
+endif; ?>

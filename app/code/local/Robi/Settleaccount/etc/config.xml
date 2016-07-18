@@ -1,0 +1,222 @@
+<config>
+	<modules>
+		<Robi_Settleaccount>
+			<version>1.0.2</version>
+		</Robi_Settleaccount>
+	</modules>
+    <frontend>
+        <routers>
+            <fee>
+                <use>standard</use>
+                <args>
+                    <module>Robi_Settleaccount</module>
+                    <frontName>settleaccount</frontName>
+                </args>
+            </fee>
+        </routers>
+        <layout>
+            <updates>
+                <fee>
+                    <file>settleaccount.xml</file>
+                </fee>
+            </updates>
+        </layout>
+    </frontend>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <settleaccount>
+                    <file>settleaccount.xml</file>
+                </settleaccount>
+            </updates>
+        </layout>
+    </adminhtml>
+
+
+
+	<global>
+
+        <pdf>
+            <totals>
+                <credit translate="title">
+                    <title>credit</title>
+                    <source_field>credit_amount</source_field>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>650</sort_order>
+                    <amount_prefix></amount_prefix>
+                </credit>
+
+                <rewardpoints translate="title">
+                    <title>rewardpoints</title>
+                    <source_field>rewardpoints_amount</source_field>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>660</sort_order>
+                    <amount_prefix></amount_prefix>
+                </rewardpoints>
+            </totals>
+        </pdf>
+
+        <blocks>
+            <settleaccount>
+                <class>Robi_Settleaccount_Block</class>
+            </settleaccount>
+        </blocks>
+
+		<models>
+            <settleaccount>
+                <class>Robi_Settleaccount_Model</class>
+            </settleaccount>
+        </models>
+		<resources>
+			<robi_settleaccount_setup>
+				<setup>
+					<module>Robi_Settleaccount</module>
+					<class>Mage_Sales_Model_Mysql4_Setup</class>
+				</setup>
+			</robi_settleaccount_setup>
+        </resources>
+		
+		<sales>
+            <quote>
+            	<totals>
+					<rewardpoints>
+	                    <class>settleaccount/quote_total_rewardpoints</class>
+	                    <after>subtotal,freeshipping,shipping,credit</after>
+	                    <before>grand_total</before>
+	                </rewardpoints>
+					<credit>
+	                    <class>settleaccount/quote_total_credit</class>
+	                    <after>subtotal,discount,shipping,settleaccount</after>
+	                    <before>grand_total</before>
+	                </credit>
+				 </totals>
+			</quote>
+			<order_invoice>
+                <totals>
+					<rewardpoints>
+                    	<class>settleaccount/invoice_total_rewardpoints</class>
+					</rewardpoints>
+					<credit>
+                    	<class>settleaccount/invoice_total_credit</class>
+					</credit>
+                </totals>
+            </order_invoice>
+            <order_creditmemo>
+                <totals>
+                    <rewardpoints>
+                        <class>settleaccount/creditmemo_total_rewardpoints</class>
+                    </rewardpoints>
+                    <credit>
+                        <class>settleaccount/creditmemo_total_credit</class>
+                    </credit>
+                </totals>
+            </order_creditmemo>
+        </sales>
+		
+		<fieldsets>
+			
+			<sales_convert_quote>
+                <contact_info><to_order>*</to_order></contact_info>
+                <credit_qty><to_order>*</to_order></credit_qty>
+                <rewardpoints_qty><to_order>*</to_order></rewardpoints_qty>
+			</sales_convert_quote>
+			
+            <sales_convert_quote_address>
+                <credit_amount><to_order>*</to_order></credit_amount>
+                <base_credit_amount><to_order>*</to_order></base_credit_amount>
+				<rewardpoints_amount><to_order>*</to_order></rewardpoints_amount>
+                <base_rewardpoints_amount><to_order>*</to_order></base_rewardpoints_amount>
+            </sales_convert_quote_address>
+			
+            <sales_convert_order>
+                <credit_amount><to_invoice>*</to_invoice><to_quote_address_shipping>*</to_quote_address_shipping><to_cm>*</to_cm></credit_amount>
+                <base_credit_amount><to_invoice>*</to_invoice><to_quote_address_shipping>*</to_quote_address_shipping><to_cm>*</to_cm></base_credit_amount>
+            	<rewardpoints_amount><to_invoice>*</to_invoice><to_quote_address_shipping>*</to_quote_address_shipping><to_cm>*</to_cm></rewardpoints_amount>
+                <base_rewardpoints_amount><to_invoice>*</to_invoice><to_quote_address_shipping>*</to_quote_address_shipping><to_cm>*</to_cm></base_rewardpoints_amount>
+			</sales_convert_order>
+        </fieldsets>
+		
+		<helpers>
+            <settleaccount>
+                <class>Robi_Settleaccount_Helper</class>
+            </settleaccount>
+        </helpers>
+		
+		<events>
+
+            <sales_order_invoice_save_after>
+                <observers>
+                    <sales_order_invoice_save_after>
+                        <class>settleaccount/observer</class>
+                        <method>invoiceSaveAfter</method>
+                    </sales_order_invoice_save_after>
+                </observers>
+            </sales_order_invoice_save_after>
+
+            <sales_order_creditmemo_save_after>
+                <observers>
+                    <sales_order_creditmemo_save_after>
+                        <class>settleaccount/observer</class>
+                        <method>creditmemoSaveAfter</method>
+                    </sales_order_creditmemo_save_after>
+                </observers>
+            </sales_order_creditmemo_save_after>
+
+
+			<payment_accept_notify>
+                <observers>
+                    <settleaccount_customergroup>
+                        <type>singleton</type>
+                        <class>settleaccount/observer</class>
+                        <method>sales_order_save_after_customergroup</method>
+                    </settleaccount_customergroup>
+                </observers>
+            </payment_accept_notify>
+            <sales_order_payment_place_start>
+                <observers>
+                    <settleaccount_credits>
+                        <type>singleton</type>
+                        <class>settleaccount/observer</class>
+                        <method>sales_order_payment_place_start</method>
+                    </settleaccount_credits>
+                    <settleaccount_rewardpoint>
+                        <type>singleton</type>
+                        <class>settleaccount/observer</class>
+                        <method>sales_order_payment_place_start_rewardpoint</method>
+                    </settleaccount_rewardpoint>
+                </observers>
+            </sales_order_payment_place_start>
+             <sales_order_payment_cancel>
+                <observers>
+                    <settleaccount_credits>
+                         <type>singleton</type>
+                         <class>settleaccount/observer</class>
+                        <method>sales_order_payment_cancel</method>
+                    </settleaccount_credits>
+                    <settleaccount_rewardpoint>
+                         <type>singleton</type>
+                         <class>settleaccount/observer</class>
+                        <method>sales_order_payment_cancel_rewardpoint</method>
+                    </settleaccount_rewardpoint>
+                </observers>
+             </sales_order_payment_cancel>
+
+        </events>
+		
+		
+	</global>
+	
+	
+	
+	<default>
+        <sales>
+            <totals_sort>
+                <credit>19</credit>
+                <rewardpoints>20</rewardpoints>
+            </totals_sort>
+        </sales>
+	</default>
+</config>

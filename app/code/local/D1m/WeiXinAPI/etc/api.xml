@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <!-- 登入注册 -->
+            <wx_user translate="title" module="wxapi">
+                <model>wxapi/user_api</model>
+                <title>User Active</title>
+                <acl>wx_user</acl>
+                <methods>
+                    <login  translate="title" module="wxapi">
+                        <title>Login For User</title>
+                        <acl>wx_user/login</acl>
+                        <method>login</method>
+                    </login >
+                    <register translate="title" module="wxapi">
+                        <title>Register For User</title>
+                        <acl>wx_user/register</acl>
+                    </register>
+                </methods>
+            </wx_user>
+            <!-- 课程接口 -->
+            <wx_course translate="title" module="wxapi">
+                <model>wxapi/course_api</model>
+                <title>Course</title>
+                <acl>wx_course</acl>
+                <methods>
+                    <province  translate="title" module="wxapi">
+                        <title>get all province</title>
+                        <acl>wx_course/province</acl>
+                    </province >
+                    <store translate="title" module="wxapi">
+                        <title>get all store</title>
+                        <acl>wx_course/store</acl>
+                    </store>
+                    <courses translate="title" module="wxapi">
+                        <title>get courses</title>
+                        <acl>wx_course/courses</acl>
+                    </courses>
+                    <credit translate="title" module="wxapi">
+                        <title>get credit</title>
+                        <acl>wx_course/credit</acl>
+                    </credit>
+                    <updateCredit translate="title" module="wxapi">
+                        <title>update credit</title>
+                        <acl>wx_course/updatecredit</acl>
+                    </updateCredit>
+                    <getProductStock translate="title" module="wxapi">
+                        <title>product stock</title>
+                        <acl>wx_course/getproductstock</acl>
+                    </getProductStock>
+                </methods>
+            </wx_course>
+            <!-- 订单接口  -->
+            <wx_order translate="title" module="wxapi">
+                <model>wxapi/order_api</model>
+                <title>Course Order</title>
+                <acl>wx_order</acl>
+                <methods>
+                    <createOrder  translate="title" module="wxapi">
+                        <title>Create Order</title>
+                        <acl>wx_order/createorder</acl>
+                    </createOrder >
+                    <cancelOrder  translate="title" module="wxapi">
+                        <title>Cancel Order</title>
+                        <acl>wx_order/cancelorder</acl>
+                    </cancelOrder >
+                    <queryOrders  translate="title" module="wxapi">
+                        <title>query Orders</title>
+                        <acl>wx_order/queryorders</acl>
+                    </queryOrders>
+                    <updateOrder translate="title" module="wxapi">
+                        <title>update order</title>
+                        <acl>wx_order/updateorder</acl>
+                    </updateOrder>
+                </methods>
+            </wx_order>
+        </resources>
+
+        <acl>
+            <resources>
+                <wx_user translate="title" module="wxapi">
+                    <title>User Active</title>
+                    <sort_order>1</sort_order>
+                    <login translate="title" module="wxapi">
+                        <title>Login</title>
+                    </login>
+                    <register translate="title" module="wxapi">
+                        <title>Register</title>
+                    </register>
+                </wx_user>
+                <wx_course translate="title" module="wxapi">
+                    <title>Course</title>
+                    <sort_order>1</sort_order>
+                    <province translate="title" module="wxapi">
+                        <title>get all province</title>
+                    </province>
+                    <store translate="title" module="wxapi">
+                        <title>get all store</title>
+                    </store>
+                    <courses translate="title" module="wxapi">
+                        <title>get courses</title>
+                    </courses>
+                    <credit translate="title" module="wxapi">
+                        <title>get credit</title>
+                    </credit>
+                    <updatecredit translate="title" module="wxapi">
+                        <title>update credit</title>
+                    </updatecredit>
+                    <getproductstock translate="title" module="wxapi">
+                        <title>product stock</title>
+                    </getproductstock>
+                </wx_course>
+                <wx_order translate="title" module="wxapi">
+                    <title>Course Order</title>
+                    <sort_order>1</sort_order>
+                    <createorder translate="title" module="wxapi">
+                        <title>Create Order</title>
+                    </createorder>
+                    <cancelorder translate="title" module="wxapi">
+                        <title>Cancel Order</title>
+                    </cancelorder>
+                    <queryorders translate="title" module="wxapi">
+                        <title>Query Orders</title>
+                    </queryorders>
+                    <updateorder translate="title" module="wxapi">
+                        <title>update order</title>
+                    </updateorder>
+                </wx_order>
+            </resources>
+        </acl>
+    </api>
+</config>

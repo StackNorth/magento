@@ -1,0 +1,33 @@
+html,body {overflow: auto}
+.page-title h1{font-size: 24px; font-weight: normal;}
+.legend{font-size: 20px;font-weight: normal;}
+.legend{text-align: center;margin-bottom:10px;}
+.hint{text-align: center;}
+.form-item{overflow: hidden; border: 2px solid #94712b; margin-bottom: 6px;}
+.form-item label,
+.form-item input{display: block;float: left;height: 24px;line-height: 24px;color: #94712b;}
+.form-item label{width: 31%;box-sizing: border-box;padding: 0 0 0 2%;border-right: 2px solid #94712b;}
+.form-item input{width: 68%;background-color: transparent;border: 0;font-family: 'Courier New','Times New Roman','微软雅黑',arial,sans-serif;font-size: 14px;padding-left:1%;}
+.fieldset{margin: 0 auto;width: 60%;}
+p.required{margin:0 0 10px 0;}
+label em{margin-right: 2px;}
+.checkoutBox .my-account .buttons-set{margin: 0 auto;width: 60%;}
+.control{margin:10px 0 0;}
+#change_password{margin-right:5px;}
+
+@media all and (max-width: 960px) {/*mobile*/
+  .checkoutBox {border: 0 none; width: 100%;padding:0;}
+  .my-account{padding:0 10px;}
+  .fieldset{margin: 0;width: 100%;}
+  .checkoutBox .my-account .buttons-set{margin: 0;width: 100%;}
+  .checkoutBox .buttons-set .button,
+  .my-account .back-link{width: 100%;}
+}
+
+
+
+
+
+
+
+

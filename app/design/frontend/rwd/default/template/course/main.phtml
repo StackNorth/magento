@@ -1,0 +1,93 @@
+<?php
+    $province= $this->getProvince();
+    $monthdate = $this->getMonthdate();
+    $coursetype = $this->getCourseType();
+
+    $course_index_link     = Mage::getUrl('course/index/calendar');
+    
+    //echo '$province:'.$province.'<br/>';
+    //echo '$monthdate:'.$monthdate.'<br/>';
+    //echo '$coursetype:'.$coursetype.'<br/>';
+
+?>
+<div style="padding:50px;margin-top:50px;background-color:#fff;">
+<form action="<?php echo $course_index_link;?>" method="get" name="courseFilterForm" id="courseFilterForm"  >
+    
+    <ul>
+    
+    <li><?php echo $this->__('Province');?>
+    <select name="province">
+    <?php
+        foreach($this->getAllProvinceSelects() as $key => $val):
+        
+            $isSelected = ($val['value'] == $province) ? ' selected' : '';
+        
+        ?>
+        <option value="<?php echo $val['value'];?>"<?php echo $isSelected;?>><?php echo $val['label'];?></option>
+    <?php
+        endforeach;?>
+    </select>
+    
+    </li>
+    <li><?php echo $this->__('Month');?>
+    <select name="monthdate">
+    <?php
+        foreach($this->getALLMonthsSelects() as $key => $val):
+            $isSelected = ($val['value'] == $monthdate) ? ' selected' : '';
+        ?>
+        <option value="<?php echo $val['value'];?>"<?php echo $isSelected;?>><?php echo $val['label'];?></option>
+    <?php
+        endforeach;?>
+    </select>
+    
+    </li>
+    
+    <li><?php echo $this->__('Cause Type');?>
+    <select name="coursetype">
+    <?php
+        foreach($this->getAllCourseTypeSelects() as $key => $val):
+            $isSelected = ($val['value'] == $coursetype) ? ' selected' : '';
+        ?>
+        <option value="<?php echo $val['value'];?>"<?php echo $isSelected;?>><?php echo $val['label'];?></option>
+    <?php
+        endforeach;?>
+    </select>
+    
+    </li>
+    
+    <li>
+    <input type="submit" value="<?php echo $this->__('Submit');?>"/>
+    </li>
+    
+    
+    </ul>
+    
+    <div>
+    <p>for html developing</p>
+    <p>ajax data url : <a href="<?php echo $this->getUrl('course/index/calendarjson');?>" target="_blank"><?php echo $this->getUrl('course/index/calendarjson');?></a></p>
+    <p>搜索可用条件 的AJON DATA: <a href="<?php echo $this->getUrl('/course/index/options');?>" target="_blank"><?php echo $this->getUrl('/course/index/options');?></a></p>
+    
+    </div>
+    
+    
+    <div id="Content">
+
+        <table class="admintable" align="center" width="600" style="margin:0 auto;text-align:center;">
+        <tr>
+            <th colspan="2">
+            </th>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <?php echo $this->getCalendar();?>
+
+            </td>
+        </tr>
+        </table>
+
+    </div>
+
+</form>
+
+</div>

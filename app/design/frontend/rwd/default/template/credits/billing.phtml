@@ -1,0 +1,88 @@
+<div class="buy-credits step2">
+    <?php
+      $subtotal = $this->getQtySubtotal();
+      $giftSubtotal = $this->getGiftCreditsAmount();
+    ?>
+
+    <script>
+    var defaultBillingAddress = <?php echo json_encode($this->getDefaultBillingAddress());?>
+    </script>
+    <h2 class="pc"><span><?php echo __('My Account');?></span></h2>
+    <form method="post" action="">
+        <div class="form">
+          <p class="title"><?php echo __('BUY CREDITS');?></p>
+          <!--div class="block-item process">
+            <div class="step2"><?php echo __('check out');?></div>
+          </div-->
+          <div class="block-item credits-status">
+            <div class="num">
+              <p><span class="pc"><?php echo __('购买');?> </span><?php echo __('课点');?></p>
+              <p><strong><?php echo $this->getQty();?></strong></p>
+            </div>
+            <div class="much">
+              <p class="pc"><?php echo __('价格');?></p>
+              <p><strong><?php echo $subtotal - $giftSubtotal;?> RMB</strong></p>
+            </div>
+          </div>
+          <div class="block-item use-card">
+            <div class="t"><?php echo __('CREDIT CARD');?></div>
+            <div class="f-ctx">
+              <div class="f-item">
+                <label for="c-num"><?php echo __('CREDIT CARD NUMBER');?></label>
+                <input id="c-num" name="c-num" class="c-num" type="text" />
+              </div>
+              <div class="f-item select-date">
+                <label><?php echo __('EXPIRATION');?></label>
+                <div class="fake-select"><select class="month"><option value="01">01</option><option value="02">02</option></select></div>
+                <div class="fake-select"><select class="year"><option value="2014">2014</option></select></div>
+              </div>
+              <div class="f-item">
+                <label for="c-code"><?php echo __('SECURITY CODE');?></label>
+                <input id="c-code" name="c-code" class="c-code" type="text" />
+              </div>
+            </div>
+          </div>
+          <!-- div class="block-item address-form">
+            <div class="t"><?php echo __('BILLING ADDRESS');?></div>
+            <div class="box">
+              <div class="f-ctx">
+                <?php $postData = $this->getPostBillingAddress();?>
+                <label class="block-label"><input name="use_default_billing" type="checkbox" value="1" /> <?php echo __('USE MY INFORMATION');?></label>
+                <div class="f-item">
+                  <label for="f-name"><?php echo __('FIRST NAME');?></label>
+                  <input id="f-name" name="billing[firstname]" value="<?php echo $this->escapeHtml($postData['firstname']);?>" class="f-name" type="text" />
+                </div>
+                <div class="f-item">
+                  <label for="l-name"><?php echo __('LAST NAME');?></label>
+                  <input id="l-name" name="billing[lastname]" value="<?php echo $this->escapeHtml($postData['lastname']);?>" class="l-name" type="text" />
+                </div>
+                <div class="f-item">
+                  <label for="email"><?php echo __('EMAIL ADDRESS');?></label>
+                  <input id="email" name="billing[email]" value="<?php echo $this->escapeHtml($postData['email']);?>" class="email" type="text" />
+                </div>
+                <div class="f-item">
+                  <label for="org"><?php echo __('ORGANIZATION');?></label>
+                  <input id="org" name="billing[company]" value="<?php echo $this->escapeHtml($postData['company']);?>" class="org" type="text" />
+                </div>
+                <div class="f-item">
+                  <label for="phone"><?php echo __('PHONE');?></label>
+                  <input id="phone" name="billing[telephone]" value="<?php echo $this->escapeHtml($postData['telephone']);?>" class="phone" type="text" />
+                </div>
+                <div class="f-item">
+                  <label for="zipcode"><?php echo __('ZIPCODE');?></label>
+                  <input id="zipcode" name="billing[zipcode]" value="<?php echo $this->escapeHtml($postData['zipcode']);?>" class="zipcode" type="text" />
+                </div>
+                <div class="f-item">
+                  <label for="address"><?php echo __('ADDRESS');?></label>
+                  <input id="address" name="billing[street_address]" value="<?php echo $this->escapeHtml($postData['street_address']);?>" class="address" type="text" />
+                </div>
+              </div>
+            </div>
+          </div -->
+          <div class="block-item to-next">
+            <a href="<?php echo Mage::getUrl('credits/checkout/view');?>"><?php echo __('上一步');?></a>
+            <button><?php echo __('提交订单');?></button>
+          </div>
+        </div>
+    </form>
+</div>
